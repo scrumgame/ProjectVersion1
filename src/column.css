@@ -1,9 +1,10 @@
 .column {
   background-color: hotpink;
   height: 80%;
-  border: 2px solid;
+  border: 2px solid yellow;
 }
 
 .columnHeadline {
   text-align: center;
+  color: lime;
 }

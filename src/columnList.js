@@ -4,19 +4,22 @@ import Column from './Column';
 class ColumnList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { columns: ['Backlog', 'Analysis', 'Development', 'Testing', 'Done'],
+                   bootclass: ['col-sm-2 col-sm-offset-1 column', 'col-sm-2 column', 'col-sm-2 column', 'col-sm-2 column', 'col-sm-2 column'] };
   }
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
-          <Column className="col-sm-2 col-sm-offset-1" name="Backlog"/>
-          <Column className="col-sm-2" name="Analysis"/>
-          <Column className="col-sm-2" name="Development"/>
-          <Column className="col-sm-2" name="Testing"/>
-          <Column className="col-sm-2" name="Done"/>
+          {this.renderColumns()}
         </div>
       </div>
     );
+  }
+  renderColumns() {
+    return this.state.columns.map((headline, i) => (
+      <Column name={headline} key={headline} className={this.state.bootclass[i]}/>
+    ));
   }
 }
 

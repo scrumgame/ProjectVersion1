@@ -7,7 +7,7 @@ class Column extends React.Component {
   }
   render() {
     return (
-      <div className={ this.props.className +" column"}><h3 className="columnHeadline">{ this.props.name }</h3></div>
+      <div className={ this.props.className }><h3 className="columnHeadline">{ this.props.name }</h3></div>
     );
   }
 }

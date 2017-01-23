@@ -1,5 +1,5 @@
 var path = require('path');
- 
+
 var config = {
   context: path.join(__dirname, 'src'),
   entry: [
@@ -16,6 +16,10 @@ var config = {
         exclude: /node_modules/,
         loaders: ['babel'],
       },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
+      }
     ],
   },
   resolveLoader: {

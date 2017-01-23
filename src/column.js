@@ -1,12 +1,13 @@
 import React from 'react';
+import './column.css';
 
 class Column extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
   render() {
     return (
-      <div class="col-xs-2">TEST</div>
+      <div className="col-xs-2 Column"><h3>{ this.props.name }</h3></div>
     );
   }
 }

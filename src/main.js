@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Column from './Column';
+import ColumnList from './ColumnList';
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    <Column />,
+    <ColumnList />,
     document.getElementById('mount')
   );
 });

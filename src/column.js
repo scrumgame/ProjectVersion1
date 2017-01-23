@@ -6,7 +6,7 @@ class Column extends React.Component {
   }
   render() {
     return (
-      <div class="col-xs-2">TEST</div>
+      <div class="col-xs-2"><Card/></div>
     );
   }
 }

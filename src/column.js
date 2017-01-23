@@ -7,7 +7,7 @@ class Column extends React.Component {
   }
   render() {
     return (
-      <div className="col-xs-2 Column"><h3>{ this.props.name }</h3></div>
+      <div className={ this.props.className +" column"}><h3 className="columnHeadline">{ this.props.name }</h3></div>
     );
   }
 }

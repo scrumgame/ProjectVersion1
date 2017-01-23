@@ -1,3 +1,9 @@
-.Column {
+.column {
   background-color: hotpink;
+  height: 80%;
+  border: 2px solid;
+}
+
+.columnHeadline {
+  text-align: center;
 }

@@ -9,11 +9,11 @@ class ColumnList extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <Column name="Backlog"/>
-          <Column name="Analysis"/>
-          <Column name="Development"/>
-          <Column name="Testing"/>
-          <Column name="Done"/>
+          <Column className="col-sm-2 col-sm-offset-1" name="Backlog"/>
+          <Column className="col-sm-2" name="Analysis"/>
+          <Column className="col-sm-2" name="Development"/>
+          <Column className="col-sm-2" name="Testing"/>
+          <Column className="col-sm-2" name="Done"/>
         </div>
       </div>
     );

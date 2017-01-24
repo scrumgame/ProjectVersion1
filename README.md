@@ -1,15 +1,15 @@
 # ProjectVersion1
 A game based on principles of scrum methodology is made here
 
-Usage
----
-
 Setup
 ---
 
 ```
 npm install
 ```
+
+Usage
+---
 
 Start the development server with this command:
 

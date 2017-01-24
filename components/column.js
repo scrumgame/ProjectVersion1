@@ -7,7 +7,7 @@ class Column extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   // SUDO RENDER OF CARDS NEED TO CHANGE PROBABLY
   renderCards() {
     if (this.props.name == "Backlog") {

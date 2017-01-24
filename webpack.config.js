@@ -1,12 +1,14 @@
 var path = require('path');
+var webpack = require('webpack');
 
 var config = {
-  context: path.join(__dirname, 'src'),
+  context: path.join(__dirname, 'components'),
   entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     './main.js',
   ],
   output: {
-    path: path.join(__dirname, 'www'),
+    path: path.join(__dirname, 'client'),
     filename: 'bundle.js',
   },
   module: {
@@ -14,7 +16,7 @@ var config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel'],
+        loaders: ['react-hot', 'babel'],
       },
       {
         test: /\.css$/,
@@ -32,5 +34,10 @@ var config = {
       path.join(__dirname, 'node_modules'),
     ],
   },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
 };
 module.exports = config;

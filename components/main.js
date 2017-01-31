@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ColumnList from './ColumnList';
+import App from './app';
 
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    <ColumnList />,
+    <App />,
     document.getElementById('mount')
   );
 });

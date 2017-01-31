@@ -1,12 +1,13 @@
 import React from 'react';
 
-class ColumnList extends React.Component {
+class App extends React.Component {
 
   render() {
     return (
 
     );
   }
+
 }
 
-export default ColumnList;
+export default App;

@@ -1,7 +1,8 @@
 .column {
-  background-color: hotpink;
+  background-color: red;
   height: 80%;
   border: 2px solid yellow;
+  margin-top: 10%;
 }
 
 .columnHeadline {

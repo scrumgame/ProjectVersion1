@@ -1,13 +1,12 @@
-import React from 'react';
-import './column.css';
+import { Component } from 'react';
+import './Column.css'
 
-class Column extends React.Component {
+export default class Column extends Component {
 
   render() {
     return (
 
     );
   }
-}
 
-export default Column;
+}

@@ -1,14 +1,12 @@
-import React from 'react';
-import './card.css';
+import { Component } from 'react';
+import './card.css'
 
-class Card extends React.Component {
+export default class Card extends Component {
 
   render() {
-    return(
+    return (
 
     );
   }
+
 }
-
-
-export default Card;

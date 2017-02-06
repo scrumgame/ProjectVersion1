@@ -3,7 +3,7 @@
   height: 80%;
   border: 2px solid yellow;
   margin-top: 10%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .columnHeadline {

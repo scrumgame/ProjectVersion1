@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import Column from './Column'
+import DevelopmentCards from './resources/DevelopmentCards'
+import MaintenanceCards from './resources/MaintenanceCards'
+import ActionCards from './resources/ActionCards'
+import MultipleChoiceCards from './resources/MultipleChoiceCards'
 
 export default class App extends Component {
 
@@ -19,6 +23,7 @@ export default class App extends Component {
 
   _generateUsCards() {
     const cards = [];
+    console.log(DevelopmentCards)
 
     for (var i = 0; i < 60; i++) {
       const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
@@ -34,13 +39,12 @@ export default class App extends Component {
         a: a,
         d: d,
         t: t,
-        id: i
+        us_id: i
       }
       cards.push(card);
     }
-
     this.setState({
-      cards: this.state.cards.concat(cards)
+      cards: this.state.cards.concat(cards, DevelopmentCards, MaintenanceCards, ActionCards, MultipleChoiceCards)
     })
   }
 

@@ -1,3 +1,4 @@
+const MaintenanceCards = [
 {
   type: 'M',
   a: 4,
@@ -32,4 +33,6 @@
   d: 7,
   t: 3,
   m_id: 4
-},
+}];
+
+export default MaintenanceCards;

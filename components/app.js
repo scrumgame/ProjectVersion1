@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Column from './Column'
-import Card from './Card'
 
 export default class App extends Component {
 
@@ -9,19 +8,25 @@ export default class App extends Component {
 
     this.state = {
       cards: [],
-      columns: ['Backlog', 'Analysis', 'Development', 'Testing', 'Done'],
+      columns: ['Controls', 'Backlog', 'Analysis', 'Development', 'Testing', 'Done'],
       dices: {}
     };
   }
 
   componentDidMount() {
+    this._generateUsCards()
+  }
+
+  _generateUsCards() {
     const cards = [];
+
     for (var i = 0; i < 60; i++) {
-      const a    = Math.floor((Math.random() * 10) + 1);
-      const d    = Math.floor((Math.random() * 10) + 1);
-      const t    = Math.floor((Math.random() * 10) + 1);
-      const cash = Math.floor((Math.random() * 450) + 1);
-      const id = i;
+      const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
+      const a    = Math.round((Math.random() * 10) + 1);
+      const d    = Math.round((Math.random() * 10) + 1);
+      const t    = Math.round((Math.random() * 10) + 1);
+      const cash = cashValues[Math.floor(Math.random() * cashValues.length)];
+      const id   = i;
 
       const card = {
         type: 'US',
@@ -37,19 +42,12 @@ export default class App extends Component {
     this.setState({
       cards: this.state.cards.concat(cards)
     })
-
   }
 
   _renderColumns() {
     return this.state.columns.map(name => (
-      <Column key={name} name={name} />
+      <Column cards={this.state.cards} key={name} name={name} />
     ));
-  }
-
-  _renderCards() {
-    return this.state.cards.map((v, i) => (
-      <Card type={v.type} cash={v.cash} a={v.a} d={v.d} t={v.t} key={i} />
-    ))
   }
 
   render() {
@@ -57,7 +55,6 @@ export default class App extends Component {
       <div className="container">
         <div className="row">
           {this._renderColumns()}
-          {this._renderCards()}
         </div>
       </div>
     )

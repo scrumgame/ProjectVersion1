@@ -1,6 +1,6 @@
 .CardDiv {
   border: 2px solid black;
-  background: hotpink;
+  background: honeydew;
   text-align: center;
-  width: 150px;
+  width: auto auto;
 }

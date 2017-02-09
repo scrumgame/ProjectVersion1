@@ -1,9 +1,9 @@
 .column {
-  background-color: red;
+  background-color: grey;
   height: 80%;
-  border: 2px solid yellow;
+  border: 2px solid black;
   margin-top: 10%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .columnHeadline {

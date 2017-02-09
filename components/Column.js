@@ -8,7 +8,9 @@ export default class Column extends Component {
 
   render() {
     return (
-      
+      <div className="column col-sm-2">
+        <h3>{this.props.name}</h3>
+      </div>
     );
   }
 }

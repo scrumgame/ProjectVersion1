@@ -10,12 +10,12 @@ export default class Column extends Component {
   _renderCards() {
     if (this.props.name == "Backlog") {
       return this.props.cards.filter((el) => el.type == 'US').map((el, i) => (
-        <Card type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} />
+        <Card type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i + el.type} />
       ))
     }
     if (this.props.name == "Controls") {
       return this.props.cards.filter((el) => el.type !== 'US').map((el, i) => (
-        <Card type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} />
+        <Card type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i + el.type} />
       ))
     }
   }

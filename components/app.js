@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Column from './Column'
+import Die from './Die'
+import DieColumns from './DieColumns'
 import DevelopmentCards from './resources/DevelopmentCards'
 import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
@@ -12,8 +14,13 @@ export default class App extends Component {
 
     this.state = {
       cards: [],
-      columns: ['Controls', 'Backlog', 'Analysis', 'Development', 'Testing', 'Done'],
-      dices: {}
+      columns: ['Controls', 'Backlog', 'Analysis', 'Development',  'Testing', 'Done'],
+      dice:  [{name: 'one',   dieColumn: 2},
+              {name: 'two',   dieColumn: 3},
+              {name: 'three', dieColumn: 3},
+              {name: 'four',  dieColumn: 3},
+              {name: 'five',  dieColumn: 3},
+              {name: 'six',   dieColumn: 4}]
     };
   }
 
@@ -54,9 +61,30 @@ export default class App extends Component {
     ));
   }
 
+  _die() {
+    var die = Math.floor((Math.random() * 6) + 1);
+    return die;
+  }
+
+  _renderDice() {
+    return this.state.dice.map(dice => (
+      <Die value={this._die()} key={dice.name} position={dice.dieColumn}/>
+    ));
+  }
+
+  _renderDieColumns() {
+    return this.state.columns.map((name, i) => (
+      <DieColumns key={name} name={name} id={i} />
+    ));
+  }
+
   render() {
     return (
       <div className="container">
+        <div className="row">
+          {this._renderDieColumns()}
+          {this._renderDice()}
+        </div>
         <div className="row">
           {this._renderColumns()}
         </div>

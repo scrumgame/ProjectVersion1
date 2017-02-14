@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import _ from 'underscore'
 import Column from './Column'
-import Die from './Die'
 import DieColumns from './DieColumns'
 import DevelopmentCards from './resources/DevelopmentCards'
 import MaintenanceCards from './resources/MaintenanceCards'
@@ -15,12 +15,13 @@ export default class App extends Component {
     this.state = {
       cards: [],
       columns: ['Controls', 'Backlog', 'Analysis', 'Development',  'Testing', 'Done'],
-      dice:  [{name: 'one',   dieColumn: 2},
-              {name: 'two',   dieColumn: 3},
-              {name: 'three', dieColumn: 3},
-              {name: 'four',  dieColumn: 3},
-              {name: 'five',  dieColumn: 3},
-              {name: 'six',   dieColumn: 4}]
+      diecolumns: [1, 2, 3],
+      dice:  [{name: 'one',   dieColumn: 1, id: 0},
+              {name: 'two',   dieColumn: 2, id: 1},
+              {name: 'three', dieColumn: 2, id: 2},
+              {name: 'four',  dieColumn: 2, id: 3},
+              {name: 'five',  dieColumn: 2, id: 4},
+              {name: 'six',   dieColumn: 3, id: 5}]
     };
   }
 
@@ -30,7 +31,6 @@ export default class App extends Component {
 
   _generateUsCards() {
     const cards = [];
-    console.log(DevelopmentCards)
 
     for (var i = 0; i < 60; i++) {
       const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
@@ -61,21 +61,34 @@ export default class App extends Component {
     ));
   }
 
-  _die() {
-    var die = Math.floor((Math.random() * 6) + 1);
-    return die;
-  }
-
-  _renderDice() {
-    return this.state.dice.map(dice => (
-      <Die value={this._die()} key={dice.name} position={dice.dieColumn}/>
-    ));
-  }
-
   _renderDieColumns() {
-    return this.state.columns.map((name, i) => (
-      <DieColumns key={name} name={name} id={i} />
+    const classes = ['col-sm-2 col-sm-offset-4 dieColumn', 'col-sm-2 dieColumn', 'col-sm-2 dieColumn']
+    return this.state.diecolumns.map((name, i) => (
+      <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={name} name={name} id={i} className={classes[i]}/>
     ));
+  }
+
+  _handleDieClick(die) {
+    const dieId = die.props.id
+    const dice = this.state.dice
+    const place = dice[dieId].dieColumn
+    switch (place) {
+      case 1:
+        dice[dieId].dieColumn = 2
+        this.setState({dice})
+        break;
+      case 2:
+        dice[dieId].dieColumn = 3
+        this.setState({dice})
+        break;
+      case 3:
+        dice[dieId].dieColumn = 1
+        this.setState({dice})
+        break;
+      default:
+        break;
+
+    }
   }
 
   render() {
@@ -83,7 +96,6 @@ export default class App extends Component {
       <div className="container">
         <div className="row">
           {this._renderDieColumns()}
-          {this._renderDice()}
         </div>
         <div className="row">
           {this._renderColumns()}

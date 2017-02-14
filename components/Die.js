@@ -10,8 +10,10 @@ export default class Die extends Component {
 
   render() {
     return (
-      <div onClick={() => this.props._handleDieClick(this)} className="bajs">
-        <p>{this.props.value} : {this.props.dieColumn}</p>
+      <div className="Die">
+        <button onClick={() => this.props._handleDieLeftClick(this)} id="left" className="DieButton">Left</button>
+        <p className="DieValue">{this.props.value}</p>
+        <button onClick={() => this.props._handleDieRightClick(this)} id="right" className="DieButton">Right</button>
       </div>
     );
   }

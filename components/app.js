@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import _ from 'underscore'
 import Column from './Column'
+import Card from './Card'
 import DieColumns from './DieColumns'
 import RollButton from './RollButton'
 import DevelopmentCards from './resources/DevelopmentCards'
@@ -47,7 +47,8 @@ export default class App extends Component {
         a: a,
         d: d,
         t: t,
-        us_id: i
+        us_id: i,
+        position: 1
       }
       cards.push(card);
     }
@@ -55,10 +56,24 @@ export default class App extends Component {
       cards: this.state.cards.concat(cards, DevelopmentCards, MaintenanceCards, ActionCards, MultipleChoiceCards)
     })
   }
+
   _renderColumns() {
-    return this.state.columns.map(name => (
-      <Column cards={this.state.cards} key={name} name={name} />
+    return this.state.columns.map((name, i) => (
+      <Column _renderCards={this._renderCards.bind(this)} key={name} name={name} id={i} />
     ));
+  }
+
+  _renderCards(that) {
+    if (that.props.id == 1) {
+      return this.state.cards.filter((el) => el.type == 'US').map((el, i) => (
+        <Card position={el.position} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i + el.type} />
+      ))
+    }
+    if (that.props.id == 0) {
+      return this.state.cards.filter((el) => el.type !== 'US').map((el, i) => (
+        <Card position={el.position} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i + el.type} />
+      ))
+    }
   }
 
   _renderDieColumns() {

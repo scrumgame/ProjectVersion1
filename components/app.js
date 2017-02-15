@@ -14,13 +14,19 @@ export default class App extends Component {
     super(props);
 
     this.state = {
+      columns: [{name: 'Controls', cash: false},
+                {name: 'Backlog', cash: false},
+                {name: 'Analysis', cash: false},
+                {name: 'Development', cash: false},
+                {name: 'Testing', cash: false},
+                {name: 'Done', cash: true}],
       cards: [],
-      dice:  [{dieColumn: 1, id: 0, value: 1},
-              {dieColumn: 2, id: 1, value: 1},
-              {dieColumn: 2, id: 2, value: 1},
-              {dieColumn: 2, id: 3, value: 1},
-              {dieColumn: 2, id: 4, value: 1},
-              {dieColumn: 3, id: 5, value: 1}]
+      dice:  [{position: 1, id: 0, value: 1},
+              {position: 2, id: 1, value: 1},
+              {position: 2, id: 2, value: 1},
+              {position: 2, id: 3, value: 1},
+              {position: 2, id: 4, value: 1},
+              {position: 3, id: 5, value: 1}]
     };
   }
 
@@ -56,9 +62,8 @@ export default class App extends Component {
   }
 
   _renderColumns() {
-    const columns = ['Controls', 'Backlog', 'Analysis', 'Development', 'Testing', 'Done']
-    return columns.map((name, i) => (
-      <Column _renderCards={this._renderCards.bind(this)} key={name} name={name} id={i} />
+    return this.state.columns.map((el, i) => (
+      <Column _renderCards={this._renderCards.bind(this)} key={el.name} name={el.name} id={i} cash={el.cash}/>
     ));
   }
 
@@ -93,12 +98,12 @@ export default class App extends Component {
   _handleDieLeftClick(die) {
     const dieId = die.props.id
     const dice = this.state.dice
-    const place = dice[dieId].dieColumn
+    const place = dice[dieId].position
     if (place == 2 || place == 3) {
-      dice[dieId].dieColumn = place -1
+      dice[dieId].position = place -1
       return this.setState({dice})
     } else {
-      dice[dieId].dieColumn = place +2
+      dice[dieId].position = place +2
       return this.setState({dice})
     }
   }
@@ -106,12 +111,12 @@ export default class App extends Component {
   _handleDieRightClick(die) {
     const dieId = die.props.id
     const dice = this.state.dice
-    const place = dice[dieId].dieColumn
+    const place = dice[dieId].position
     if (place == 1 || place == 2) {
-      dice[dieId].dieColumn = place +1
+      dice[dieId].position = place +1
       return this.setState({dice})
     } else {
-      dice[dieId].dieColumn = place -2
+      dice[dieId].position = place -2
       return this.setState({dice})
     }
   }

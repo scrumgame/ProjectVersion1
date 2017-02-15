@@ -1,10 +1,10 @@
 .Die {
   display: inline-block;
-  background: hotpink;
 }
 .DieButton {
   display: inline-block;
 }
 .DieValue {
   display: inline-block;
+  color: white
 }

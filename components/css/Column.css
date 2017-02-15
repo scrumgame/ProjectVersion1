@@ -1,7 +1,7 @@
 .column {
-  background-color: grey;
+  background-color: #0091D2;
   height: 80%;
-  border: 2px solid black;
+  border: 2px solid #004969;
   overflow: hidden;
 }
 

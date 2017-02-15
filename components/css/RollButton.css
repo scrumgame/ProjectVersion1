@@ -1,7 +1,7 @@
 .RollButton {
-  background-color: grey;
+  background-color: #0091D2;
   height: 25%;
-  border: 2px solid black;
+  border: 2px solid #004969;
   margin-top: 10%;
   text-align: center;
 }

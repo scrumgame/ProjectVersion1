@@ -15,8 +15,6 @@ export default class App extends Component {
 
     this.state = {
       cards: [],
-      columns: ['Controls', 'Backlog', 'Analysis', 'Development',  'Testing', 'Done'],
-      diecolumns: [1, 2, 3],
       dice:  [{dieColumn: 1, id: 0, value: 1},
               {dieColumn: 2, id: 1, value: 1},
               {dieColumn: 2, id: 2, value: 1},
@@ -27,17 +25,17 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this._generateUsCards()
+    this._generateCards()
   }
 
-  _generateUsCards() {
+  _generateCards() {
     const cards = [];
 
     for (var i = 1; i < 61; i++) {
       const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
-      const a    = Math.round((Math.random() * 10) + 1);
-      const d    = Math.round((Math.random() * 10) + 1);
-      const t    = Math.round((Math.random() * 10) + 1);
+      const a    = Math.floor((Math.random() * 10) + 1);
+      const d    = Math.floor((Math.random() * 10) + 1);
+      const t    = Math.floor((Math.random() * 10) + 1);
       const cash = cashValues[Math.floor(Math.random() * cashValues.length)];
       const id   = i;
 
@@ -58,66 +56,36 @@ export default class App extends Component {
   }
 
   _renderColumns() {
-    return this.state.columns.map((name, i) => (
+    const columns = ['Controls', 'Backlog', 'Analysis', 'Development', 'Testing', 'Done']
+    return columns.map((name, i) => (
       <Column _renderCards={this._renderCards.bind(this)} key={name} name={name} id={i} />
     ));
   }
 
   _renderCards(that) {
     const columnId = that.props.id
-
     switch (columnId) {
       case 0:
-        return this.state.cards.filter((el) => el.position == 0).map((el, i) => (
-          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
-        ))
-
-        break;
-
       case 1:
-        return this.state.cards.filter((el) => el.position == 1).map((el, i) => (
-          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
-        ))
-
-        break;
-
       case 2:
-        return this.state.cards.filter((el) => el.position == 2).map((el, i) => (
-          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
-        ))
-
-        break;
-
       case 3:
-        return this.state.cards.filter((el) => el.position == 3).map((el, i) => (
-          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
-        ))
-
-        break;
-
       case 4:
-        return this.state.cards.filter((el) => el.position == 4).map((el, i) => (
-          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
-        ))
-
-        break;
-
       case 5:
-        return this.state.cards.filter((el) => el.position == 5).map((el, i) => (
+        return this.state.cards.filter((el) => el.position == columnId).map((el, i) => (
           <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
         ))
 
         break;
 
       default:
-        console.log('sucks')
         break;
     }
   }
 
   _renderDieColumns() {
     const classes = ['col-sm-2 col-sm-offset-4 dieColumn', 'col-sm-2 dieColumn', 'col-sm-2 dieColumn']
-    return this.state.diecolumns.map((name, i) => (
+    const dieColumns = [1, 2, 3]
+    return dieColumns.map((name, i) => (
       <DieColumns _handleDieLeftClick={this._handleDieLeftClick.bind(this)} _handleDieRightClick={this._handleDieRightClick.bind(this)} dice={this.state.dice} key={name} name={name} id={i} className={classes[i]}/>
     ));
   }
@@ -160,7 +128,6 @@ export default class App extends Component {
     const cards = this.state.cards
     const cardId = card.props.id -1
     const cardCurrentPosition = cards[cardId].position
-    console.log(cardCurrentPosition, cardId)
     if (cardCurrentPosition !== 5) {
       cards[cardId].position = cardCurrentPosition +1
       return this.setState({cards})

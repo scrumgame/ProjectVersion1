@@ -2,7 +2,7 @@
   background-color: grey;
   height: 80%;
   border: 2px solid black;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .columnHeadline {

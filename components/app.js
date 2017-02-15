@@ -33,7 +33,7 @@ export default class App extends Component {
   _generateUsCards() {
     const cards = [];
 
-    for (var i = 0; i < 60; i++) {
+    for (var i = 1; i < 61; i++) {
       const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
       const a    = Math.round((Math.random() * 10) + 1);
       const d    = Math.round((Math.random() * 10) + 1);
@@ -47,13 +47,13 @@ export default class App extends Component {
         a: a,
         d: d,
         t: t,
-        us_id: i,
+        id: i,
         position: 1
       }
       cards.push(card);
     }
     this.setState({
-      cards: this.state.cards.concat(cards, DevelopmentCards, MaintenanceCards, ActionCards, MultipleChoiceCards)
+      cards: this.state.cards.concat(cards, ActionCards, DevelopmentCards, MaintenanceCards, MultipleChoiceCards)
     })
   }
 
@@ -64,15 +64,54 @@ export default class App extends Component {
   }
 
   _renderCards(that) {
-    if (that.props.id == 1) {
-      return this.state.cards.filter((el) => el.type == 'US').map((el, i) => (
-        <Card position={el.position} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i + el.type} />
-      ))
-    }
-    if (that.props.id == 0) {
-      return this.state.cards.filter((el) => el.type !== 'US').map((el, i) => (
-        <Card position={el.position} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i + el.type} />
-      ))
+    const columnId = that.props.id
+
+    switch (columnId) {
+      case 0:
+        return this.state.cards.filter((el) => el.position == 0).map((el, i) => (
+          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
+        ))
+
+        break;
+
+      case 1:
+        return this.state.cards.filter((el) => el.position == 1).map((el, i) => (
+          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
+        ))
+
+        break;
+
+      case 2:
+        return this.state.cards.filter((el) => el.position == 2).map((el, i) => (
+          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
+        ))
+
+        break;
+
+      case 3:
+        return this.state.cards.filter((el) => el.position == 3).map((el, i) => (
+          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
+        ))
+
+        break;
+
+      case 4:
+        return this.state.cards.filter((el) => el.position == 4).map((el, i) => (
+          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
+        ))
+
+        break;
+
+      case 5:
+        return this.state.cards.filter((el) => el.position == 5).map((el, i) => (
+          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
+        ))
+
+        break;
+
+      default:
+        console.log('sucks')
+        break;
     }
   }
 
@@ -115,6 +154,17 @@ export default class App extends Component {
       el.value = Math.floor((Math.random() * 6) + 1)
     ))
     this.setState({dice})
+  }
+
+  _handleCardClick(card) {
+    const cards = this.state.cards
+    const cardId = card.props.id -1
+    const cardCurrentPosition = cards[cardId].position
+    console.log(cardCurrentPosition, cardId)
+    if (cardCurrentPosition !== 5) {
+      cards[cardId].position = cardCurrentPosition +1
+      return this.setState({cards})
+    }
   }
 
   render() {

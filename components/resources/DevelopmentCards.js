@@ -4,7 +4,7 @@ const DevelopmentCards = [
   a: 1,
   d: 6,
   t: 4,
-  d_id: 0,
+  id: 74,
   position: 0
 },
 {
@@ -12,7 +12,7 @@ const DevelopmentCards = [
   a: 3,
   d: 4,
   t: 7,
-  d_id: 1,
+  id: 75,
   position: 0
 },
 {
@@ -20,7 +20,7 @@ const DevelopmentCards = [
   a: 2,
   d: 7,
   t: 5,
-  d_id: 2,
+  id: 76,
   position: 0
 },
 {
@@ -28,7 +28,7 @@ const DevelopmentCards = [
   a: 5,
   d: 8,
   t: 6,
-  d_id: 3,
+  id: 77,
   position: 0
 },
 {
@@ -36,7 +36,7 @@ const DevelopmentCards = [
   a: 7,
   d: 5,
   t: 3,
-  d_id: 4,
+  id: 78,
   position: 0
 },
 {
@@ -44,7 +44,7 @@ const DevelopmentCards = [
   a: 5,
   d: 7,
   t: 3,
-  d_id: 5,
+  id: 79,
   position: 0
 },
 {
@@ -52,7 +52,7 @@ const DevelopmentCards = [
   a: 1,
   d: 6,
   t: 3,
-  d_id: 6,
+  id: 80,
   position: 0
 }]
 

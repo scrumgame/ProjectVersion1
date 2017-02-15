@@ -4,7 +4,7 @@ const MaintenanceCards = [
   a: 4,
   d: 7,
   t: 4,
-  m_id: 0,
+  id: 81,
   position: 0
 },
 {
@@ -12,7 +12,7 @@ const MaintenanceCards = [
   a: 2,
   d: 5,
   t: 3,
-  m_id: 1,
+  id: 82,
   position: 0
 },
 {
@@ -20,7 +20,7 @@ const MaintenanceCards = [
   a: 3,
   d: 8,
   t: 6,
-  m_id: 2,
+  id: 83,
   position: 0
 },
 {
@@ -28,7 +28,7 @@ const MaintenanceCards = [
   a: 2,
   d: 5,
   t: 4,
-  m_id: 3,
+  id: 84,
   position: 0
 },
 {
@@ -36,7 +36,7 @@ const MaintenanceCards = [
   a: 5,
   d: 7,
   t: 3,
-  m_id: 4,
+  id: 85,
   position: 0
 }];
 

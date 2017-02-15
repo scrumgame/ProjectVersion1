@@ -14,12 +14,12 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      columns: [{name: 'Controls', cash: false},
-                {name: 'Backlog', cash: false},
-                {name: 'Analysis', cash: false},
-                {name: 'Development', cash: false},
-                {name: 'Testing', cash: false},
-                {name: 'Done', cash: true}],
+      columns: [{name: 'Controls'},
+                {name: 'Backlog'},
+                {name: 'Analysis'},
+                {name: 'Development'},
+                {name: 'Testing'},
+                {name: 'Done', cash: 0}],
       cards: [],
       dice:  [{position: 1, id: 0, value: 1},
               {position: 2, id: 1, value: 1},
@@ -130,13 +130,19 @@ export default class App extends Component {
   }
 
   _handleCardClick(card) {
+    const columns = this.state.columns
     const cards = this.state.cards
     const cardId = card.props.id -1
     const cardCurrentPosition = cards[cardId].position
     if (cardCurrentPosition !== 5) {
       cards[cardId].position = cardCurrentPosition +1
+      if (cardCurrentPosition == 4) {
+        columns[5].cash += cards[cardId].cash
+        return this.setState({columns})
+      }
       return this.setState({cards})
     }
+
   }
 
   render() {

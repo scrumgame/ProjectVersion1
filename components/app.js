@@ -14,25 +14,45 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      columns: [{name: 'Controls'},
-                {name: 'Backlog'},
-                {name: 'Analysis'},
-                {name: 'Development'},
-                {name: 'Testing'},
-                {name: 'Done', cash: 0}],
-      cards: [],
-      dice:  [{position: 1, id: 0, value: 1},
-              {position: 2, id: 1, value: 1},
-              {position: 2, id: 2, value: 1},
-              {position: 2, id: 3, value: 1},
-              {position: 2, id: 4, value: 1},
-              {position: 3, id: 5, value: 1}]
+      cards:
+        [],
+
+      columns:
+        [
+        {name: 'Controls'},
+        {name: 'Backlog'},
+        {name: 'Analysis'},
+        {name: 'Development'},
+        {name: 'Testing'},
+        {name: 'Done', cash: 0}
+        ],
+
+      dice:
+        [
+        {position: 1, id: 0, value: 1},
+        {position: 2, id: 1, value: 1},
+        {position: 2, id: 2, value: 1},
+        {position: 2, id: 3, value: 1},
+        {position: 2, id: 4, value: 1},
+        {position: 3, id: 5, value: 1}
+        ],
+
+      dicesum:
+        [
+        {position: 1, value: 0},
+        {position: 2, value: 0},
+        {position: 3, value: 0}
+        ]
     };
   }
 
   componentDidMount() {
     this._generateCards()
   }
+
+/**********************************************************************/
+/*                               CARDS                                */
+/**********************************************************************/
 
   _generateCards() {
     const cards = [];
@@ -61,12 +81,6 @@ export default class App extends Component {
     })
   }
 
-  _renderColumns() {
-    return this.state.columns.map((el, i) => (
-      <Column _renderCards={this._renderCards.bind(this)} key={el.name} name={el.name} id={i} cash={el.cash}/>
-    ));
-  }
-
   _renderCards(that) {
     const columnId = that.props.id
     switch (columnId) {
@@ -86,6 +100,35 @@ export default class App extends Component {
         break;
     }
   }
+
+  _handleCardClick(card) {
+    const columns = this.state.columns
+    const cards = this.state.cards
+    const cardId = card.props.id -1
+    const cardCurrentPosition = cards[cardId].position
+    if (cardCurrentPosition !== 5) {
+      cards[cardId].position = cardCurrentPosition +1
+      if (cardCurrentPosition == 4) {
+        columns[5].cash += cards[cardId].cash
+        return this.setState({columns})
+      }
+      return this.setState({cards})
+    }
+  }
+
+/**********************************************************************/
+/*                           CARDCOLUMNS                              */
+/**********************************************************************/
+
+  _renderColumns() {
+    return this.state.columns.map((el, i) => (
+      <Column _renderCards={this._renderCards.bind(this)} key={el.name} name={el.name} id={i} cash={el.cash}/>
+    ));
+  }
+
+/**********************************************************************/
+/*                                DICE                                */
+/**********************************************************************/
 
   _renderDieColumns() {
     const classes = ['col-sm-2 col-sm-offset-4 dieColumn', 'col-sm-2 dieColumn', 'col-sm-2 dieColumn']
@@ -127,23 +170,25 @@ export default class App extends Component {
       el.value = Math.floor((Math.random() * 6) + 1)
     ))
     this.setState({dice})
+    this._summarizeDiceRoll()
   }
 
-  _handleCardClick(card) {
-    const columns = this.state.columns
-    const cards = this.state.cards
-    const cardId = card.props.id -1
-    const cardCurrentPosition = cards[cardId].position
-    if (cardCurrentPosition !== 5) {
-      cards[cardId].position = cardCurrentPosition +1
-      if (cardCurrentPosition == 4) {
-        columns[5].cash += cards[cardId].cash
-        return this.setState({columns})
-      }
-      return this.setState({cards})
-    }
+  _summarizeDiceRoll() {
+    const dicesum = this.state.dicesum
+    const dice = this.state.dice
 
+    const sum = dice.filter((el) => el.position == 2)
+        .map((el) => (el.value))
+        .reduce((value, sum) => sum + value, 0)
+
+    dicesum[1].value = sum
+
+    return this.setState({dicesum})
   }
+
+/**********************************************************************/
+/*                           RENDERFUNCTION                           */
+/**********************************************************************/
 
   render() {
     return (

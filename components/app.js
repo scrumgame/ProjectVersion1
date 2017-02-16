@@ -177,11 +177,23 @@ export default class App extends Component {
     const dicesum = this.state.dicesum
     const dice = this.state.dice
 
-    const sum = dice.filter((el) => el.position == 2)
+    let sum = dice.filter((el) => el.position == 1)
+        .map((el) => (el.value))
+        .reduce((value, sum) => sum + value, 0)
+
+    dicesum[0].value = sum
+
+    sum = dice.filter((el) => el.position == 2)
         .map((el) => (el.value))
         .reduce((value, sum) => sum + value, 0)
 
     dicesum[1].value = sum
+
+    sum = dice.filter((el) => el.position == 3)
+        .map((el) => (el.value))
+        .reduce((value, sum) => sum + value, 0)
+
+    dicesum[2].value = sum
 
     return this.setState({dicesum})
   }

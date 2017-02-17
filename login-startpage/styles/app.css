@@ -1,0 +1,30 @@
+/* ************************************* */
+/*   App CSS                             */
+/* ************************************* */
+
+
+/* --------------Colors To be Used-------------- */
+/* background brownish: #2a1a12 */
+/* text: #99a6a7 */
+/* text featured: #8c546d */
+
+* {
+box-sizing: border-box;
+}
+
+html,body {
+height: 100%;
+  }
+
+body {
+align-items: center;
+background:#2a1a12;
+color: #99a6a7;
+display: flex;
+font-family: 'Milonga', cursive;
+font-size: 18px;
+justify-content: center;
+margin: 0;
+padding: 0;
+
+}

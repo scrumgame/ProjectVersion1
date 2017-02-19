@@ -142,10 +142,22 @@ export default class App extends Component {
     const dieId = die.props.id
     const dice = this.state.dice
     const place = dice[dieId].position
-    if (place == 2 || place == 3) {
+    const diceElements =  []
+
+    dice.forEach(function(elem) {
+      const diceNumber = elem.position
+      if (diceNumber == 2) {
+        diceElements.push(diceNumber)
+      }
+    });
+
+    if (place == 3 && diceElements.length < 4) {
       dice[dieId].position = place -1
       return this.setState({dice})
-    } else {
+    } else if (place == 2) {
+      dice[dieId].position = place -1
+      return this.setState({dice})
+    } else if (place == 1) {
       dice[dieId].position = place +2
       return this.setState({dice})
     }
@@ -155,10 +167,22 @@ export default class App extends Component {
     const dieId = die.props.id
     const dice = this.state.dice
     const place = dice[dieId].position
-    if (place == 1 || place == 2) {
+    const diceElements =  []
+
+    dice.forEach(function(elem) {
+      const diceNumber = elem.position
+      if (diceNumber == 2) {
+        diceElements.push(diceNumber)
+      }
+    });
+
+    if (place == 1 && diceElements.length < 4) {
       dice[dieId].position = place +1
       return this.setState({dice})
-    } else {
+    } else if (place == 2) {
+      dice[dieId].position = place +1
+      return this.setState({dice})
+    } else if (place == 3) {
       dice[dieId].position = place -2
       return this.setState({dice})
     }
@@ -178,20 +202,20 @@ export default class App extends Component {
     const dice = this.state.dice
 
     let sum = dice.filter((el) => el.position == 1)
-        .map((el) => (el.value))
-        .reduce((value, sum) => sum + value, 0)
+                  .map((el) => (el.value))
+                  .reduce((value, sum) => sum + value, 0)
 
     dicesum[0].value = sum
 
-    sum = dice.filter((el) => el.position == 2)
-        .map((el) => (el.value))
-        .reduce((value, sum) => sum + value, 0)
+        sum = dice.filter((el) => el.position == 2)
+                  .map((el) => (el.value))
+                  .reduce((value, sum) => sum + value, 0)
 
     dicesum[1].value = sum
 
-    sum = dice.filter((el) => el.position == 3)
-        .map((el) => (el.value))
-        .reduce((value, sum) => sum + value, 0)
+        sum = dice.filter((el) => el.position == 3)
+                  .map((el) => (el.value))
+                  .reduce((value, sum) => sum + value, 0)
 
     dicesum[2].value = sum
 

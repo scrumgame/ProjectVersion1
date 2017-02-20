@@ -144,8 +144,8 @@ export default class App extends Component {
     const place = dice[dieId].position
     const diceElements =  []
 
-    dice.forEach(function(elem) {
-      const diceNumber = elem.position
+    dice.forEach(function(el) {
+      const diceNumber = el.position
       if (diceNumber == 2) {
         diceElements.push(diceNumber)
       }
@@ -172,8 +172,8 @@ export default class App extends Component {
     const place = dice[dieId].position
     const diceElements =  []
 
-    dice.forEach(function(elem) {
-      const diceNumber = elem.position
+    dice.forEach(function(el) {
+      const diceNumber = el.position
       if (diceNumber == 2) {
         diceElements.push(diceNumber)
       }

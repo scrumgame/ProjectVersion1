@@ -154,6 +154,9 @@ export default class App extends Component {
     if (place == 3 && diceElements.length < 4) {
       dice[dieId].position = place -1
       return this.setState({dice})
+    } else if (place == 3 && diceElements.length >= 4) {
+      dice[dieId].position = place -2
+      return this.setState({dice})
     } else if (place == 2) {
       dice[dieId].position = place -1
       return this.setState({dice})
@@ -178,6 +181,9 @@ export default class App extends Component {
 
     if (place == 1 && diceElements.length < 4) {
       dice[dieId].position = place +1
+      return this.setState({dice})
+    } else if (place == 1 && diceElements.length >= 4) {
+      dice[dieId].position = place +2
       return this.setState({dice})
     } else if (place == 2) {
       dice[dieId].position = place +1

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import update from 'immutability-helper'
 import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
@@ -29,12 +30,12 @@ export default class App extends Component {
 
       dice:
         [
-        {position: 1, id: 0, value: 1},
-        {position: 2, id: 1, value: 1},
-        {position: 2, id: 2, value: 1},
-        {position: 2, id: 3, value: 1},
-        {position: 2, id: 4, value: 1},
-        {position: 3, id: 5, value: 1}
+        {position: 1, id: 0, value: 1, type: 'Analysis'},
+        {position: 2, id: 1, value: 1, type: 'Developer'},
+        {position: 2, id: 2, value: 1, type: 'Developer'},
+        {position: 2, id: 3, value: 1, type: 'Developer'},
+        {position: 2, id: 4, value: 1, type: 'Developer'},
+        {position: 3, id: 5, value: 1, type: 'Testing'}
         ],
 
       dicesum:
@@ -57,22 +58,23 @@ export default class App extends Component {
   _generateCards() {
     const cards = [];
 
-    for (var i = 1; i < 61; i++) {
+    for (var i = 0; i < 60; i++) {
       const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
-      const a    = Math.floor((Math.random() * 10) + 1);
-      const d    = Math.floor((Math.random() * 10) + 1);
-      const t    = Math.floor((Math.random() * 10) + 1);
-      const cash = cashValues[Math.floor(Math.random() * cashValues.length)];
-      const id   = i;
+      const a          = Math.floor((Math.random() * 10) + 1);
+      const d          = Math.floor((Math.random() * 10) + 1);
+      const t          = Math.floor((Math.random() * 10) + 1);
+      const cash       = cashValues[Math.floor(Math.random() * cashValues.length)];
+      const id         = i;
 
       const card = {
-        type: 'US',
-        cash: cash,
-        a: a,
-        d: d,
-        t: t,
-        id: i,
-        position: 1
+        type    : 'US',
+        cash    : cash,
+        a       : a,
+        d       : d,
+        t       : t,
+        id      : i,
+        position: 1,
+        movable: true
       }
       cards.push(card);
     }
@@ -81,38 +83,39 @@ export default class App extends Component {
     })
   }
 
-  _renderCards(that) {
-    const columnId = that.props.id
-    switch (columnId) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-        return this.state.cards.filter((el) => el.position == columnId).map((el, i) => (
-          <Card _handleCardClick={this._handleCardClick.bind(this)} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
-        ))
-
-        break;
-
-      default:
-        break;
-    }
-  }
-
   _handleCardClick(card) {
     const columns = this.state.columns
     const cards = this.state.cards
-    const cardId = card.props.id -1
-    const cardCurrentPosition = cards[cardId].position
-    if (cardCurrentPosition !== 5) {
-      cards[cardId].position = cardCurrentPosition +1
-      if (cardCurrentPosition == 4) {
-        columns[5].cash += cards[cardId].cash
-        return this.setState({columns})
+    const cardId = card.props.id
+    const pressedCard = cards[cardId]
+
+    switch (pressedCard.position) {
+      case 2:
+        if (pressedCard.a == 0) pressedCard.movable = true
+        break;
+      case 3:
+        if (pressedCard.d == 0) pressedCard.movable = true
+        break;
+      case 4:
+        if (pressedCard.t == 0) pressedCard.movable = true
+        break;
+      default:
+        break;
+    }
+
+    if(pressedCard.movable == true) {
+
+      if (pressedCard.position !== 5) {
+        pressedCard.position++
+        pressedCard.movable = false
+
+        if (pressedCard.position == 5) {
+          columns[5].cash += pressedCard.cash
+          return this.setState({columns})
+        }
+
+        return this.setState({cards})
       }
-      return this.setState({cards})
     }
   }
 
@@ -122,7 +125,7 @@ export default class App extends Component {
 
   _renderColumns() {
     return this.state.columns.map((el, i) => (
-      <Column _renderCards={this._renderCards.bind(this)} key={el.name} name={el.name} id={i} cash={el.cash}/>
+      <Column _handleCardClick={this._handleCardClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash}/>
     ));
   }
 
@@ -131,10 +134,10 @@ export default class App extends Component {
 /**********************************************************************/
 
   _renderDieColumns() {
-    const classes = ['col-sm-2 col-sm-offset-4 dieColumn', 'col-sm-2 dieColumn', 'col-sm-2 dieColumn']
+    const classes = ['col-sm-offset-4', '', '']
     const dieColumns = [1, 2, 3]
     return dieColumns.map((name, i) => (
-      <DieColumns _handleDieLeftClick={this._handleDieLeftClick.bind(this)} _handleDieRightClick={this._handleDieRightClick.bind(this)} dice={this.state.dice} key={name} name={name} id={i} className={classes[i]}/>
+      <DieColumns _handleDieLeftClick={this._handleDieLeftClick.bind(this)} _handleDieRightClick={this._handleDieRightClick.bind(this)} dice={this.state.dice} key={name} name={name} id={name} className={classes[i]}/>
     ));
   }
 
@@ -149,7 +152,7 @@ export default class App extends Component {
       if (diceNumber == 2) {
         diceElements.push(diceNumber)
       }
-    });
+    })
 
     if (place == 3 && diceElements.length < 4) {
       dice[dieId].position = place -1
@@ -177,7 +180,7 @@ export default class App extends Component {
       if (diceNumber == 2) {
         diceElements.push(diceNumber)
       }
-    });
+    })
 
     if (place == 1 && diceElements.length < 4) {
       dice[dieId].position = place +1
@@ -207,25 +210,41 @@ export default class App extends Component {
     const dicesum = this.state.dicesum
     const dice = this.state.dice
 
-    let sum = dice.filter((el) => el.position == 1)
-                  .map((el) => (el.value))
-                  .reduce((value, sum) => sum + value, 0)
+    dicesum.map(sum => {
+      sum.value = dice
+        .filter((el) => el.position == sum.position)
+        .map(el => el.value)
+        .reduce((total, value) => value + total, 0)
+    })
 
-    dicesum[0].value = sum
+    this.setState({dicesum})
+    this._checkValues()
+  }
 
-        sum = dice.filter((el) => el.position == 2)
-                  .map((el) => (el.value))
-                  .reduce((value, sum) => sum + value, 0)
+  _checkValues() {
+    const dicesum = this.state.dicesum
+    const cards = this.state.cards
 
-    dicesum[1].value = sum
-
-        sum = dice.filter((el) => el.position == 3)
-                  .map((el) => (el.value))
-                  .reduce((value, sum) => sum + value, 0)
-
-    dicesum[2].value = sum
-
-    return this.setState({dicesum})
+    dicesum.map(dice => {
+      cards.filter(el => el.position == 2).map(el => {
+        while (el.a > 0 && dice.value > 0 && dice.position == 1) {
+          el.a--
+          dice.value--
+        }
+      })
+      cards.filter(el => el.position == 3).map(el => {
+        while (el.d > 0 && dice.value > 0 && dice.position == 2) {
+          el.d--
+          dice.value--
+        }
+      })
+      cards.filter(el => el.position == 4).map(el => {
+        while (el.t > 0 && dice.value > 0 && dice.position == 3) {
+          el.t--
+          dice.value--
+        }
+      })
+    })
   }
 
 /**********************************************************************/

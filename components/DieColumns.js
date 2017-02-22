@@ -7,20 +7,12 @@ export default class DieColumns extends Component {
     super(props)
   }
 
-  _renderDice(v) {
-    switch (v) {
-      case 0:
-        return this.props.dice.filter((el) => el.position == 1).map((el, i) => (
-          <Die _handleDieLeftClick={this.props._handleDieLeftClick} _handleDieRightClick={this.props._handleDieRightClick} dice={this.props.dice} value={el.value} key={el.id} id={el.id} position={el.position}/> ))
-        break;
-
+  _renderDice(id) {
+    switch (id) {
       case 1:
-        return this.props.dice.filter((el) => el.position == 2).map((el, i) => (
-          <Die _handleDieLeftClick={this.props._handleDieLeftClick} _handleDieRightClick={this.props._handleDieRightClick} dice={this.props.dice} value={el.value} key={el.id} id={el.id} position={el.position}/> ))
-        break;
-
       case 2:
-        return this.props.dice.filter((el) => el.position == 3).map((el, i) => (
+      case 3:
+        return this.props.dice.filter((el) => el.position == id).map((el, i) => (
           <Die _handleDieLeftClick={this.props._handleDieLeftClick} _handleDieRightClick={this.props._handleDieRightClick} dice={this.props.dice} value={el.value} key={el.id} id={el.id} position={el.position}/> ))
         break;
 
@@ -31,7 +23,7 @@ export default class DieColumns extends Component {
 
   render() {
     return (
-      <div className={this.props.className}>
+      <div className={`col-sm-2 dieColumn ${this.props.className}`}>
         {this._renderDice(this.props.id)}
       </div>
     );

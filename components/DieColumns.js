@@ -13,7 +13,7 @@ export default class DieColumns extends Component {
       case 2:
       case 3:
         return this.props.dice.filter((el) => el.position == id).map((el, i) => (
-          <Die _handleDieLeftClick={this.props._handleDieLeftClick} _handleDieRightClick={this.props._handleDieRightClick} dice={this.props.dice} value={el.value} key={el.id} id={el.id} position={el.position}/> ))
+          <Die _handleDieClick={this.props._handleDieClick} type={el.type} value={el.value} key={el.id} id={el.id} position={el.position}/> ))
         break;
 
       default:

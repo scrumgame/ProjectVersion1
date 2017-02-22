@@ -31,10 +31,10 @@ export default class App extends Component {
       dice:
         [
         {position: 1, id: 0, value: 1, type: 'Analysis'},
-        {position: 2, id: 1, value: 1, type: 'Developer'},
-        {position: 2, id: 2, value: 1, type: 'Developer'},
-        {position: 2, id: 3, value: 1, type: 'Developer'},
-        {position: 2, id: 4, value: 1, type: 'Developer'},
+        {position: 2, id: 1, value: 1, type: 'Development'},
+        {position: 2, id: 2, value: 1, type: 'Development'},
+        {position: 2, id: 3, value: 1, type: 'Development'},
+        {position: 2, id: 4, value: 1, type: 'Development'},
         {position: 3, id: 5, value: 1, type: 'Testing'}
         ],
 
@@ -90,6 +90,10 @@ export default class App extends Component {
     const pressedCard = cards[cardId]
 
     switch (pressedCard.position) {
+      case 0:
+      case 1:
+        pressedCard.movable = true
+        break;
       case 2:
         if (pressedCard.a == 0) pressedCard.movable = true
         break;
@@ -137,62 +141,25 @@ export default class App extends Component {
     const classes = ['col-sm-offset-4', '', '']
     const dieColumns = [1, 2, 3]
     return dieColumns.map((name, i) => (
-      <DieColumns _handleDieLeftClick={this._handleDieLeftClick.bind(this)} _handleDieRightClick={this._handleDieRightClick.bind(this)} dice={this.state.dice} key={name} name={name} id={name} className={classes[i]}/>
+      <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={name} name={name} id={name} className={classes[i]}/>
     ));
   }
 
-  _handleDieLeftClick(die) {
+  _handleDieClick(die, button) {
+    const buttontype = button.props.type
     const dieId = die.props.id
     const dice = this.state.dice
     const place = dice[dieId].position
-    const diceElements =  []
+    const type = dice[dieId].type
 
-    dice.forEach(function(el) {
-      const diceNumber = el.position
-      if (diceNumber == 2) {
-        diceElements.push(diceNumber)
-      }
-    })
-
-    if (place == 3 && diceElements.length < 4) {
+    if (buttontype == 'M') {
+      dice[dieId].position = (place == 1) ? 3 : 1
+      return this.setState({dice})
+    } else if (buttontype == 'L' && place == 2 || buttontype == 'L' && place == 3) {
       dice[dieId].position = place -1
       return this.setState({dice})
-    } else if (place == 3 && diceElements.length >= 4) {
-      dice[dieId].position = place -2
-      return this.setState({dice})
-    } else if (place == 2) {
-      dice[dieId].position = place -1
-      return this.setState({dice})
-    } else if (place == 1) {
-      dice[dieId].position = place +2
-      return this.setState({dice})
-    }
-  }
-
-  _handleDieRightClick(die) {
-    const dieId = die.props.id
-    const dice = this.state.dice
-    const place = dice[dieId].position
-    const diceElements =  []
-
-    dice.forEach(function(el) {
-      const diceNumber = el.position
-      if (diceNumber == 2) {
-        diceElements.push(diceNumber)
-      }
-    })
-
-    if (place == 1 && diceElements.length < 4) {
+    } else if (buttontype == 'R' && place == 1 || buttontype == 'R' && place == 2) {
       dice[dieId].position = place +1
-      return this.setState({dice})
-    } else if (place == 1 && diceElements.length >= 4) {
-      dice[dieId].position = place +2
-      return this.setState({dice})
-    } else if (place == 2) {
-      dice[dieId].position = place +1
-      return this.setState({dice})
-    } else if (place == 3) {
-      dice[dieId].position = place -2
       return this.setState({dice})
     }
   }

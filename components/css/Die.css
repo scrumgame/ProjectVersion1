@@ -1,10 +1,7 @@
 .Die {
-  display: inline-block;
-}
-.DieButton {
-  display: inline-block;
+  display: block;
 }
 .DieValue {
-  display: inline-block;
+  display: block;
   color: white
 }

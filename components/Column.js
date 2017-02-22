@@ -15,7 +15,7 @@ export default class Column extends Component {
       case 3:
       case 4:
       case 5:
-        return this.props.cards.filter((el) => el.position == id).map((el, i) => (
+        return this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC').map((el, i) => (
           <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={new Date() + i + el.type} />
         ))
         break;

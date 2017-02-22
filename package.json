@@ -43,6 +43,8 @@
   },
   "devDependencies": {
     "css-loader": "^0.26.1",
+    "eslint": "^3.16.0",
+    "eslint-config-google": "^0.7.1",
     "redux-devtools": "^3.3.2",
     "style-loader": "^0.13.1"
   }

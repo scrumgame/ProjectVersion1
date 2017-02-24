@@ -86,41 +86,43 @@ export default class App extends Component {
   _handleCardClick(card) {
     const columns = this.state.columns
     const cards = this.state.cards
-    const cardId = card.props.id
-    const pressedCard = cards[cardId]
 
-    switch (pressedCard.position) {
-      case 0:
-      case 1:
-        pressedCard.movable = true
-        break;
-      case 2:
-        if (pressedCard.a == 0) pressedCard.movable = true
-        break;
-      case 3:
-        if (pressedCard.d == 0) pressedCard.movable = true
-        break;
-      case 4:
-        if (pressedCard.t == 0) pressedCard.movable = true
-        break;
-      default:
-        break;
-    }
+    cards.filter((el) => el.id == card.props.id).map(el => {
 
-    if(pressedCard.movable == true) {
-
-      if (pressedCard.position !== 5) {
-        pressedCard.position++
-        pressedCard.movable = false
-
-        if (pressedCard.position == 5) {
-          columns[5].cash += pressedCard.cash
-          return this.setState({columns})
-        }
-
-        return this.setState({cards})
+      switch (el.position) {
+        case 0:
+        case 1:
+          el.movable = true
+        break;
+        case 2:
+        if (el.a == 0) el.movable = true
+        break;
+        case 3:
+        if (el.d == 0) el.movable = true
+        break;
+        case 4:
+        if (el.t == 0) el.movable = true
+        break;
+        default:
+        break;
       }
-    }
+
+      if(el.movable == true) {
+
+        if (el.position !== 5) {
+          el.position++
+          el.movable = false
+
+          if (el.position == 5) {
+            columns[5].cash += el.cash
+            return this.setState({columns})
+          }
+
+          return this.setState({cards})
+        }
+      }
+    })
+
   }
 
 /**********************************************************************/
@@ -147,21 +149,20 @@ export default class App extends Component {
 
   _handleDieClick(die, button) {
     const buttontype = button.props.type
-    const dieId = die.props.id
     const dice = this.state.dice
-    const place = dice[dieId].position
-    const type = dice[dieId].type
 
-    if (buttontype == 'M') {
-      dice[dieId].position = (place == 1) ? 3 : 1
-      return this.setState({dice})
-    } else if (buttontype == 'L' && place == 2 || buttontype == 'L' && place == 3) {
-      dice[dieId].position = place -1
-      return this.setState({dice})
-    } else if (buttontype == 'R' && place == 1 || buttontype == 'R' && place == 2) {
-      dice[dieId].position = place +1
-      return this.setState({dice})
-    }
+    dice.filter(el => el.id == die.props.id).map(el => {
+      if (buttontype == 'M') {
+        el.position = (el.position == 1) ? 3 : 1
+        return this.setState({dice})
+      } else if (buttontype == 'L' && el.position == 2 || buttontype == 'L' && el.position == 3) {
+        el.position--
+        return this.setState({dice})
+      } else if (buttontype == 'R' && el.position == 1 || buttontype == 'R' && el.position == 2) {
+        el.position++
+        return this.setState({dice})
+      }
+    })
   }
 
   _handleDieRoll() {

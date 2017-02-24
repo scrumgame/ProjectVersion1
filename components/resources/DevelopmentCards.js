@@ -4,7 +4,7 @@ const DevelopmentCards = [
   a       : 1,
   d       : 6,
   t       : 4,
-  id      : 73,
+  id      : 1000,
   position: 0,
   movable : true
 },

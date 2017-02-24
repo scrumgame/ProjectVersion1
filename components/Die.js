@@ -31,7 +31,3 @@ export default class Die extends Component {
     );
   }
 }
-
-/* <button onClick={() => this.props._bajs(this)} id="bajs" className="DieButton">B</button>
-<button onClick={() => this.props._handleDieLeftClick(this)} id="left" className="DieButton">L</button>
-<button onClick={() => this.props._handleDieRightClick(this)} id="right" className="DieButton">R</button> */

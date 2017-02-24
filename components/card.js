@@ -13,9 +13,9 @@ export default class Card extends Component {
   _ifADT() {
     if (this.props.a >= 0 && this.props.d >= 0 && this.props.t >= 0 ) {
       return [
-        <p key={this.props.a}>A: {this.props.a}</p>,
-        <p key={this.props.d}>D: {this.props.d}</p>,
-        <p key={this.props.t}>T: {this.props.t}</p>
+        <p>A: {this.props.a}</p>,
+        <p>D: {this.props.d}</p>,
+        <p>T: {this.props.t}</p>
       ]
     }
   }

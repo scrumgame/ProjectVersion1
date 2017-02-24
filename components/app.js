@@ -142,8 +142,8 @@ export default class App extends Component {
   _renderDieColumns() {
     const classes = ['col-sm-offset-4', '', '']
     const dieColumns = [1, 2, 3]
-    return dieColumns.map((name, i) => (
-      <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={name} name={name} id={name} className={classes[i]}/>
+    return dieColumns.map((el, i) => (
+      <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={el} name={el} id={el} className={classes[i]}/>
     ));
   }
 

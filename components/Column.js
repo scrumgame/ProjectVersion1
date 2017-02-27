@@ -13,6 +13,7 @@ export default class Column extends Component {
         const US = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'US').map((el, i) => (
           <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
         )).slice(0, 1)
+
         const D = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'D').map((el, i) => (
           <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
         )).slice(0, 1)
@@ -28,7 +29,6 @@ export default class Column extends Component {
       case 2:
       case 3:
       case 4:
-      case 5:
         return this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC').map((el, i) => (
           <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
         ))
@@ -50,7 +50,7 @@ export default class Column extends Component {
 
   render() {
     return (
-      <div className="column col-sm-2">
+      <div className={`col-sm-2 column ${this.props.className}`}>
         {this._cash()}
         {this._renderCards(this.props.id)}
       </div>

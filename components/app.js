@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import update from 'immutability-helper'
 import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
@@ -20,7 +19,6 @@ export default class App extends Component {
 
       columns:
         [
-        {name: 'Controls'},
         {name: 'Backlog'},
         {name: 'Analysis'},
         {name: 'Development'},
@@ -95,16 +93,15 @@ export default class App extends Component {
 
         switch (el.position) {
           case 0:
-          case 1:
           el.movable = true
           break;
-          case 2:
+          case 1:
           if (el.a == 0) el.movable = true
           break;
-          case 3:
+          case 2:
           if (el.d == 0) el.movable = true
           break;
-          case 4:
+          case 3:
           if (el.t == 0) el.movable = true
           break;
           default:
@@ -113,12 +110,12 @@ export default class App extends Component {
 
         if(el.movable == true) {
 
-          if (el.position !== 5) {
+          if (el.position !== 4) {
             el.position++
             el.movable = false
 
-            if (el.position == 5) {
-              columns[5].cash += el.cash
+            if (el.position == 4) {
+              columns[4].cash += el.cash
               return this.setState({columns})
             }
 
@@ -134,8 +131,9 @@ export default class App extends Component {
 /**********************************************************************/
 
   _renderColumns() {
+    const classes = ['col-sm-offset-1', '', '', '', '']
     return this.state.columns.map((el, i) => (
-      <Column _handleCardClick={this._handleCardClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash}/>
+      <Column _handleCardClick={this._handleCardClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash} className={classes[i]}/>
     ));
   }
 
@@ -144,7 +142,7 @@ export default class App extends Component {
 /**********************************************************************/
 
   _renderDieColumns() {
-    const classes = ['col-sm-offset-4', '', '']
+    const classes = ['col-sm-offset-3', '', '']
     const dieColumns = [1, 2, 3]
     return dieColumns.map((el, i) => (
       <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={el} name={el} id={el} className={classes[i]}/>
@@ -198,19 +196,19 @@ export default class App extends Component {
     const cards = this.state.cards
 
     dicesum.map(dice => {
-      cards.filter(el => el.position == 2).map(el => {
+      cards.filter(el => el.position == 1).map(el => {
         while (el.a > 0 && dice.value > 0 && dice.position == 1) {
           el.a--
           dice.value--
         }
       })
-      cards.filter(el => el.position == 3).map(el => {
+      cards.filter(el => el.position == 2).map(el => {
         while (el.d > 0 && dice.value > 0 && dice.position == 2) {
           el.d--
           dice.value--
         }
       })
-      cards.filter(el => el.position == 4).map(el => {
+      cards.filter(el => el.position == 3).map(el => {
         while (el.t > 0 && dice.value > 0 && dice.position == 3) {
           el.t--
           dice.value--

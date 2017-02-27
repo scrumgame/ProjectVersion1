@@ -4,7 +4,7 @@ import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
 import RollButton from './RollButton'
-import DevelopmentCards from './resources/DevelopmentCards'
+import DefectCards from './resources/DefectCards'
 import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
 import MultipleChoiceCards from './resources/MultipleChoiceCards'
@@ -68,18 +68,21 @@ export default class App extends Component {
 
       const card = {
         type    : 'US',
+        number  : i+1,
         cash    : cash,
         a       : a,
         d       : d,
         t       : t,
         id      : i,
-        position: 1,
-        movable: true
+        position: 0,
+        priority: 0,
+        movable : true
       }
       cards.push(card);
     }
+
     this.setState({
-      cards: this.state.cards.concat(cards, ActionCards, DevelopmentCards, MaintenanceCards, MultipleChoiceCards)
+      cards: this.state.cards.concat(cards, ActionCards, DefectCards, MaintenanceCards, MultipleChoiceCards)
     })
   }
 
@@ -87,42 +90,43 @@ export default class App extends Component {
     const columns = this.state.columns
     const cards = this.state.cards
 
-    cards.filter((el) => el.id == card.props.id).map(el => {
+    if (card.props.index == 0) {
+      cards.filter((el) => el.id == card.props.id).map(el => {
 
-      switch (el.position) {
-        case 0:
-        case 1:
+        switch (el.position) {
+          case 0:
+          case 1:
           el.movable = true
-        break;
-        case 2:
-        if (el.a == 0) el.movable = true
-        break;
-        case 3:
-        if (el.d == 0) el.movable = true
-        break;
-        case 4:
-        if (el.t == 0) el.movable = true
-        break;
-        default:
-        break;
-      }
-
-      if(el.movable == true) {
-
-        if (el.position !== 5) {
-          el.position++
-          el.movable = false
-
-          if (el.position == 5) {
-            columns[5].cash += el.cash
-            return this.setState({columns})
-          }
-
-          return this.setState({cards})
+          break;
+          case 2:
+          if (el.a == 0) el.movable = true
+          break;
+          case 3:
+          if (el.d == 0) el.movable = true
+          break;
+          case 4:
+          if (el.t == 0) el.movable = true
+          break;
+          default:
+          break;
         }
-      }
-    })
 
+        if(el.movable == true) {
+
+          if (el.position !== 5) {
+            el.position++
+            el.movable = false
+
+            if (el.position == 5) {
+              columns[5].cash += el.cash
+              return this.setState({columns})
+            }
+
+            return this.setState({cards})
+          }
+        }
+      })
+    }
   }
 
 /**********************************************************************/

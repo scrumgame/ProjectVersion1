@@ -23,7 +23,7 @@ export default class Card extends Component {
   render (){
     return(
       <div onClick={() => this.props._handleCardClick(this)} className="CardDiv">
-        <h4>{this.props.type}</h4>
+        <h4>{this.props.type} {this.props.number}</h4>
         {this._ifCash()}
         {this._ifADT()}
       </div>

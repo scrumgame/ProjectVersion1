@@ -10,14 +10,29 @@ export default class Column extends Component {
   _renderCards(id) {
     switch (id) {
       case 0:
+        const US = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'US').map((el, i) => (
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
+        )).slice(0, 1)
+        const D = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'D').map((el, i) => (
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
+        )).slice(0, 1)
+
+        const M = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'M').map((el, i) => (
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
+        )).slice(0, 1)
+
+        return [US, D, M]
+
+        break;
       case 1:
       case 2:
       case 3:
       case 4:
       case 5:
         return this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC').map((el, i) => (
-          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i + el.type} />
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
         ))
+
         break;
       default:
         break;

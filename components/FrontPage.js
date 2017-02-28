@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import App from './app'
+import TeamName from './TeamName'
 import Logo from './Logo'
 import FrontPageButtons from './FrontPageButtons'
 import './css/FrontPage.css'
@@ -11,7 +12,7 @@ export default class FrontPage extends Component {
     this.state = {
       game:
         {value: false}
-    }
+      }
   }
 
 
@@ -21,12 +22,14 @@ export default class FrontPage extends Component {
     })
   }
 
-  bajs() {
+
+
+  _renderPage() {
   if (this.state.game.value == true) {
     return <App />
   } else {
     return [<Logo />,
-    <FrontPageButtons className="btn btn-block" name="newGame" _newGame={this._newGame.bind(this)}/>,
+    <FrontPageButtons className="btn btn-default" name="newGame" _newGame={this._newGame.bind(this)}/>,
     <FrontPageButtons className="btn btn-default" name="custom game"/>
   ]}
   }
@@ -34,7 +37,7 @@ export default class FrontPage extends Component {
   render() {
     return (
       <div>
-        {this.bajs()}
+        {this._renderPage()}
       </div>
     );
   }

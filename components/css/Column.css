@@ -1,11 +1,21 @@
 .column {
-  background-color: #0091D2;
+  background-color: #edf0f1;
   height: 80%;
-  border: 2px solid #004969;
+  border: 1px solid #027ebe;
   overflow: hidden;
 }
 
 .columnHeadline {
   text-align: center;
   color: lime;
+}
+
+h3 {
+  background: #027ebe none repeat scroll 0 0;
+  color: #fdfdfd;
+  font-size: 17px;
+  margin: 0 -15px;
+  padding: 10px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
 }

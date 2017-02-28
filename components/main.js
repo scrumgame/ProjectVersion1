@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import FrontPage from './FrontPage';
 
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    <App />,
+    <FrontPage />,
     document.getElementById('mount')
   );
 });

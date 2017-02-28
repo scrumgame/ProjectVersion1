@@ -11,13 +11,13 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 # Den här klassen startar upp vårt API och hämtar allt det vi behöver från själva HTTP-anropet
 #
 
-class API{
+class API {
 
 	private	$method, // GET, POSt, PUT, DELETE ...
-			$input, // Data sent with request
-			$resource, // REST Resource to call
-			$resource_id, // Id of the resource
-			$request; // The rest of the URL
+					$input, // Data sent with request
+					$resource, // REST Resource to call
+					$resource_id, // Id of the resource
+					$request; // The rest of the URL
 
 	# En "magisk" get funktion som gör att det går att hämta alla våra variabler inom objektet fast att de är privata, men vi kan inte lägga in värden i dem utanför objektet
 	function __get($k){

@@ -65,16 +65,17 @@ export default class App extends Component {
       const id         = i;
 
       const card = {
-        type    : 'US',
-        number  : i+1,
-        cash    : cash,
-        a       : a,
-        d       : d,
-        t       : t,
-        id      : i,
-        position: 0,
-        priority: 0,
-        movable : true
+        type       : 'US',
+        number     : i+1,
+        cash       : cash,
+        a          : a,
+        d          : d,
+        t          : t,
+        id         : i,
+        position   : 0,
+        priority   : 0,
+        timeclicked: 0,
+        movable    : true
       }
       cards.push(card);
     }
@@ -85,6 +86,8 @@ export default class App extends Component {
   }
 
   _handleCardClick(card) {
+    const date = new Date()
+    const time = date.getTime()
     const columns = this.state.columns
     const cards = this.state.cards
 
@@ -94,15 +97,25 @@ export default class App extends Component {
         switch (el.position) {
           case 0:
           el.movable = true
+          el.timeclicked = time
           break;
           case 1:
-          if (el.a == 0) el.movable = true
+          if (el.a == 0) {
+            el.movable = true
+            el.timeclicked = time
+          }
           break;
           case 2:
-          if (el.d == 0) el.movable = true
+          if (el.d == 0) {
+            el.movable = true
+            el.timeclicked = time
+          }
           break;
           case 3:
-          if (el.t == 0) el.movable = true
+          if (el.t == 0) {
+            el.movable = true
+            el.timeclicked = time
+          }
           break;
           default:
           break;
@@ -114,7 +127,7 @@ export default class App extends Component {
             el.position++
             el.movable = false
 
-            if (el.position == 4) {
+            if (el.position == 4 && el.cash) {
               columns[4].cash += el.cash
               return this.setState({columns})
             }
@@ -181,7 +194,7 @@ export default class App extends Component {
     const dice = this.state.dice
 
     dicesum.map(sum => {
-      sum.value = dice
+        sum.value = dice
         .filter((el) => el.position == sum.position)
         .map(el => el.value)
         .reduce((total, value) => value + total, 0)

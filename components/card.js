@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import CardButton from './CardButton'
 import './css/Card.css';
 
 export default class Card extends Component {
@@ -7,7 +8,9 @@ export default class Card extends Component {
   }
 
   _ifCash() {
-    if (this.props.cash) return <p>${this.props.cash}</p>
+    if (this.props.cash) {
+      return <p>${this.props.cash}</p>
+    }
   }
 
   _ifADT() {
@@ -20,12 +23,19 @@ export default class Card extends Component {
     }
   }
 
+  _ifPrio() {
+    if (this.props.type == 'D' || this.props.type == 'M') {
+      return <CardButton />
+    }
+  }
+
   render (){
     return(
       <div onClick={() => this.props._handleCardClick(this)} className="CardDiv">
         <h4>{this.props.type} {this.props.number}</h4>
         {this._ifCash()}
         {this._ifADT()}
+        {this._ifPrio()}
       </div>
     );
   }

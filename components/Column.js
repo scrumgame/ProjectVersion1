@@ -10,17 +10,26 @@ export default class Column extends Component {
   _renderCards(id) {
     switch (id) {
       case 0:
-        const US = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'US').map((el, i) => (
-          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
-        )).slice(0, 1)
+        const US = this.props.cards
+                    .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'US')
+                    .map((el, i) => (
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority} timeclicked={el.timeclicked}/>
+        ))
+                    .slice(0, 1)
 
-        const D = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'D').map((el, i) => (
-          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
-        )).slice(0, 1)
+        const D = this.props.cards
+                    .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'D')
+                    .map((el, i) => (
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority} timeclicked={el.timeclicked}/>
+        ))
+                    .slice(0, 1)
 
-        const M = this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'M').map((el, i) => (
-          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
-        )).slice(0, 1)
+        const M = this.props.cards
+                    .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == 'M')
+                    .map((el, i) => (
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority} timeclicked={el.timeclicked}/>
+        ))
+                    .slice(0, 1)
 
         return [US, D, M]
 
@@ -29,9 +38,14 @@ export default class Column extends Component {
       case 2:
       case 3:
       case 4:
-        return this.props.cards.filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC').map((el, i) => (
-          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority}/>
+        return this.props.cards
+          .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC')
+          .map((el, i) => (
+          <Card _handleCardClick={this.props._handleCardClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority} timeclicked={el.timeclicked} />
         ))
+          .sort(function(a,b) {
+          return b.props.timeclicked - a.props.timeclicked
+        })
 
         break;
       default:

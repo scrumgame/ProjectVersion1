@@ -2,10 +2,11 @@ var path = require('path');
 var webpack = require('webpack');
 
 var config = {
+
   context: path.join(__dirname, 'components'),
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    './main.js',
+    './main.js'
   ],
   output: {
     path: path.join(__dirname, 'client'),
@@ -17,6 +18,13 @@ var config = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel'],
+      },
+      {
+       test: /\.(jpe?g|png|gif|svg)$/i,
+       loaders: [
+         'file?hash=sha512&digest=hex&name=[hash].[ext]',
+         'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+       ]
       },
       {
         test: /\.css$/,

@@ -1,44 +1,98 @@
 import React, { Component } from 'react';
-import App from './app'
-import TeamName from './TeamName'
+import Game from './Game'
+import Input from './Input'
 import Logo from './Logo'
-import FrontPageButtons from './FrontPageButtons'
+import NewGame from './NewGame'
+import CustomGame from './CustomGame'
+import InputRange from 'react-input-range'
+import 'react-input-range/lib/css/index.css'
 import './css/FrontPage.css'
+
 
 export default class FrontPage extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      game:
-        {value: false}
-      }
   }
 
 
-  _newGame(that) {
-    return this.setState({
-      game: {value: true}
-    })
-  }
+  _changeUI() {
+    if(this.props.admin.value == true) {
+      return [
+        <Input placeholder="Choose your teamname" ref="createTeam"/>,
+          <form>
+            <InputRange
+              maxValue={120}
+              minValue={60}
+              value={this.props.slidevalue}
+              onChange={this.props._slideState.bind(this)}
 
+            />
+            <Input type="submit" value="Start Game" className="btn btn-default"/>
+          </form>
+      ]
+    } else if (this.props.customgame.value == true) {
+      return [
+          <form>
+            <Input placeholder="Username" type="text"/>,
+            <Input placeholder="Password" type="password"/>
+            <Input type="submit" value="Login" className="btn btn-default"/>
+          </form>
+        ]
+    } else {
+      return [
+        <div>
+          <form onSubmit={this.props._quickPlay}>
+            <Input placeholder="Choose your teamname" ref="createTeam"/>
+            <NewGame className="btn btn-default" name="New Game" type="submit"/>
+          </form>
+           <CustomGame className="btn btn-default" name="Custom Game" type="submit" _customGame={this.props._customGame}/>
+         </div>
+      ]
 
-
-  _renderPage() {
-  if (this.state.game.value == true) {
-    return <App />
-  } else {
-    return [<Logo />,
-    <FrontPageButtons className="btn btn-default" name="newGame" _newGame={this._newGame.bind(this)}/>,
-    <FrontPageButtons className="btn btn-default" name="custom game"/>
-  ]}
+    }
   }
 
   render() {
     return (
       <div>
-        {this._renderPage()}
+
+        <Logo />
+        {this._changeUI()}
       </div>
     );
   }
 }
+
+// _renderPage() {
+// if (this.state.newgame.value == true) {
+//   return <Game />
+// } else if (this.state.customgame.value == true) {
+//   return [
+//         <div>
+//         <Logo />
+
+
+//        </div>
+//          ]
+// } else {
+//   return [
+//     <div>
+//       <Logo />
+//
+//     </div>
+// ]}
+// }
+//
+
+//
+// handleTeam(event) {
+//   event.preventDefault()
+//
+//   const createTeam = this.refs.createTeam
+//   const task = createTeam.value
+//
+//
+//     return this.setState({
+//       newgame: {value: true}
+//     })
+// }

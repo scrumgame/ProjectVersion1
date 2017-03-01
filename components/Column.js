@@ -19,7 +19,7 @@ export default class Column extends Component {
   _renderCards(id) {
     switch (id) {
       case 0:
-      
+
         return [
           this._sliceCards('US', id),
           this._sliceCards('D', id),
@@ -35,7 +35,11 @@ export default class Column extends Component {
         return this.props.cards
           .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC')
           .sort(function(a,b) {
-            return a.priority < b.priority
+            if (a.priority > 0 || b.priority > 0) {
+              return b.priority - a.priority
+            } else {
+              return a.timeclicked - b.timeclicked
+            }
           })
           .map((el, i) => (
             <Card _handleCardClick={this.props._handleCardClick} _handlePrioClick={this.props._handlePrioClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority} timeclicked={el.timeclicked} />

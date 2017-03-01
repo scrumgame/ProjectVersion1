@@ -12,7 +12,7 @@ export default class App extends Component {
       customgame:
         {value: false},
       admin:
-        {value: false},
+        {value: true},
       slidevalue: 60
       }
     this._slideState = this._slideState.bind(this)

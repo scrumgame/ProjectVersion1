@@ -3,10 +3,12 @@ import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
 import RollButton from './RollButton'
+import ReleasePlanWeek from './ReleasePlanWeek'
 import DefectCards from './resources/DefectCards'
 import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
 import MultipleChoiceCards from './resources/MultipleChoiceCards'
+import update from 'immutability-helper';
 
 export default class App extends Component {
 
@@ -41,7 +43,10 @@ export default class App extends Component {
           {position: 1, value: 0},
           {position: 2, value: 0},
           {position: 3, value: 0}
-        ]
+        ],
+
+      releaseplan:
+        {sprint: 1, day: 1}
     };
   }
 
@@ -56,7 +61,7 @@ export default class App extends Component {
   _generateCards() {
     const cards = [];
 
-    for (var i = 0; i < 60; i++) {
+    for (var i = 0; i < this.props.slidevalue; i++) {
       const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
       const a          = Math.floor((Math.random() * 10) + 1);
       const d          = Math.floor((Math.random() * 10) + 1);
@@ -251,12 +256,51 @@ export default class App extends Component {
   }
 
 /**********************************************************************/
+/*                           RELEASEPLAN                              */
+/**********************************************************************/
+
+  _tickDay(day) {
+    console.log(this.state.releaseplan)
+    switch (day.props.name) {
+      case 'Mon':
+        return this.setState({
+          releaseplan: update(this.state.releaseplan, {day: {$set: 2}})
+        })
+        break;
+      case 'Tue':
+        return this.setState({
+          releaseplan: update(this.state.releaseplan, {day: {$set: 3}})
+        })
+        break;
+      case 'Wed':
+        return this.setState({
+          releaseplan: update(this.state.releaseplan, {day: {$set: 4}})
+        })
+        break;
+      case 'Thu':
+        return this.setState({
+          releaseplan: update(this.state.releaseplan, {day: {$set: 5}})
+        })
+        break;
+      case 'Fri':
+        return this.setState({
+          releaseplan: update(this.state.releaseplan, {$merge: {day: 1, sprint: this.state.releaseplan.sprint+1}})
+        })
+        break;
+      default:
+        break;
+    }
+  }
+/**********************************************************************/
 /*                           RENDERFUNCTION                           */
 /**********************************************************************/
 
   render() {
     return (
       <div className="container">
+        <div className="row">
+          <ReleasePlanWeek releaseplan={this.state.releaseplan} _tickDay={this._tickDay.bind(this)}/>
+        </div>
         <div className="row">
           {this._renderDieColumns()}
           <RollButton _handleDieRoll={this._handleDieRoll.bind(this)}/>

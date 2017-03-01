@@ -3,6 +3,7 @@ import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
 import RollButton from './RollButton'
+import ReleasePlan from './ReleasePlan'
 import DefectCards from './resources/DefectCards'
 import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
@@ -257,6 +258,9 @@ export default class App extends Component {
   render() {
     return (
       <div className="container">
+        <div className="row">
+          <ReleasePlan />
+        </div>
         <div className="row">
           {this._renderDieColumns()}
           <RollButton _handleDieRoll={this._handleDieRoll.bind(this)}/>

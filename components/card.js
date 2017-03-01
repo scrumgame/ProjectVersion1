@@ -7,6 +7,10 @@ export default class Card extends Component {
     super(props)
   }
 
+  _handleCardButtonClick() {
+    this.props._handlePrioClick(this)
+  }
+
   _ifCash() {
     if (this.props.cash) {
       return <p>${this.props.cash}</p>
@@ -25,7 +29,7 @@ export default class Card extends Component {
 
   _ifPrio() {
     if (this.props.type == 'D' || this.props.type == 'M') {
-      return <CardButton />
+      return <CardButton _handleCardButtonClick={this._handleCardButtonClick.bind(this)}/>
     }
   }
 

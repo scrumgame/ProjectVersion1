@@ -19,28 +19,28 @@ export default class App extends Component {
 
       columns:
         [
-        {name: 'Backlog'},
-        {name: 'Analysis'},
-        {name: 'Development'},
-        {name: 'Testing'},
-        {name: 'Done', cash: 0}
+          {name: 'Backlog'},
+          {name: 'Analysis'},
+          {name: 'Development'},
+          {name: 'Testing'},
+          {name: 'Done', cash: 0}
         ],
 
       dice:
         [
-        {position: 1, id: 0, value: 1, type: 'Analysis'},
-        {position: 2, id: 1, value: 1, type: 'Development'},
-        {position: 2, id: 2, value: 1, type: 'Development'},
-        {position: 2, id: 3, value: 1, type: 'Development'},
-        {position: 2, id: 4, value: 1, type: 'Development'},
-        {position: 3, id: 5, value: 1, type: 'Testing'}
+          {position: 1, id: 0, value: 1, type: 'Analysis'},
+          {position: 2, id: 1, value: 1, type: 'Development'},
+          {position: 2, id: 2, value: 1, type: 'Development'},
+          {position: 2, id: 3, value: 1, type: 'Development'},
+          {position: 2, id: 4, value: 1, type: 'Development'},
+          {position: 3, id: 5, value: 1, type: 'Testing'}
         ],
 
       dicesum:
         [
-        {position: 1, value: 0},
-        {position: 2, value: 0},
-        {position: 3, value: 0}
+          {position: 1, value: 0},
+          {position: 2, value: 0},
+          {position: 3, value: 0}
         ]
     };
   }
@@ -82,6 +82,14 @@ export default class App extends Component {
 
     this.setState({
       cards: this.state.cards.concat(cards, ActionCards, DefectCards, MaintenanceCards, MultipleChoiceCards)
+    })
+  }
+
+  _handlePrioClick(card) {
+    const cards = this.state.cards
+    cards.filter(el => el.id == card.props.id).map(el => {
+        el.priority++
+        return this.setState({cards})
     })
   }
 
@@ -146,7 +154,7 @@ export default class App extends Component {
   _renderColumns() {
     const classes = ['col-sm-offset-1', '', '', '', '']
     return this.state.columns.map((el, i) => (
-      <Column _handleCardClick={this._handleCardClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash} className={classes[i]}/>
+      <Column _handleCardClick={this._handleCardClick.bind(this)} _handlePrioClick={this._handlePrioClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash} className={classes[i]}/>
     ));
   }
 
@@ -209,24 +217,36 @@ export default class App extends Component {
     const cards = this.state.cards
 
     dicesum.map(dice => {
-      cards.filter(el => el.position == 1).map(el => {
-        while (el.a > 0 && dice.value > 0 && dice.position == 1) {
-          el.a--
-          dice.value--
-        }
-      })
-      cards.filter(el => el.position == 2).map(el => {
-        while (el.d > 0 && dice.value > 0 && dice.position == 2) {
-          el.d--
-          dice.value--
-        }
-      })
-      cards.filter(el => el.position == 3).map(el => {
-        while (el.t > 0 && dice.value > 0 && dice.position == 3) {
-          el.t--
-          dice.value--
-        }
-      })
+      cards.filter(el => el.position == 1)
+           .sort(function(a,b) {
+             return a.priority < b.priority
+           })
+           .map(el => {
+              while (el.a > 0 && dice.value > 0 && dice.position == 1) {
+                el.a--
+                dice.value--
+              }
+           })
+      cards.filter(el => el.position == 2)
+           .sort(function(a,b) {
+             return a.priority < b.priority
+           })
+           .map(el => {
+             while (el.d > 0 && dice.value > 0 && dice.position == 2) {
+               el.d--
+               dice.value--
+             }
+           })
+      cards.filter(el => el.position == 3)
+           .sort(function(a,b) {
+             return a.priority < b.priority
+           })
+           .map(el => {
+             while (el.t > 0 && dice.value > 0 && dice.position == 3) {
+               el.t--
+               dice.value--
+             }
+           })
     })
   }
 

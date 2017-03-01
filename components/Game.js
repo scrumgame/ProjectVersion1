@@ -45,6 +45,9 @@ export default class App extends Component {
           {position: 3, value: 0}
         ],
 
+      dicerollbutton:
+        {value: 1},
+
       releaseplan:
         {sprint: 1, day: 1}
     };
@@ -195,11 +198,24 @@ export default class App extends Component {
 
   _handleDieRoll() {
     const dice = this.state.dice
-    dice.map((el) => (
-      el.value = Math.floor((Math.random() * 6) + 1)
-    ))
-    this.setState({dice})
-    this._summarizeDiceRoll()
+    const dicebutton = this.state.dicerollbutton
+
+    if (dicebutton.value == this.state.releaseplan.day) {
+      dice.map((el) => (
+        el.value = Math.floor((Math.random() * 6) + 1)
+      ))
+      this.setState({dice})
+      if (dicebutton.value == 5) {
+        this.setState({
+          dicerollbutton: update(dicebutton, {value: {$set: 1}})
+        })
+      } else {
+        this.setState({
+          dicerollbutton: update(dicebutton, {value: {$set: dicebutton.value+1}})
+        })
+      }
+      this._summarizeDiceRoll()
+    }
   }
 
   _summarizeDiceRoll() {
@@ -260,32 +276,43 @@ export default class App extends Component {
 /**********************************************************************/
 
   _tickDay(day) {
-    console.log(this.state.releaseplan)
+    const releaseplan = this.state.releaseplan
+
     switch (day.props.name) {
       case 'Mon':
-        return this.setState({
-          releaseplan: update(this.state.releaseplan, {day: {$set: 2}})
-        })
+        if (releaseplan.day == 1) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 2}})
+          })
+        }
         break;
       case 'Tue':
-        return this.setState({
-          releaseplan: update(this.state.releaseplan, {day: {$set: 3}})
-        })
+        if (releaseplan.day == 2) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 3}})
+          })
+        }
         break;
       case 'Wed':
-        return this.setState({
-          releaseplan: update(this.state.releaseplan, {day: {$set: 4}})
-        })
+        if (releaseplan.day == 3) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 4}})
+          })
+        }
         break;
       case 'Thu':
-        return this.setState({
-          releaseplan: update(this.state.releaseplan, {day: {$set: 5}})
-        })
+        if (releaseplan.day == 4) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 5}})
+          })
+        }
         break;
       case 'Fri':
-        return this.setState({
-          releaseplan: update(this.state.releaseplan, {$merge: {day: 1, sprint: this.state.releaseplan.sprint+1}})
-        })
+        if (releaseplan.day == 5) {
+          return this.setState({
+            releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
+          })
+        }
         break;
       default:
         break;

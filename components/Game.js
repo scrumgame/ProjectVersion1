@@ -8,7 +8,7 @@ import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
 import MultipleChoiceCards from './resources/MultipleChoiceCards'
 
-export default class Game extends Component {
+export default class App extends Component {
 
   constructor(props) {
     super(props);
@@ -19,28 +19,28 @@ export default class Game extends Component {
 
       columns:
         [
-        {name: 'Backlog'},
-        {name: 'Analysis'},
-        {name: 'Development'},
-        {name: 'Testing'},
-        {name: 'Done', cash: 0}
+          {name: 'Backlog'},
+          {name: 'Analysis'},
+          {name: 'Development'},
+          {name: 'Testing'},
+          {name: 'Done', cash: 0}
         ],
 
       dice:
         [
-        {position: 1, id: 0, value: 1, type: 'Analysis'},
-        {position: 2, id: 1, value: 1, type: 'Development'},
-        {position: 2, id: 2, value: 1, type: 'Development'},
-        {position: 2, id: 3, value: 1, type: 'Development'},
-        {position: 2, id: 4, value: 1, type: 'Development'},
-        {position: 3, id: 5, value: 1, type: 'Testing'}
+          {position: 1, id: 0, value: 1, type: 'Analysis'},
+          {position: 2, id: 1, value: 1, type: 'Development'},
+          {position: 2, id: 2, value: 1, type: 'Development'},
+          {position: 2, id: 3, value: 1, type: 'Development'},
+          {position: 2, id: 4, value: 1, type: 'Development'},
+          {position: 3, id: 5, value: 1, type: 'Testing'}
         ],
 
       dicesum:
         [
-        {position: 1, value: 0},
-        {position: 2, value: 0},
-        {position: 3, value: 0}
+          {position: 1, value: 0},
+          {position: 2, value: 0},
+          {position: 3, value: 0}
         ]
     };
   }
@@ -65,16 +65,17 @@ export default class Game extends Component {
       const id         = i;
 
       const card = {
-        type    : 'US',
-        number  : i+1,
-        cash    : cash,
-        a       : a,
-        d       : d,
-        t       : t,
-        id      : i,
-        position: 0,
-        priority: 0,
-        movable : true
+        type       : 'US',
+        number     : i+1,
+        cash       : cash,
+        a          : a,
+        d          : d,
+        t          : t,
+        id         : i,
+        position   : 0,
+        priority   : 0,
+        timeclicked: 0,
+        movable    : true
       }
       cards.push(card);
     }
@@ -84,7 +85,17 @@ export default class Game extends Component {
     })
   }
 
+  _handlePrioClick(card) {
+    const cards = this.state.cards
+    cards.filter(el => el.id == card.props.id).map(el => {
+        el.priority++
+        return this.setState({cards})
+    })
+  }
+
   _handleCardClick(card) {
+    const date = new Date()
+    const time = date.getTime()
     const columns = this.state.columns
     const cards = this.state.cards
 
@@ -94,15 +105,25 @@ export default class Game extends Component {
         switch (el.position) {
           case 0:
           el.movable = true
+          el.timeclicked = time
           break;
           case 1:
-          if (el.a == 0) el.movable = true
+          if (el.a == 0) {
+            el.movable = true
+            el.timeclicked = time
+          }
           break;
           case 2:
-          if (el.d == 0) el.movable = true
+          if (el.d == 0) {
+            el.movable = true
+            el.timeclicked = time
+          }
           break;
           case 3:
-          if (el.t == 0) el.movable = true
+          if (el.t == 0) {
+            el.movable = true
+            el.timeclicked = time
+          }
           break;
           default:
           break;
@@ -114,7 +135,7 @@ export default class Game extends Component {
             el.position++
             el.movable = false
 
-            if (el.position == 4) {
+            if (el.position == 4 && el.cash) {
               columns[4].cash += el.cash
               return this.setState({columns})
             }
@@ -133,7 +154,7 @@ export default class Game extends Component {
   _renderColumns() {
     const classes = ['col-sm-offset-1', '', '', '', '']
     return this.state.columns.map((el, i) => (
-      <Column _handleCardClick={this._handleCardClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash} className={classes[i]}/>
+      <Column _handleCardClick={this._handleCardClick.bind(this)} _handlePrioClick={this._handlePrioClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash} className={classes[i]}/>
     ));
   }
 
@@ -181,7 +202,7 @@ export default class Game extends Component {
     const dice = this.state.dice
 
     dicesum.map(sum => {
-      sum.value = dice
+        sum.value = dice
         .filter((el) => el.position == sum.position)
         .map(el => el.value)
         .reduce((total, value) => value + total, 0)
@@ -196,24 +217,36 @@ export default class Game extends Component {
     const cards = this.state.cards
 
     dicesum.map(dice => {
-      cards.filter(el => el.position == 1).map(el => {
-        while (el.a > 0 && dice.value > 0 && dice.position == 1) {
-          el.a--
-          dice.value--
-        }
-      })
-      cards.filter(el => el.position == 2).map(el => {
-        while (el.d > 0 && dice.value > 0 && dice.position == 2) {
-          el.d--
-          dice.value--
-        }
-      })
-      cards.filter(el => el.position == 3).map(el => {
-        while (el.t > 0 && dice.value > 0 && dice.position == 3) {
-          el.t--
-          dice.value--
-        }
-      })
+      cards.filter(el => el.position == 1)
+           .sort(function(a,b) {
+             return a.priority < b.priority
+           })
+           .map(el => {
+              while (el.a > 0 && dice.value > 0 && dice.position == 1) {
+                el.a--
+                dice.value--
+              }
+           })
+      cards.filter(el => el.position == 2)
+           .sort(function(a,b) {
+             return a.priority < b.priority
+           })
+           .map(el => {
+             while (el.d > 0 && dice.value > 0 && dice.position == 2) {
+               el.d--
+               dice.value--
+             }
+           })
+      cards.filter(el => el.position == 3)
+           .sort(function(a,b) {
+             return a.priority < b.priority
+           })
+           .map(el => {
+             while (el.t > 0 && dice.value > 0 && dice.position == 3) {
+               el.t--
+               dice.value--
+             }
+           })
     })
   }
 

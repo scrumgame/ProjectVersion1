@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FrontPage from './FrontPage'
 import Game from './Game'
+import Navbar from './Navbar'
 
 export default class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class App extends Component {
       admin:
         {value: false},
       slidevalue: 60
-      }
+    }
     this._slideState = this._slideState.bind(this)
   }
 
@@ -37,10 +38,16 @@ export default class App extends Component {
 
   _startGame() {
     if ( this.state.newgame.value == true) {
-      return <Game slidevalue={this.state.slidevalue}/>
+      return [
+        <Navbar />,
+        <Game slidevalue={this.state.slidevalue}/>
+      ]
     } else {
-      return <FrontPage slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
+      return [
+        <Navbar />,
+        <FrontPage slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
       _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)}/>
+    ]
     }
   }
 

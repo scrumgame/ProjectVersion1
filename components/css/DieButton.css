@@ -1,13 +1,42 @@
 
-.DieButton {
-  background: white none repeat scroll 0 0;
-  border: 3px solid #65b618;
-  border-radius: 50%;
-  color: #65b618;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  height: 46px;
-  margin: 4px;
-  width: 46px;
+.LBtn{
+  background: transparent none repeat scroll 0 0;
+  margin-right: 5px;
+  padding: 0;
+  
+  border-top: 5px solid transparent;
+  border-right: 5px solid #0091D2;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
 }
+.RBtn{  
+  background: transparent none repeat scroll 0 0;
+  margin: 0;
+  padding: 0;
+  
+  border-top: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #0091D2;
+}
+.MBtn{
+  background: transparent none repeat scroll 0 0;
+  margin: 0;
+  padding: 0;
+  
+  border-top: 5px solid transparent;
+  border-right: 5px solid #00ACE7;
+  border-bottom: 5px solid #00ACE7;
+  border-left: 5px solid #00ACE7;
+}
+/*.DieButton {
+  background: #f1f1f1 none repeat scroll 0 0;
+  border: 3px solid #004969;
+  border-radius: 50%;
+  color:#004969;
+  display: inline-block;
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
+  margin: 4px;
+}*/

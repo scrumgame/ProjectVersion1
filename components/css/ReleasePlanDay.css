@@ -1,5 +1,7 @@
 .ReleasePlanDay {
   display: inline;
-  background: white;
-  border: 1px solid black;
+  background: #fff;
+  border: 1px solid #004969;
+  padding: 15px 10px;
+  margin-left: 1px;
 }

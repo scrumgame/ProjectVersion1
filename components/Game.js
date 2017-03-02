@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
+import DiceSum from './DiceSum'
 import RollButton from './RollButton'
 import RetroButton from './RetroButton'
 import ReleasePlanWeek from './ReleasePlanWeek'
@@ -276,6 +277,20 @@ export default class App extends Component {
     })
   }
 
+  _renderSumColumns() {
+    const classes = ['col-sm-offset-3', '', '']
+    const dicesum = this.state.dicesum
+    const dice = this.state.dice
+
+    const diceSumValue = dicesum.map((el, i) => {
+      const numberDie = dice.filter(elem => elem.position == el.position)
+                            .map(elem => elem)
+      return <DiceSum className={classes[i]} value={el.value} dice={numberDie.length*6} />
+    })
+
+    return diceSumValue
+
+  }
 /**********************************************************************/
 /*                           RELEASEPLAN                              */
 /**********************************************************************/
@@ -362,10 +377,13 @@ export default class App extends Component {
       <div className="container">
         <div className="row">
           <ReleasePlanWeek releaseplan={this.state.releaseplan} releaseplandays={this.state.releaseplandays} _tickDay={this._tickDay.bind(this)}/>
+          {this._renderRollOrRetroButton()}
         </div>
         <div className="row">
           {this._renderDieColumns()}
-          {this._renderRollOrRetroButton()}
+        </div>
+        <div className="row">
+          {this._renderSumColumns()}
         </div>
         <div className="row">
           {this._renderColumns()}

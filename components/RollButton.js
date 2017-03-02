@@ -9,7 +9,7 @@ export default class RollButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props._handleDieRoll()} className="RollButton col-sm-2">ROLL</button>
+        <button onClick={() => this.props._handleDieRoll()} className="RollButton col-sm-2">Roll</button>
       </div>
     );
   }

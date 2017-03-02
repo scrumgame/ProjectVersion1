@@ -9,7 +9,7 @@ export default class RetroButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props._handleRetrospective()} className="RollButton col-sm-2">Retrospective</button>
+        <button onClick={() => this.props._handleRetrospective()} className="RollButton col-sm-2">Retro</button>
       </div>
     );
   }

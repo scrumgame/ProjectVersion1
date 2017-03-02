@@ -239,9 +239,7 @@ export default class App extends Component {
 
     dicesum.map(dice => {
       cards.filter(el => el.position == 1)
-           .sort(function(a,b) {
-             return a.priority < b.priority
-           })
+           .sort((a, b) => b.priority - a.priority)
            .map(el => {
               while (el.a > 0 && dice.value > 0 && dice.position == 1) {
                 el.a--
@@ -249,9 +247,7 @@ export default class App extends Component {
               }
            })
       cards.filter(el => el.position == 2)
-           .sort(function(a,b) {
-             return a.priority < b.priority
-           })
+           .sort((a, b) => b.priority - a.priority)
            .map(el => {
              while (el.d > 0 && dice.value > 0 && dice.position == 2) {
                el.d--
@@ -259,9 +255,7 @@ export default class App extends Component {
              }
            })
       cards.filter(el => el.position == 3)
-           .sort(function(a,b) {
-             return a.priority < b.priority
-           })
+           .sort((a, b) => b.priority - a.priority)
            .map(el => {
              while (el.t > 0 && dice.value > 0 && dice.position == 3) {
                el.t--

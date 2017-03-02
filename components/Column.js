@@ -34,7 +34,7 @@ export default class Column extends Component {
 
         return this.props.cards
           .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC')
-          .sort(function(a,b) {
+          .sort((a,b) => {
             if (a.priority > 0 || b.priority > 0) {
               return b.priority - a.priority
             } else {

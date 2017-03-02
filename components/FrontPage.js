@@ -5,7 +5,6 @@ import Logo from './Logo'
 import NewGame from './NewGame'
 import CustomGame from './CustomGame'
 import InputRange from 'react-input-range'
-import 'react-input-range/lib/css/index.css'
 import './css/FrontPage.css'
 
 

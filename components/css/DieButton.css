@@ -1,13 +1,38 @@
 
+.LBtn{
+  background: transparent none repeat scroll 0 0;
+  margin-right: 5px;
+  padding: 0;
+  
+  border-top: 5px solid transparent;
+  border-right: 5px solid black;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+.RBtn{  
+  background: transparent none repeat scroll 0 0;
+  margin: 0;
+  padding: 0;
+  
+  border-top: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid black;
+}
+.MBtn{
+  background: white none repeat scroll 0 0;
+  border: 3px solid #000;
+  border-radius: 50%;
+  color: #000;
+
 .DieButton {
   background: #f1f1f1 none repeat scroll 0 0;
   border: 3px solid #004969;
   border-radius: 50%;
   color:#004969;
   display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  height: 46px;
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
   margin: 4px;
-  width: 46px;
 }

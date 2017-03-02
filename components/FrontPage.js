@@ -17,7 +17,7 @@ export default class FrontPage extends Component {
   _changeUI() {
     if(this.props.admin.value == true) {
       return [
-        <Input placeholder="Choose your teamname" ref="createTeam"/>,
+        <Input placeholder="Choose teamname" ref="createTeam"/>,
           <form onSubmit={this.props._quickPlay}>
             <InputRange
               maxValue={120}
@@ -41,7 +41,7 @@ export default class FrontPage extends Component {
       return [
         <div>
           <form onSubmit={this.props._quickPlay}>
-            <Input placeholder="Choose your teamname" ref="createTeam"/>
+            <Input className="teamnameInput" placeholder="Choose teamname" ref="createTeam"/>
             <NewGame className="btn btn-default" name="New Game" type="submit"/>
           </form>
            <CustomGame className="btn btn-default" name="Custom Game" type="submit" _customGame={this.props._customGame}/>

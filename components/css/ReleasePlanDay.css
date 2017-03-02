@@ -2,4 +2,11 @@
   display: inline;
   background: white;
   border: 1px solid black;
+  cursor: pointer;
+}
+
+.ReleasePlanDayDone {
+  display: inline;
+  background: red;
+  border: 1px solid black;
 }

@@ -7,15 +7,22 @@ export default class ReleasePlanWeek extends Component {
     super(props)
   }
 
+  _renderReleasePlanDays() {
+    return this.props.releaseplandays
+            .map((el, i) => {
+              if (el.done) {
+                return <ReleasePlanDay name={el.name} done={el.done} key={i} className="ReleasePlanDayDone col-sm-1" _tickDay={this.props._tickDay}/>
+              } else {
+                return <ReleasePlanDay name={el.name} done={el.done} key={i} className="ReleasePlanDay col-sm-1" _tickDay={this.props._tickDay}/>
+              }
+            })
+  }
+
   render() {
     return (
       <div>
-        <div className="ReleasePlanWeek">Sprint {this.props.releaseplan.sprint}</div>
-        <ReleasePlanDay name="Mon" _tickDay={this.props._tickDay}/>
-        <ReleasePlanDay name="Tue" _tickDay={this.props._tickDay}/>
-        <ReleasePlanDay name="Wed" _tickDay={this.props._tickDay}/>
-        <ReleasePlanDay name="Thu" _tickDay={this.props._tickDay}/>
-        <ReleasePlanDay name="Fri" _tickDay={this.props._tickDay}/>
+        <div className="ReleasePlanWeek col-sm-1 col-sm-offset-3">Sprint {this.props.releaseplan.sprint}</div>
+        {this._renderReleasePlanDays()}
       </div>
     );
   }

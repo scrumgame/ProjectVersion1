@@ -3,6 +3,7 @@ import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
 import RollButton from './RollButton'
+import RetroButton from './RetroButton'
 import ReleasePlanWeek from './ReleasePlanWeek'
 import DefectCards from './resources/DefectCards'
 import MaintenanceCards from './resources/MaintenanceCards'
@@ -49,7 +50,17 @@ export default class App extends Component {
         {value: 1},
 
       releaseplan:
-        {sprint: 1, day: 1}
+        {sprint: 1, day: 1},
+
+      releaseplandays:
+        [
+          {day: 1, name: "Mon", done: false},
+          {day: 2, name: "Tue", done: false},
+          {day: 3, name: "Wed", done: false},
+          {day: 4, name: "Thu", done: false},
+          {day: 5, name: "Fri", done: false}
+        ]
+
     };
   }
 
@@ -271,47 +282,77 @@ export default class App extends Component {
 
   _tickDay(day) {
     const releaseplan = this.state.releaseplan
+    const releaseplandays = this.state.releaseplandays
+    const dicerollbutton = this.state.dicerollbutton
 
     switch (day.props.name) {
       case 'Mon':
-        if (releaseplan.day == 1) {
+        if (releaseplan.day == 1 && dicerollbutton.value !== 1) {
           return this.setState({
-            releaseplan: update(releaseplan, {day: {$set: 2}})
-          })
+              releaseplan: update(releaseplan, {day: {$set: 2}}),
+              releaseplandays: update(releaseplandays, {0: {done: {$set: true}}})
+            })
         }
-        break;
+        break
       case 'Tue':
         if (releaseplan.day == 2) {
           return this.setState({
-            releaseplan: update(releaseplan, {day: {$set: 3}})
+            releaseplan: update(releaseplan, {day: {$set: 3}}),
+            releaseplandays: update(releaseplandays, {1: {done: {$set: true}}})
           })
         }
-        break;
+        break
       case 'Wed':
         if (releaseplan.day == 3) {
           return this.setState({
-            releaseplan: update(releaseplan, {day: {$set: 4}})
+            releaseplan: update(releaseplan, {day: {$set: 4}}),
+            releaseplandays: update(releaseplandays, {2: {done: {$set: true}}})
           })
         }
-        break;
+        break
       case 'Thu':
         if (releaseplan.day == 4) {
           return this.setState({
-            releaseplan: update(releaseplan, {day: {$set: 5}})
+            releaseplan: update(releaseplan, {day: {$set: 5}}),
+            releaseplandays: update(releaseplandays, {3: {done: {$set: true}}})
           })
         }
-        break;
+        break
       case 'Fri':
         if (releaseplan.day == 5) {
           return this.setState({
-            releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
+            releaseplandays: update(releaseplandays, {4: {done: {$set: true}}})
           })
         }
-        break;
+        break
       default:
-        break;
+        break
     }
   }
+
+  _renderRollOrRetroButton() {
+    const releaseplandays = this.state.releaseplandays
+    if (releaseplandays[4].done == true) {
+      return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)}/>
+    } else {
+      return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)}/>
+    }
+  }
+
+  _handleRetrospective() {
+    const releaseplan = this.state.releaseplan
+    const releaseplandays = this.state.releaseplandays
+
+    releaseplandays.map(el => el.done = false)
+    this.setState({releaseplandays})
+
+    const newState = this.setState({
+            releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
+          })
+
+    return newState
+  }
+
 /**********************************************************************/
 /*                           RENDERFUNCTION                           */
 /**********************************************************************/
@@ -320,11 +361,11 @@ export default class App extends Component {
     return (
       <div className="container">
         <div className="row">
-          <ReleasePlanWeek releaseplan={this.state.releaseplan} _tickDay={this._tickDay.bind(this)}/>
+          <ReleasePlanWeek releaseplan={this.state.releaseplan} releaseplandays={this.state.releaseplandays} _tickDay={this._tickDay.bind(this)}/>
         </div>
         <div className="row">
           {this._renderDieColumns()}
-          <RollButton _handleDieRoll={this._handleDieRoll.bind(this)}/>
+          {this._renderRollOrRetroButton()}
         </div>
         <div className="row">
           {this._renderColumns()}

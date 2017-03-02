@@ -26,7 +26,7 @@ export default class Column extends Component {
           this._sliceCards('M', id)
         ]
 
-        break;
+        break
       case 1:
       case 2:
       case 3:
@@ -45,9 +45,9 @@ export default class Column extends Component {
             <Card _handleCardClick={this.props._handleCardClick} _handlePrioClick={this.props._handlePrioClick} position={el.position} id={el.id} type={el.type} cash={el.cash} a={el.a} d={el.d} t={el.t} key={i} index={i} number={el.number} priority={el.priority} timeclicked={el.timeclicked} />
           ))
 
-        break;
+        break
       default:
-        break;
+        break
     }
   }
 

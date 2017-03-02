@@ -5,7 +5,6 @@ import Logo from './Logo'
 import NewGame from './NewGame'
 import CustomGame from './CustomGame'
 import InputRange from 'react-input-range'
-import 'react-input-range/lib/css/index.css'
 import './css/FrontPage.css'
 
 
@@ -62,37 +61,3 @@ export default class FrontPage extends Component {
     );
   }
 }
-
-// _renderPage() {
-// if (this.state.newgame.value == true) {
-//   return <Game />
-// } else if (this.state.customgame.value == true) {
-//   return [
-//         <div>
-//         <Logo />
-
-
-//        </div>
-//          ]
-// } else {
-//   return [
-//     <div>
-//       <Logo />
-//
-//     </div>
-// ]}
-// }
-//
-
-//
-// handleTeam(event) {
-//   event.preventDefault()
-//
-//   const createTeam = this.refs.createTeam
-//   const task = createTeam.value
-//
-//
-//     return this.setState({
-//       newgame: {value: true}
-//     })
-// }

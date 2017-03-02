@@ -19,7 +19,7 @@ export default class FrontPage extends Component {
     if(this.props.admin.value == true) {
       return [
         <Input placeholder="Choose your teamname" ref="createTeam"/>,
-          <form>
+          <form onSubmit={this.props._quickPlay}>
             <InputRange
               maxValue={120}
               minValue={60}

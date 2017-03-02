@@ -3,10 +3,12 @@ import Column from './Column'
 import Card from './Card'
 import DieColumns from './DieColumns'
 import RollButton from './RollButton'
+import ReleasePlanWeek from './ReleasePlanWeek'
 import DefectCards from './resources/DefectCards'
 import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
 import MultipleChoiceCards from './resources/MultipleChoiceCards'
+import update from 'immutability-helper';
 
 export default class App extends Component {
 
@@ -41,7 +43,13 @@ export default class App extends Component {
           {position: 1, value: 0},
           {position: 2, value: 0},
           {position: 3, value: 0}
-        ]
+        ],
+
+      dicerollbutton:
+        {value: 1},
+
+      releaseplan:
+        {sprint: 1, day: 1}
     };
   }
 
@@ -56,7 +64,7 @@ export default class App extends Component {
   _generateCards() {
     const cards = [];
 
-    for (var i = 0; i < 60; i++) {
+    for (var i = 0; i < this.props.slidevalue; i++) {
       const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
       const a          = Math.floor((Math.random() * 10) + 1);
       const d          = Math.floor((Math.random() * 10) + 1);
@@ -190,11 +198,24 @@ export default class App extends Component {
 
   _handleDieRoll() {
     const dice = this.state.dice
-    dice.map((el) => (
-      el.value = Math.floor((Math.random() * 6) + 1)
-    ))
-    this.setState({dice})
-    this._summarizeDiceRoll()
+    const dicebutton = this.state.dicerollbutton
+
+    if (dicebutton.value == this.state.releaseplan.day) {
+      dice.map((el) => (
+        el.value = Math.floor((Math.random() * 6) + 1)
+      ))
+      this.setState({dice})
+      if (dicebutton.value == 5) {
+        this.setState({
+          dicerollbutton: update(dicebutton, {value: {$set: 1}})
+        })
+      } else {
+        this.setState({
+          dicerollbutton: update(dicebutton, {value: {$set: dicebutton.value+1}})
+        })
+      }
+      this._summarizeDiceRoll()
+    }
   }
 
   _summarizeDiceRoll() {
@@ -218,9 +239,7 @@ export default class App extends Component {
 
     dicesum.map(dice => {
       cards.filter(el => el.position == 1)
-           .sort(function(a,b) {
-             return a.priority < b.priority
-           })
+           .sort((a, b) => b.priority - a.priority)
            .map(el => {
               while (el.a > 0 && dice.value > 0 && dice.position == 1) {
                 el.a--
@@ -228,9 +247,7 @@ export default class App extends Component {
               }
            })
       cards.filter(el => el.position == 2)
-           .sort(function(a,b) {
-             return a.priority < b.priority
-           })
+           .sort((a, b) => b.priority - a.priority)
            .map(el => {
              while (el.d > 0 && dice.value > 0 && dice.position == 2) {
                el.d--
@@ -238,9 +255,7 @@ export default class App extends Component {
              }
            })
       cards.filter(el => el.position == 3)
-           .sort(function(a,b) {
-             return a.priority < b.priority
-           })
+           .sort((a, b) => b.priority - a.priority)
            .map(el => {
              while (el.t > 0 && dice.value > 0 && dice.position == 3) {
                el.t--
@@ -251,12 +266,62 @@ export default class App extends Component {
   }
 
 /**********************************************************************/
+/*                           RELEASEPLAN                              */
+/**********************************************************************/
+
+  _tickDay(day) {
+    const releaseplan = this.state.releaseplan
+
+    switch (day.props.name) {
+      case 'Mon':
+        if (releaseplan.day == 1) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 2}})
+          })
+        }
+        break;
+      case 'Tue':
+        if (releaseplan.day == 2) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 3}})
+          })
+        }
+        break;
+      case 'Wed':
+        if (releaseplan.day == 3) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 4}})
+          })
+        }
+        break;
+      case 'Thu':
+        if (releaseplan.day == 4) {
+          return this.setState({
+            releaseplan: update(releaseplan, {day: {$set: 5}})
+          })
+        }
+        break;
+      case 'Fri':
+        if (releaseplan.day == 5) {
+          return this.setState({
+            releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
+          })
+        }
+        break;
+      default:
+        break;
+    }
+  }
+/**********************************************************************/
 /*                           RENDERFUNCTION                           */
 /**********************************************************************/
 
   render() {
     return (
       <div className="container">
+        <div className="row">
+          <ReleasePlanWeek releaseplan={this.state.releaseplan} _tickDay={this._tickDay.bind(this)}/>
+        </div>
         <div className="row">
           {this._renderDieColumns()}
           <RollButton _handleDieRoll={this._handleDieRoll.bind(this)}/>

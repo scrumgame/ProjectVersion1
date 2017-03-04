@@ -14,13 +14,16 @@ export default class App extends Component {
         {value: false},
       admin:
         {value: false},
-      slidevalue: 60
-      }
+      navbar:
+        {value: false},
+      slidevalue:
+          60
+
+    }
     this._slideState = this._slideState.bind(this)
   }
 
   _slideState(slidevalue) {
-    console.log(slidevalue)
     this.setState({slidevalue: slidevalue})
   }
 
@@ -36,17 +39,24 @@ export default class App extends Component {
     })
   }
 
+  _gameNav() {
+    return this.setState({
+      navbar: {value: true}
+    })
+  }
+
   _startGame() {
-    if ( this.state.newgame.value == true) {
+    if (this.state.newgame.value == true) {
       return [
-        <Navbar />,
-        <Game slidevalue={this.state.slidevalue}/>
+        <Navbar navbar={this.state.navbar} _gameNav={this._gameNav.bind(this)}/>,
+        <Game slidevalue={this.state.slidevalue}/>,
       ]
     } else {
       return [
-        <Navbar />,
-        <FrontPage slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
-      _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)}/>
+        <Navbar navbar={this.state.navbar}/>,
+        <FrontPage slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame}   _customGame={this._customGame.bind(this)} _slideState={this._getState}
+        _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)}
+        />
     ]
     }
   }

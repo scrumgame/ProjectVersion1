@@ -8,7 +8,7 @@ export default class ReleasePlanDay extends Component {
 
   render() {
     return (
-      <div onClick={() => this.props._tickDay(this)} className="ReleasePlanDay">{this.props.name}</div>
+      <div onClick={() => this.props._tickDay(this)} className={this.props.className} >{this.props.name}</div>
     );
   }
 }

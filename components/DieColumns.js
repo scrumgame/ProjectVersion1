@@ -17,10 +17,10 @@ export default class DieColumns extends Component {
                 .map((el, i) => (
                   <Die _handleDieClick={this.props._handleDieClick} type={el.type} value={el.value} key={el.id} id={el.id} position={el.position}/>
                 ))
-        break;
+        break
 
       default:
-        break;
+        break
     }
   }
 

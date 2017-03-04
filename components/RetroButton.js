@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/RollButton.css'
 
-export default class RollButton extends Component {
+export default class RetroButton extends Component {
   constructor(props) {
     super(props)
   }
@@ -9,7 +9,7 @@ export default class RollButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props._handleDieRoll()} className="RollButton col-sm-1">Roll</button>
+        <button onClick={() => this.props._handleRetrospective()} className="RollButton col-sm-2">Retro</button>
       </div>
     );
   }

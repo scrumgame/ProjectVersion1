@@ -10,8 +10,10 @@ export default class App extends Component {
     this.state = {
       newgame:
         {value: false},
+
       customgame:
         {value: false},
+
       admin:
         {value: false},
       navbar:

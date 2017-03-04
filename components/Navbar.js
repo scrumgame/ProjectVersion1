@@ -27,7 +27,7 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar-kwp-header navbar-default navbar-fixed-top">
+      <nav className="navbar-kwp-header navbar-default">
            <div className="container pull-left">
                <div className="navbar-header">
                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#Navbar">

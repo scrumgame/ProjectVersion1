@@ -8,7 +8,15 @@ export default class ReleasePlan extends Component {
 
   render() {
     return (
-      <div className="col-sm-4 col-sm-offset-4 ReleasePlan">
+      <div className="ReleasePlan">
+        <ReleasePlanWeek />
+        <ReleasePlanWeek />
+        <ReleasePlanWeek />
+        <ReleasePlanWeek />
+        <ReleasePlanWeek />
+        <ReleasePlanWeek />
+        <ReleasePlanWeek />
+        <ReleasePlanWeek />
       </div>
     );
   }

@@ -14,4 +14,29 @@
   border: 1px solid #004969;
   padding: 15px 10px;
   margin-left: 1px;
+  overflow: hidden;
+  transition: all 1s ease;
+}
+
+.ReleasePlanDayDone:before, .ReleasePlanDayDone:after {
+    position: absolute;
+    content: '';
+    background: red;
+    display: block;
+    width: 125%;
+    height: 4px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    transition: all 1s ease;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto -8px;
+}
+
+.ReleasePlanDayDone:after {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transition: all 1s ease;
 }

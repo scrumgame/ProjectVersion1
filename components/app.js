@@ -10,17 +10,20 @@ export default class App extends Component {
     this.state = {
       newgame:
         {value: false},
+
       customgame:
         {value: false},
+
       admin:
         {value: false},
+
       slidevalue: 60
     }
+
     this._slideState = this._slideState.bind(this)
   }
 
   _slideState(slidevalue) {
-    console.log(slidevalue)
     this.setState({slidevalue: slidevalue})
   }
 

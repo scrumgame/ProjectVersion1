@@ -7,6 +7,14 @@ export default class Column extends Component {
     super(props);
   }
 
+  _cash() {
+    if (this.props.cash) {
+      return <h3>{this.props.name} ${this.props.cash}</h3>
+    } else {
+      return <h3>{this.props.name}</h3>
+    }
+  }
+
   _sliceCards(type, id) {
     return this.props.cards
       .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == type)
@@ -48,14 +56,6 @@ export default class Column extends Component {
         break
       default:
         break
-    }
-  }
-
-  _cash() {
-    if (this.props.cash) {
-      return <h3>{this.props.name} ${this.props.cash}</h3>
-    } else {
-      return <h3>{this.props.name}</h3>
     }
   }
 

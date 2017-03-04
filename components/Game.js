@@ -55,11 +55,11 @@ export default class App extends Component {
 
       releaseplandays:
         [
-          {day: 1, name: "Mon", done: false},
-          {day: 2, name: "Tue", done: false},
-          {day: 3, name: "Wed", done: false},
-          {day: 4, name: "Thu", done: false},
-          {day: 5, name: "Fri", done: false}
+          {name: "Mon", done: false},
+          {name: "Tue", done: false},
+          {name: "Wed", done: false},
+          {name: "Thu", done: false},
+          {name: "Fri", done: false}
         ]
 
     };
@@ -250,30 +250,29 @@ export default class App extends Component {
     const cards = this.state.cards
 
     dicesum.map(dice => {
-      cards.filter(el => el.position == 1)
+      let dicevalue = dice.value
+      cards.filter(el => el.position == dice.position)
            .sort((a, b) => b.priority - a.priority)
            .map(el => {
-              while (el.a > 0 && dice.value > 0 && dice.position == 1) {
-                el.a--
-                dice.value--
-              }
+             if (dice.position == 1) {
+               while (el.a > 0 && dicevalue > 0 && dice.position == el.position) {
+                 el.a--
+                 dicevalue--
+               }
+             } else if (dice.position == 2) {
+                while (el.d > 0 && dicevalue > 0 && dice.position == el.position) {
+                  el.d--
+                  dicevalue--
+                }
+              } else if (dice.position == 3) {
+                 while (el.t > 0 && dicevalue > 0 && dice.position == el.position) {
+                   el.t--
+                   dicevalue--
+                 }
+               }
+
            })
-      cards.filter(el => el.position == 2)
-           .sort((a, b) => b.priority - a.priority)
-           .map(el => {
-             while (el.d > 0 && dice.value > 0 && dice.position == 2) {
-               el.d--
-               dice.value--
-             }
-           })
-      cards.filter(el => el.position == 3)
-           .sort((a, b) => b.priority - a.priority)
-           .map(el => {
-             while (el.t > 0 && dice.value > 0 && dice.position == 3) {
-               el.t--
-               dice.value--
-             }
-           })
+
     })
   }
 
@@ -302,7 +301,7 @@ export default class App extends Component {
 
     switch (day.props.name) {
       case 'Mon':
-        if (releaseplan.day == 1 && dicerollbutton.value !== 1) {
+        if (releaseplan.day == 1 && dicerollbutton.value == 2) {
           return this.setState({
               releaseplan: update(releaseplan, {day: {$set: 2}}),
               releaseplandays: update(releaseplandays, {0: {done: {$set: true}}})
@@ -310,7 +309,7 @@ export default class App extends Component {
         }
         break
       case 'Tue':
-        if (releaseplan.day == 2) {
+        if (releaseplan.day == 2 && dicerollbutton.value == 3) {
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 3}}),
             releaseplandays: update(releaseplandays, {1: {done: {$set: true}}})
@@ -318,7 +317,7 @@ export default class App extends Component {
         }
         break
       case 'Wed':
-        if (releaseplan.day == 3) {
+        if (releaseplan.day == 3 && dicerollbutton.value == 4) {
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 4}}),
             releaseplandays: update(releaseplandays, {2: {done: {$set: true}}})
@@ -326,7 +325,7 @@ export default class App extends Component {
         }
         break
       case 'Thu':
-        if (releaseplan.day == 4) {
+        if (releaseplan.day == 4 && dicerollbutton.value == 5) {
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 5}}),
             releaseplandays: update(releaseplandays, {3: {done: {$set: true}}})
@@ -334,7 +333,7 @@ export default class App extends Component {
         }
         break
       case 'Fri':
-        if (releaseplan.day == 5) {
+        if (releaseplan.day == 5 && dicerollbutton.value == 1) {
           return this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: true}}})
           })
@@ -364,8 +363,12 @@ export default class App extends Component {
     const newState = this.setState({
             releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
           })
-
+    this._test()
     return newState
+  }
+
+  _test() {
+    prompt("It's time for retrospective")
   }
 
 /**********************************************************************/

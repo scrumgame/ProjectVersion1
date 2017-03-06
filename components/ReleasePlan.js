@@ -6,17 +6,12 @@ export default class ReleasePlan extends Component {
     super(props)
   }
 
+  
+
   render() {
     return (
       <div className="ReleasePlan">
-        <ReleasePlanWeek />
-        <ReleasePlanWeek />
-        <ReleasePlanWeek />
-        <ReleasePlanWeek />
-        <ReleasePlanWeek />
-        <ReleasePlanWeek />
-        <ReleasePlanWeek />
-        <ReleasePlanWeek />
+
       </div>
     );
   }

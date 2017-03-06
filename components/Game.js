@@ -12,7 +12,7 @@ import ActionCards from './resources/ActionCards'
 import MultipleChoiceCards from './resources/MultipleChoiceCards'
 import update from 'immutability-helper';
 
-export default class App extends Component {
+export default class Game extends Component {
 
   constructor(props) {
     super(props);

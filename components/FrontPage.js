@@ -42,7 +42,7 @@ export default class FrontPage extends Component {
         <div>
           <form onSubmit={this.props._quickPlay}>
             <Input className="teamnameInput" placeholder="Choose teamname" ref="createTeam"/>
-            <NewGame className="btn btn-default" name="New Game" type="submit"/>
+            <NewGame className="btn btn-default" name="New Game" type="submit" _gameNav={this.props._gameNav} />
           </form>
            <CustomGame className="btn btn-default" name="Custom Game" type="submit" _customGame={this.props._customGame}/>
          </div>

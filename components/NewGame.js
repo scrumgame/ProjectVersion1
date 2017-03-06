@@ -7,9 +7,7 @@ export default class NewGame extends Component {
 
   render() {
     return (
-
-        <input type="submit" className={this.props.className} type={this.props.type} value={this.props.name}/>
-
+        <input type="submit" className={this.props.className} type={this.props.type} value={this.props.name} onClick={this.props._gameNav}/>
     );
   }
 }

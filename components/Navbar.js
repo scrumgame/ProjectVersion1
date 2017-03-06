@@ -4,6 +4,7 @@ export default class Navbar extends Component {
   constructor(props) {
     super(props)
   }
+
   _changeNavbar() {
     if (this.props.navbar.value == true) {
       return [
@@ -40,8 +41,7 @@ export default class Navbar extends Component {
                <div className="navbar-collapse collapse">
                    <ul className="nav navbar-nav">
                        <li className="dropdown"><a className="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">Info <span className="caret"></span></a>
-
-                             {this._changeNavbar()}
+                            {this._changeNavbar()}
 
                        </li>
                    </ul>

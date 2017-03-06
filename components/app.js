@@ -10,10 +10,8 @@ export default class App extends Component {
     this.state = {
       newgame:
         {value: false},
-
       customgame:
         {value: false},
-
       admin:
         {value: false},
       navbar:
@@ -58,6 +56,7 @@ export default class App extends Component {
         <Navbar navbar={this.state.navbar}/>,
         <FrontPage slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame}   _customGame={this._customGame.bind(this)} _slideState={this._getState}
         _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)}
+        _gameNav={this._gameNav.bind(this)}
         />
     ]
     }

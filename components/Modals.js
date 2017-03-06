@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import { Modal } from 'react-bootstrap'
 import { OverlayTrigger } from 'react-bootstrap'
+import Rules from './Rules'
 
 export default class Modals extends Component {
   constructor() {
@@ -14,7 +15,7 @@ export default class Modals extends Component {
         return <h1>release</h1>
         break;
       case 'Rules':
-        return <h1>rules</h1>
+        return <Rules />
         break;
       case 'Highscore':
         return <h1>high</h1>
@@ -27,7 +28,7 @@ export default class Modals extends Component {
   render(){
     return(
       <div>
-        <Modal show={this.props.showModal.open} onHide={this.props._closeModal}>
+        <Modal show={this.props.showModal.open} onHide={this.props._closeModal} bsSize="large">
           <Modal.Header>
             <Modal.Title>
               {this.props.showModal.type}

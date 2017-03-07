@@ -346,14 +346,20 @@ export default class Game extends Component {
 
   _renderRollOrRetroButton() {
     const releaseplandays = this.state.releaseplandays
+    const releaseplan = this.state.releaseplan
+    const dicerollbutton = this.state.dicerollbutton
+
     if (releaseplandays[4].done == true) {
-      return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)}/>
+      return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)} className="RollButton col-sm-1"/>
+    } else if (releaseplan.day !== dicerollbutton.value) {
+      return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)} className="RollButton col-sm-1"/>
     } else {
-      return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)}/>
+      return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)} className="RollButtonReady col-sm-1"/>
     }
+
   }
 
-  _handleRetrospective() {
+  _handleRetrospective(that, type) {
     const releaseplan = this.state.releaseplan
     const releaseplandays = this.state.releaseplandays
 
@@ -363,12 +369,8 @@ export default class Game extends Component {
     const newState = this.setState({
             releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
           })
-    this._test()
+    this.props._openModal(that, type)
     return newState
-  }
-
-  _test() {
-    prompt("It's time for retrospective")
   }
 
 /**********************************************************************/

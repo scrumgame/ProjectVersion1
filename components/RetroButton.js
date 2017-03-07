@@ -7,9 +7,10 @@ export default class RetroButton extends Component {
   }
 
   render() {
+    const modalTypeRetrospective = 'Retrospective'
     return (
       <div>
-        <button onClick={() => this.props._handleRetrospective()} className="RollButton col-sm-2">Retro</button>
+        <button onClick={this.props._handleRetrospective.bind(this, modalTypeRetrospective)} className={this.props.className}>Retro</button>
       </div>
     );
   }

@@ -67,7 +67,7 @@ export default class App extends Component {
     if (this.state.newgame.value == true) {
       return [
         <Navbar _openModal={this._openModal.bind(this)} navbar={this.state.navbar} _gameNav={this._gameNav.bind(this)}/>,
-        <Game slidevalue={this.state.slidevalue}/>,
+        <Game slidevalue={this.state.slidevalue} _openModal={this._openModal.bind(this)} />,
       ]
     } else {
       return [

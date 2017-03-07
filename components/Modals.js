@@ -5,6 +5,7 @@ import { OverlayTrigger } from 'react-bootstrap'
 import Rules from './Rules'
 import Highscore from './Highscore'
 import Releaseplan from './Releaseplan'
+import Retrospective from './Retrospective'
 
 
 export default class Modals extends Component {
@@ -22,6 +23,9 @@ export default class Modals extends Component {
         break;
       case 'Highscore':
         return <Highscore />
+        break;
+      case 'Retrospective':
+        return <Retrospective _closeModal={this.props._closeModal}/>
         break;
       default:
         break;

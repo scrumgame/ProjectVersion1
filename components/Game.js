@@ -18,49 +18,47 @@ export default class Game extends Component {
     super(props);
 
     this.state = {
-      cards:
-        [],
+      cards: [],
 
-      columns:
-        [
-          {name: 'Backlog'},
-          {name: 'Analysis'},
-          {name: 'Development'},
-          {name: 'Testing'},
-          {name: 'Done', cash: 0}
-        ],
+      columns: [
+        {name: 'Backlog'},
+        {name: 'Analysis'},
+        {name: 'Development'},
+        {name: 'Testing'},
+        {name: 'Done', cash: 0}
+      ],
 
-      dice:
-        [
-          {position: 1, id: 0, value: 1, type: 'Analysis'},
-          {position: 2, id: 1, value: 1, type: 'Development'},
-          {position: 2, id: 2, value: 1, type: 'Development'},
-          {position: 2, id: 3, value: 1, type: 'Development'},
-          {position: 2, id: 4, value: 1, type: 'Development'},
-          {position: 3, id: 5, value: 1, type: 'Testing'}
-        ],
+      dice: [
+        {position: 1, id: 0, value: 1, type: 'Analysis'},
+        {position: 2, id: 1, value: 1, type: 'Development'},
+        {position: 2, id: 2, value: 1, type: 'Development'},
+        {position: 2, id: 3, value: 1, type: 'Development'},
+        {position: 2, id: 4, value: 1, type: 'Development'},
+        {position: 3, id: 5, value: 1, type: 'Testing'}
+      ],
 
-      dicesum:
-        [
-          {position: 1, value: 0},
-          {position: 2, value: 0},
-          {position: 3, value: 0}
-        ],
+      dicesum: [
+        {position: 1, value: 0},
+        {position: 2, value: 0},
+        {position: 3, value: 0}
+      ],
 
-      dicerollbutton:
-        {value: 1},
+      dicerollbutton: {
+        value: 1
+      },
 
-      releaseplan:
-        {sprint: 1, day: 1},
+      releaseplan: {
+        sprint: 1,
+        day: 1
+      },
 
-      releaseplandays:
-        [
-          {name: "Mon", done: false},
-          {name: "Tue", done: false},
-          {name: "Wed", done: false},
-          {name: "Thu", done: false},
-          {name: "Fri", done: false}
-        ]
+      releaseplandays: [
+        {name: "Mon", done: false},
+        {name: "Tue", done: false},
+        {name: "Wed", done: false},
+        {name: "Thu", done: false},
+        {name: "Fri", done: false}
+      ]
 
     };
   }
@@ -69,9 +67,9 @@ export default class Game extends Component {
     this._generateCards()
   }
 
-/**********************************************************************/
-/*                               CARDS                                */
-/**********************************************************************/
+  /**********************************************************************/
+  /*                               CARDS                                */
+  /**********************************************************************/
 
   _generateCards() {
     const cards = [];
@@ -108,8 +106,8 @@ export default class Game extends Component {
   _handlePrioClick(card) {
     const cards = this.state.cards
     cards.filter(el => el.id == card.props.id).map(el => {
-        el.priority++
-        return this.setState({cards})
+      el.priority++
+      return this.setState({cards})
     })
   }
 
@@ -127,24 +125,28 @@ export default class Game extends Component {
           el.movable = true
           el.timeclicked = time
           break;
+          
           case 1:
           if (el.a == 0) {
             el.movable = true
             el.timeclicked = time
           }
           break;
+
           case 2:
           if (el.d == 0) {
             el.movable = true
             el.timeclicked = time
           }
           break;
+
           case 3:
           if (el.t == 0) {
             el.movable = true
             el.timeclicked = time
           }
           break;
+
           default:
           break;
         }
@@ -167,9 +169,9 @@ export default class Game extends Component {
     }
   }
 
-/**********************************************************************/
-/*                           CARDCOLUMNS                              */
-/**********************************************************************/
+  /**********************************************************************/
+  /*                           CARDCOLUMNS                              */
+  /**********************************************************************/
 
   _renderColumns() {
     const classes = ['col-sm-offset-1', '', '', '', '']
@@ -178,9 +180,9 @@ export default class Game extends Component {
     ));
   }
 
-/**********************************************************************/
-/*                                DICE                                */
-/**********************************************************************/
+  /**********************************************************************/
+  /*                                DICE                                */
+  /**********************************************************************/
 
   _renderDieColumns() {
     const classes = ['col-sm-offset-3', '', '']
@@ -290,10 +292,11 @@ export default class Game extends Component {
     return diceSumValue
 
   }
-/**********************************************************************/
-/*                           RELEASEPLAN                              */
-/**********************************************************************/
+  /**********************************************************************/
+  /*                           RELEASEPLAN                              */
+  /**********************************************************************/
 
+  // When card is done, tick off the day to continue the game
   _tickDay(day) {
     const releaseplan = this.state.releaseplan
     const releaseplandays = this.state.releaseplandays
@@ -373,9 +376,9 @@ export default class Game extends Component {
     return newState
   }
 
-/**********************************************************************/
-/*                           RENDERFUNCTION                           */
-/**********************************************************************/
+  /**********************************************************************/
+  /*                           RENDERFUNCTION                           */
+  /**********************************************************************/
 
   render() {
     return (

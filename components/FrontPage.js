@@ -13,30 +13,29 @@ export default class FrontPage extends Component {
     super(props)
   }
 
-
+  // The ability as an admin to custom the game
   _changeUI() {
     if(this.props.admin.value == true) {
       return [
         <Input placeholder="Choose teamname" ref="createTeam"/>,
-          <form onSubmit={this.props._quickPlay}>
-            <InputRange
-              maxValue={120}
-              minValue={60}
-              value={this.props.slidevalue}
-              onChange={this.props._slideState.bind(this)}
-
-            />
-            <Input type="submit" value="Start Game" className="btn btn-default"/>
-          </form>
+        <form onSubmit={this.props._quickPlay}>
+          <InputRange
+            maxValue={120}
+            minValue={60}
+            value={this.props.slidevalue}
+            onChange={this.props._slideState.bind(this)}
+          />
+          <Input type="submit" value="Start Game" className="btn btn-default"/>
+        </form>
       ]
     } else if (this.props.customgame.value == true) {
       return [
-          <form>
-            <Input placeholder="Username" type="text"/>,
-            <Input placeholder="Password" type="password"/>
-            <Input type="submit" value="Login" className="btn btn-default"/>
-          </form>
-        ]
+        <form>
+          <Input placeholder="Username" type="text"/>,
+          <Input placeholder="Password" type="password"/>
+          <Input type="submit" value="Login" className="btn btn-default"/>
+        </form>
+      ]
     } else {
       return [
         <div>
@@ -47,7 +46,6 @@ export default class FrontPage extends Component {
            <CustomGame className="btn btn-default" name="Custom Game" type="submit" _customGame={this.props._customGame}/>
          </div>
       ]
-
     }
   }
 

@@ -3,6 +3,7 @@ import FrontPage from './FrontPage'
 import Game from './Game'
 import Navbar from './Navbar'
 import Modals from './Modals'
+import '../node_modules/react-input-range/lib/css/index.css'
 
 export default class App extends Component {
   constructor(props) {

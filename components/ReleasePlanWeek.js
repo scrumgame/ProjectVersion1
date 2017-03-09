@@ -9,13 +9,13 @@ export default class ReleasePlanWeek extends Component {
 
   _renderReleasePlanDays() {
     return this.props.releaseplandays
-            .map((el, i) => {
-              if (el.done) {
-                return <ReleasePlanDay name={el.name} done={el.done} key={i} className="ReleasePlanDayDone col-sm-1" _tickDay={this.props._tickDay}/>
-              } else {
-                return <ReleasePlanDay name={el.name} done={el.done} key={i} className="ReleasePlanDay col-sm-1" _tickDay={this.props._tickDay}/>
-              }
-            })
+      .map((el, i) => {
+        if (el.done) {
+          return <ReleasePlanDay name={el.name} done={el.done} key={i} className="ReleasePlanDayDone col-sm-1" _tickDay={this.props._tickDay}/>
+        } else {
+          return <ReleasePlanDay name={el.name} done={el.done} key={i} className="ReleasePlanDay col-sm-1" _tickDay={this.props._tickDay}/>
+        }
+      })
   }
 
   render() {

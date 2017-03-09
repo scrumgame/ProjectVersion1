@@ -6,6 +6,7 @@ export default class Highscore extends Component {
     super(props)
   }
 
+  // displays the top highscore of the teams
   render() {
     return (
       <table>

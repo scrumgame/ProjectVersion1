@@ -9,10 +9,10 @@ export default class Rules extends Component {
   render() {
     return (
       <div className="test">
-          <img  src={require("../images/rulesplan0.png")} />
-          <img  className="bajs" src={require("../images/rulesboard.png")} />
-          <img  src={require("../images/rules1.png")} />
-          <img  src={require("../images/bajs.png")} />
+        <img  src={require("../images/rulesplan0.png")} />
+        <img  className="rules" src={require("../images/rulesboard.png")} />
+        <img  src={require("../images/rules1.png")} />
+        <img  src={require("../images/rules2.png")} />
       </div>
     );
   }

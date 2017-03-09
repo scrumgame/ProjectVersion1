@@ -6,6 +6,7 @@ import NewGame from './NewGame'
 import CustomGame from './CustomGame'
 import InputRange from 'react-input-range'
 import './css/FrontPage.css'
+import './css/NewGame.css'
 
 
 export default class FrontPage extends Component {
@@ -13,21 +14,23 @@ export default class FrontPage extends Component {
     super(props)
   }
 
-
+  // The ability as an admin to custom the game
   _changeUI() {
     if(this.props.admin.value == true) {
       return [
         <Input placeholder="Choose teamname" ref="createTeam"/>,
-          <form onSubmit={this.props._quickPlay}>
+        <form onSubmit={this.props._quickPlay}>
+          <div className="col-sm-offset-3 col-sm-6">
             <InputRange
               maxValue={120}
               minValue={60}
               value={this.props.slidevalue}
               onChange={this.props._slideState.bind(this)}
-
             />
-            <Input type="submit" value="Start Game" className="btn btn-default"/>
-          </form>
+            <Input type="submit" value="Start Game" className="btn btn-default admin-newgame"/>
+          </div>
+        </form>
+
       ]
     } else if (this.props.customgame.value == true) {
       return [
@@ -47,7 +50,6 @@ export default class FrontPage extends Component {
            <CustomGame className="btn btn-default" name="Custom Game" type="submit" _customGame={this.props._customGame}/>
          </div>
       ]
-
     }
   }
 

@@ -4,6 +4,7 @@ import Game from './Game'
 import Navbar from './Navbar'
 import Modals from './Modals'
 import axios from 'axios'
+import '../node_modules/react-input-range/lib/css/index.css'
 
 export default class App extends Component {
   constructor(props) {
@@ -101,7 +102,7 @@ export default class App extends Component {
         <FrontPage slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
         _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)} _saveTeamName={this._saveTeamName.bind(this)}
         _gameNav={this._gameNav.bind(this)} />,
-    ]
+      ]
     }
   }
 

@@ -13,10 +13,10 @@ export default class DieColumns extends Component {
       case 2:
       case 3:
         return this.props.dice
-                .filter((el) => el.position == id)
-                .map((el, i) => (
-                  <Die _handleDieClick={this.props._handleDieClick} type={el.type} value={el.value} key={el.id} id={el.id} position={el.position}/>
-                ))
+          .filter((el) => el.position == id)
+          .map((el, i) => (
+            <Die _handleDieClick={this.props._handleDieClick} type={el.type} value={el.value} key={el.id} id={el.id} position={el.position}/>
+          ))
         break
 
       default:

@@ -4,4 +4,6 @@
 
 .logo {
   margin-top: 60px;
+  margin-bottom: 60px;
+  max-height: 400px;
 }

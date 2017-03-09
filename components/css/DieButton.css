@@ -1,31 +1,9 @@
+.glyphicon-chevron-right{
+  background: none;
+  border: none;
 
-.LBtn{
-  background: transparent none repeat scroll 0 0;
-  margin-right: 10px;
-  padding: 0;
-
-  border-top: 10px solid transparent;
-  border-right: 10px solid #004969;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid transparent;
 }
-.RBtn{
-  background: transparent none repeat scroll 0 0;
-  margin: 0;
-  padding: 0;
-
-  border-top: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid #0091D2;
-}
-.MBtn{
-  background: transparent none repeat scroll 0 0;
-  margin: 0;
-  padding: 0;
-
-  border-top: 10px solid transparent;
-  border-right: 10px solid #004969;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid #00ACE7;
+.glyphicon-chevron-left{
+  background: none;
+  border: none;
 }

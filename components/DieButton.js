@@ -8,7 +8,7 @@ export default class DieButton extends Component {
 
   render() {
     return (
-      <button onClick={() => this.props._handleDieButtonClick(this)} type={this.props.type} className={`${this.props.type}Btn`}></button>
+      <button onClick={() => this.props._handleDieButtonClick(this)} type={this.props.type} className={`glyphicon glyphicon-${this.props.type}`}></button>
     );
   }
 }

@@ -9,11 +9,11 @@ export default class Die extends Component {
 
   _distributeButtons() {
     if (this.props.type == 'Analysis' || this.props.type == 'Testing') {
-      return <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='M'/>
+      return <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='transfer'/>
     } else {
       return [
-        <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='L'/>,
-        <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='R'/>
+        <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='chevron-left'/>,
+        <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='chevron-right'/>
       ]
     }
   }
@@ -25,7 +25,8 @@ export default class Die extends Component {
   render() {
     return (
       <div className="Die">
-        <h5 className="DieValue">{this.props.type}: {this.props.value}</h5>
+        <h5 className="DieValue glyphicon glyphicon-user"></h5>
+        <p>{this.props.value}</p>
         {this._distributeButtons()}
       </div>
     );

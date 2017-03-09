@@ -32,7 +32,7 @@ export default class FrontPage extends Component {
     } else if (this.props.customgame.value == true) {
       return [
           <form>
-            <Input placeholder="Username" type="text"/>,
+            <Input placeholder="Username" type="text"/>
             <Input placeholder="Password" type="password"/>
             <Input type="submit" value="Login" className="btn btn-default"/>
           </form>
@@ -41,7 +41,7 @@ export default class FrontPage extends Component {
       return [
         <div>
           <form onSubmit={this.props._quickPlay}>
-            <Input className="teamnameInput" placeholder="Choose teamname" ref="createTeam"/>
+            <Input _saveTeamName={this.props._saveTeamName} className="teamnameInput" placeholder="Choose teamname" ref="createTeam"/>
             <NewGame className="btn btn-default" name="New Game" type="submit" _gameNav={this.props._gameNav} />
           </form>
            <CustomGame className="btn btn-default" name="Custom Game" type="submit" _customGame={this.props._customGame}/>

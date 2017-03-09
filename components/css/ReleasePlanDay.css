@@ -1,5 +1,16 @@
 .ReleasePlanDay {
   display: inline;
+  /*background: #0091D2;*/
+  background: grey;
+  color: #004969;
+  border: 1px solid #004969;
+  cursor: pointer;
+  padding: 15px 10px;
+  margin-left: 1px;
+}
+
+.ReleasePlanDayCurrent {
+  display: inline;
   background: #0091D2;
   color: #004969;
   border: 1px solid #004969;

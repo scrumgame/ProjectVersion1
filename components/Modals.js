@@ -15,7 +15,7 @@ export default class Modals extends Component {
 
   _renderModalContent() {
     switch (this.props.showModal.type) {
-      case 'ReleasePlan':
+      case 'Releaseplan':
         return <Releaseplan />
         break;
 
@@ -28,7 +28,7 @@ export default class Modals extends Component {
         break;
 
       case 'Retrospective':
-        return <Retrospective _closeModal={this.props._closeModal}/>
+        return <Retrospective />
         break;
 
       default:
@@ -36,24 +36,28 @@ export default class Modals extends Component {
     }
   }
 
+  _renderModalButton() {
+    if (this.props.showModal.type == "Retrospective") {
+      return <Button onClick={this.props._closeModal} bsStyle="success" block>Submit</Button>
+    } else {
+      return <Button onClick={this.props._closeModal} bsStyle="danger" block >Close</Button>
+    }
+  }
+
   render() {
     return(
       <div>
         <Modal show={this.props.showModal.open} onHide={this.props._closeModal} bsSize="large">
-          {/* modal header */}
           <Modal.Header>
-            {/* modal title */}
             <Modal.Title>
               {this.props.showModal.type}
             </Modal.Title>
           </Modal.Header>
-          {/* modal body */}
           <Modal.Body>
             {this._renderModalContent()}
           </Modal.Body>
-          {/* modal footer */}
           <Modal.Footer>
-            <Button bsStyle="danger" block onClick={this.props._closeModal}>Close</Button>
+            {this._renderModalButton()}
           </Modal.Footer>
         </Modal>
       </div>

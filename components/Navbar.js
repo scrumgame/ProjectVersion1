@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/Navbar.css'
 
 export default class Navbar extends Component {
 
@@ -33,7 +34,7 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar-kwp-header navbar-default">
-        <div className="container pull-left">
+        <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#Navbar">
               <span className="sr-only"></span>

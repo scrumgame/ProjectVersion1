@@ -108,9 +108,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        {this._startGame()}
-        <Modals showModal={this.state.showModal} _closeModal={this._closeModal.bind(this)} />
+      <div className="container-fluid">
+        <div className="row">
+          {this._startGame()}
+          <Modals showModal={this.state.showModal} _closeModal={this._closeModal.bind(this)} />
+        </div>
       </div>
     );
   }

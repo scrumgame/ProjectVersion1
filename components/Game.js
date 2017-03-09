@@ -53,11 +53,11 @@ export default class Game extends Component {
       },
 
       releaseplandays: [
-        {name: "Mon", done: false},
-        {name: "Tue", done: false},
-        {name: "Wed", done: false},
-        {name: "Thu", done: false},
-        {name: "Fri", done: false}
+        {name: "Mon", done: 2},
+        {name: "Tue", done: 1},
+        {name: "Wed", done: 1},
+        {name: "Thu", done: 1},
+        {name: "Fri", done: 1}
       ]
 
     };
@@ -125,7 +125,7 @@ export default class Game extends Component {
           el.movable = true
           el.timeclicked = time
           break;
-          
+
           case 1:
           if (el.a == 0) {
             el.movable = true
@@ -307,7 +307,7 @@ export default class Game extends Component {
         if (releaseplan.day == 1 && dicerollbutton.value == 2) {
           return this.setState({
               releaseplan: update(releaseplan, {day: {$set: 2}}),
-              releaseplandays: update(releaseplandays, {0: {done: {$set: true}}})
+              releaseplandays: update(releaseplandays, {0: {done: {$set: 3}}, 1: {done: {$set: 2}}})
             })
         }
         break
@@ -315,7 +315,7 @@ export default class Game extends Component {
         if (releaseplan.day == 2 && dicerollbutton.value == 3) {
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 3}}),
-            releaseplandays: update(releaseplandays, {1: {done: {$set: true}}})
+            releaseplandays: update(releaseplandays, {1: {done: {$set: 3}}, 2: {done: {$set: 2}}})
           })
         }
         break
@@ -323,7 +323,7 @@ export default class Game extends Component {
         if (releaseplan.day == 3 && dicerollbutton.value == 4) {
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 4}}),
-            releaseplandays: update(releaseplandays, {2: {done: {$set: true}}})
+            releaseplandays: update(releaseplandays, {2: {done: {$set: 3}}, 3: {done: {$set: 2}}})
           })
         }
         break
@@ -331,14 +331,14 @@ export default class Game extends Component {
         if (releaseplan.day == 4 && dicerollbutton.value == 5) {
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 5}}),
-            releaseplandays: update(releaseplandays, {3: {done: {$set: true}}})
+            releaseplandays: update(releaseplandays, {3: {done: {$set: 3}}, 4: {done: {$set: 2}}})
           })
         }
         break
       case 'Fri':
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
           return this.setState({
-            releaseplandays: update(releaseplandays, {4: {done: {$set: true}}})
+            releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
           })
         }
         break
@@ -352,8 +352,8 @@ export default class Game extends Component {
     const releaseplan = this.state.releaseplan
     const dicerollbutton = this.state.dicerollbutton
 
-    if (releaseplandays[4].done == true) {
-      return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)} className="RollButton col-sm-1"/>
+    if (releaseplandays[4].done == 3) {
+      return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)} className="RollButtonReady col-sm-1"/>
     } else if (releaseplan.day !== dicerollbutton.value) {
       return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)} className="RollButton col-sm-1"/>
     } else {
@@ -366,7 +366,13 @@ export default class Game extends Component {
     const releaseplan = this.state.releaseplan
     const releaseplandays = this.state.releaseplandays
 
-    releaseplandays.map(el => el.done = false)
+    releaseplandays.map((el, i) => {
+      if (i == 0) {
+        el.done = 2
+      } else {
+        el.done = 1
+      }
+    })
     this.setState({releaseplandays})
 
     const newState = this.setState({

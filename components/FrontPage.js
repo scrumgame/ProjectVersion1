@@ -18,31 +18,35 @@ export default class FrontPage extends Component {
   _changeUI() {
     if(this.props.admin.value == true) {
       return [
-        <Input placeholder="Choose teamname" ref="createTeam"/>,
-        <form onSubmit={this.props._quickPlay}>
-          <div className="col-sm-offset-3 col-sm-6">
-            <InputRange
-              maxValue={120}
-              minValue={60}
-              value={this.props.slidevalue}
-              onChange={this.props._slideState.bind(this)}
-            />
-            <Input type="submit" value="Start Game" className="btn btn-default admin-newgame"/>
-          </div>
-        </form>
+        <div className="col-sm-12">
+          <Input placeholder="Choose teamname" ref="createTeam"/>,
+          <form onSubmit={this.props._quickPlay}>
+            <div className="col-sm-offset-3 col-sm-6">
+              <InputRange
+                maxValue={120}
+                minValue={60}
+                value={this.props.slidevalue}
+                onChange={this.props._slideState.bind(this)}
+              />
+              <Input type="submit" value="Start Game" className="btn btn-default admin-newgame"/>
+            </div>
+          </form>
+      </div>
 
       ]
     } else if (this.props.customgame.value == true) {
       return [
-          <form>
-            <Input placeholder="Username" type="text"/>
-            <Input placeholder="Password" type="password"/>
-            <Input type="submit" value="Login" className="btn btn-default"/>
-          </form>
+          <div className="col-sm-12">
+            <form>
+              <Input placeholder="Username" type="text"/>
+              <Input placeholder="Password" type="password"/>
+              <Input type="submit" value="Login" className="btn btn-default"/>
+            </form>
+          </div>
         ]
     } else {
       return [
-        <div>
+        <div className="col-sm-12">
           <form onSubmit={this.props._quickPlay}>
             <Input _saveTeamName={this.props._saveTeamName} className="teamnameInput" placeholder="Choose teamname" ref="createTeam"/>
             <NewGame className="btn btn-default" name="New Game" type="submit" _gameNav={this.props._gameNav} />

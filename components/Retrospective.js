@@ -15,9 +15,6 @@ export default class Retrospective extends Component {
         <FormGroup controlId="formControlsTextarea">
           <FormControl componentClass="textarea" placeholder="It's time to reflect over your sprint"/>
         </FormGroup>
-        <Button onClick={this.props._closeModal} bsStyle="success" block>
-          Submit
-        </Button>
       </form>
     );
   }

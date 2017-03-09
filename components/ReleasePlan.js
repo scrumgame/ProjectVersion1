@@ -6,10 +6,14 @@ export default class ReleasePlan extends Component {
     super(props)
   }
 
+  _bajs() {
+    return <p>hej</p>
+  }
+
   render() {
     return (
       <div className="ReleasePlan">
-        <h1>RELEASEPLAN SITS HERE</h1>
+        {this._bajs()}
       </div>
     );
   }

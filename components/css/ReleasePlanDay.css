@@ -1,6 +1,7 @@
 .ReleasePlanDay {
   display: inline;
-  background: #fff;
+  background: #0091D2;
+  color: #004969;
   border: 1px solid #004969;
   cursor: pointer;
   padding: 15px 10px;
@@ -10,8 +11,8 @@
 .ReleasePlanDayDone {
   display: inline;
   background: #004969;
-  color: #fff;
-  border: 1px solid #004969;
+  color: #0091D2;
+  border: 1px solid #0091D2;
   padding: 15px 10px;
   margin-left: 1px;
   overflow: hidden;
@@ -21,7 +22,7 @@
 .ReleasePlanDayDone:before, .ReleasePlanDayDone:after {
     position: absolute;
     content: '';
-    background: #FF0000;
+    background: #c4c4c4;
     display: block;
     width: 100%;
     height: 4px;

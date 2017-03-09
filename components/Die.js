@@ -12,8 +12,8 @@ export default class Die extends Component {
       return <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='M'/>
     } else {
       return [
-        <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='L'/>,
-        <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='R'/>
+        <DieButton key={1} _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='L'/>,
+        <DieButton key={2} _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='R'/>
       ]
     }
   }

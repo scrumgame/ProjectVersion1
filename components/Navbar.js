@@ -14,18 +14,18 @@ export default class Navbar extends Component {
 
     if (this.props.navbar.value == true) {
       return [
-        <ul className="dropdown-menu" role="menu">
-          <li onClick={this.props._openModal.bind(this, modalTypeReleaseplan)}>Releaseplan</li>
-          <li onClick={this.props._openModal.bind(this, modalTypeRules)}>Rules</li>
-          <li onClick={this.props._openModal.bind(this, modalTypeHighscore)}>Highscores</li>
-          <li><a href="#">Restart </a></li>
+        <ul key={0} className="dropdown-menu" role="menu">
+          <li key={1} onClick={this.props._openModal.bind(this, modalTypeReleaseplan)}>Releaseplan</li>
+          <li key={2} onClick={this.props._openModal.bind(this, modalTypeRules)}>Rules</li>
+          <li key={3} onClick={this.props._openModal.bind(this, modalTypeHighscore)}>Highscores</li>
+          <li key={4}><a href="#">Restart </a></li>
         </ul>
       ]
     } else {
       return [
-        <ul className="dropdown-menu" role="menu">
-          <li onClick={this.props._openModal.bind(this, modalTypeRules)}>Rules</li>
-          <li onClick={this.props._openModal.bind(this, modalTypeHighscore)}>Highscores</li>
+        <ul key={0} className="dropdown-menu" role="menu">
+          <li key={1} onClick={this.props._openModal.bind(this, modalTypeRules)}>Rules</li>
+          <li key={2} onClick={this.props._openModal.bind(this, modalTypeHighscore)}>Highscores</li>
         </ul>
       ]
     }
@@ -37,10 +37,10 @@ export default class Navbar extends Component {
         <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#Navbar">
-              <span className="sr-only"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
+              <span key={1} className="sr-only"></span>
+              <span key={2} className="icon-bar"></span>
+              <span key={3} className="icon-bar"></span>
+              <span key={4} className="icon-bar"></span>
             </button>
           </div>
           <div className="navbar-collapse collapse">

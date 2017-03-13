@@ -20,7 +20,7 @@ export default class FrontPage extends Component {
     if(this.props.admin.value == true) {
       return [
         <div key={0} className="col-sm-12">
-          <Input key={1} placeholder="Choose teamname" ref="createTeam"/>,
+          <Input key={1} _saveTeamName={this.props._saveTeamName} placeholder="Choose teamname" ref="createTeam"/>,
           <form key={2} onSubmit={this.props._quickPlay}>
             <div className="col-sm-offset-3 col-sm-6">
               <InputRange

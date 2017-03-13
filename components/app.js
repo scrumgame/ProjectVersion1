@@ -87,9 +87,7 @@ export default class App extends Component {
     this._slideState = this._slideState.bind(this)
   }
 
-  componentDidMount() {
-    this._generateCards()
-  }
+
 
   /**********************************************************************/
   /*                           FRONTPAGE                                */
@@ -163,8 +161,11 @@ export default class App extends Component {
         _renderDieColumns={this._renderDieColumns.bind(this)}
         _renderSumColumns={this._renderSumColumns.bind(this)}
         _renderColumns={this._renderColumns.bind(this)}
+        _pushCardsIntoState={this._pushCardsIntoState.bind(this)}
+        _createDbCards={this._createDbCards.bind(this)}
         releaseplan={this.state.releaseplan}
         releaseplandays={this.state.releaseplandays}
+        slidevalue={this.state.slidevalue}
         />
       ]
     } else {
@@ -184,35 +185,30 @@ export default class App extends Component {
   /*                               CARDS                                */
   /**********************************************************************/
 
-  _generateCards() {
-    const cards = [];
-
-    for (var i = 0; i < this.state.slidevalue; i++) {
-      const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
-      const a          = Math.floor((Math.random() * 10) + 1);
-      const d          = Math.floor((Math.random() * 10) + 1);
-      const t          = Math.floor((Math.random() * 10) + 1);
-      const cash       = cashValues[Math.floor(Math.random() * cashValues.length)];
-      const id         = i;
-
-      const card = {
-        type       : 'US',
-        number     : i+1,
-        cash       : cash,
-        a          : a,
-        d          : d,
-        t          : t,
-        id         : i,
-        position   : 0,
-        priority   : 0,
-        timeclicked: 0,
-        movable    : true
-      }
-      cards.push(card);
-    }
-
+  _pushCardsIntoState(cards) {
     this.setState({
-      cards: this.state.cards.concat(cards, ActionCards, DefectCards, MaintenanceCards, MultipleChoiceCards)
+     cards: this.state.cards.concat(cards, ActionCards, DefectCards, MaintenanceCards, MultipleChoiceCards)
+   })
+  }
+
+  _createDbCards() {
+    console.log(this.state.cards)
+    this.state.cards.map(el => {
+      axios({
+        method: 'post',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        data: {
+          team: this.state.teamname.value,
+          card: el
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
     })
   }
 
@@ -280,6 +276,22 @@ export default class App extends Component {
         }
       })
     }
+    axios({
+      method: 'put',
+      url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+      data: {
+        team: this.state.teamname.value,
+        card: card.props
+      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
   }
 
   /**********************************************************************/
@@ -310,13 +322,13 @@ export default class App extends Component {
     const dice = this.state.dice
 
     dice.filter(el => el.id == die.props.id).map(el => {
-      if (buttontype == 'M') {
+      if (buttontype == 'transfer') {
         el.position = (el.position == 1) ? 3 : 1
         return this.setState({dice})
-      } else if (buttontype == 'L' && el.position == 2 || buttontype == 'L' && el.position == 3) {
+      } else if (buttontype == 'chevron-left' && el.position == 2 || buttontype == 'chevron-left' && el.position == 3) {
         el.position--
         return this.setState({dice})
-      } else if (buttontype == 'R' && el.position == 1 || buttontype == 'R' && el.position == 2) {
+      } else if (buttontype == 'chevron-right' && el.position == 1 || buttontype == 'chevron-right' && el.position == 2) {
         el.position++
         return this.setState({dice})
       }
@@ -414,6 +426,7 @@ export default class App extends Component {
     const releaseplan = this.state.releaseplan
     const releaseplandays = this.state.releaseplandays
     const dicerollbutton = this.state.dicerollbutton
+    const columns = this.state.columns
 
     switch (day.props.name) {
       case 'Mon':
@@ -450,6 +463,24 @@ export default class App extends Component {
         break
       case 'Fri':
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
+          console.log(columns[4].cash)
+          axios({
+              method: 'put',
+              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
+              data: {
+                cash: columns[4].cash,
+                sprint: releaseplan.sprint,
+                team: this.state.teamname.value
+              },
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          })
+          .then(function(response) {
+              console.log(response);
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+
           return this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
           })

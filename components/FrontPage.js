@@ -4,6 +4,7 @@ import Input from './Input'
 import Logo from './Logo'
 import NewGame from './NewGame'
 import CustomGame from './CustomGame'
+import Login from './Login'
 import InputRange from 'react-input-range'
 import './css/FrontPage.css'
 import './css/NewGame.css'
@@ -37,11 +38,7 @@ export default class FrontPage extends Component {
     } else if (this.props.customgame.value == true) {
       return [
           <div key={0} className="col-sm-12">
-            <form>
-              <Input key={1} placeholder="Username" type="text"/>
-              <Input key={2} placeholder="Password" type="password"/>
-              <Input key={3} type="submit" value="Login" className="btn btn-default"/>
-            </form>
+            <Login _login={this.props._login}/>
           </div>
         ]
     } else {

@@ -30,8 +30,11 @@ export default class App extends Component {
       customgame:
         {value: false},
 
-      admin:
+      admin: [
         {value: false},
+        {username: undefined},
+        {password: undefined}
+      ],
 
       navbar:
         {value: false},
@@ -105,6 +108,34 @@ export default class App extends Component {
     })
   }
 
+  _login(username, password) {
+    console.log(username, password)
+    var that = this
+    const admin = this.state.admin
+
+    axios({
+      method: 'GET',
+      url: 'http://localhost/ProjectVersion1/api/?/admin',
+      data: {
+        username: username,
+        password: password
+      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .then(function(response) {
+      console.log(response.data.admin[0].password,response)
+      if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
+        that.setState({
+        admin: {value: true}
+        })
+      }
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+
+  }
+
   _quickPlay(that) {
 
     axios({
@@ -172,7 +203,8 @@ export default class App extends Component {
         <Navbar key={1} _openModal={this._openModal.bind(this)} navbar={this.state.navbar} teamname={this.state.teamname}/>,
         <FrontPage key={2}slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
         _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)} _saveTeamName={this._saveTeamName.bind(this)}
-        _gameNav={this._gameNav.bind(this)} />,
+        _gameNav={this._gameNav.bind(this)}
+        _login={this._login.bind(this)}/>,
       ]
     }
   }

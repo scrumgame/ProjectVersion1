@@ -90,7 +90,27 @@ export default class App extends Component {
     this._slideState = this._slideState.bind(this)
   }
 
+  componentDidUpdate() {
+    const cards = this.state.cards
 
+    cards.map((el) => {
+      axios({
+        method: 'put',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        data: {
+          team: this.state.teamname.value,
+          card: el
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    })
+  }
 
   /**********************************************************************/
   /*                           FRONTPAGE                                */
@@ -224,7 +244,6 @@ export default class App extends Component {
   }
 
   _createDbCards() {
-    console.log(this.state.cards)
     this.state.cards.map(el => {
       axios({
         method: 'post',
@@ -253,6 +272,7 @@ export default class App extends Component {
   }
 
   _handleCardClick(card) {
+    console.log(this, card)
     const date = new Date()
     const time = date.getTime()
     const columns = this.state.columns
@@ -308,22 +328,6 @@ export default class App extends Component {
         }
       })
     }
-    axios({
-      method: 'put',
-      url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
-      data: {
-        team: this.state.teamname.value,
-        card: card.props
-      },
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-
   }
 
   /**********************************************************************/

@@ -9,6 +9,7 @@ export default class Game extends Component {
 
   componentDidMount() {
     this._generateCards()
+    setTimeout(this.props._createDbCards, 3000)
   }
 
   _generateCards() {
@@ -39,7 +40,6 @@ export default class Game extends Component {
     }
 
     this.props._pushCardsIntoState(cards)
-    setTimeout(this.props._createDbCards(), 1500);
   }
 
   render() {

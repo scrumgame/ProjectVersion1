@@ -37,6 +37,6 @@ class _admin extends Resource {
 		}
 
 	}
-	# Den här funktionen är privat och kan bara köras inom objektet, inte utanf
+
 
 }

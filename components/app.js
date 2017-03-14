@@ -30,6 +30,9 @@ export default class App extends Component {
       customgame:
         {value: false},
 
+      validation:
+        {value: ''},
+
       admin: [
         {value: false},
         {username: undefined},
@@ -96,7 +99,7 @@ export default class App extends Component {
     cards.map((el) => {
       axios({
         method: 'put',
-        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
@@ -104,10 +107,10 @@ export default class App extends Component {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(function(response) {
-        console.log(response);
+        //(response);
       })
       .catch(function(error) {
-        console.log(error);
+        //(error);
       })
     })
   }
@@ -117,7 +120,23 @@ export default class App extends Component {
   /**********************************************************************/
 
   _slideState(slidevalue) {
-    this.setState({slidevalue: slidevalue})
+    this.setState({
+      slidevalue: slidevalue
+    })
+  }
+
+  _validationState(event) {
+    this.setState({
+      validation: {value: event.target.value}
+    })
+  }
+
+  _getValidationState() {
+      const balle = this.state.validation.value
+      const length = balle.length
+      if (length > 20) return 'success'
+      else if (length > 10) return 'warning'
+      else if (length > 0) return 'error'
   }
 
   _customGame() {
@@ -127,7 +146,6 @@ export default class App extends Component {
   }
 
   _login(username, password) {
-    console.log(username, password)
     var that = this
     const admin = this.state.admin
 
@@ -141,7 +159,6 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(function(response) {
-      console.log(response.data.admin[0].password,response)
       if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
         that.setState({
         admin: {value: true}
@@ -149,7 +166,7 @@ export default class App extends Component {
       }
     })
     .catch(function(error) {
-      console.log(error)
+      //(error)
     })
 
   }
@@ -158,17 +175,17 @@ export default class App extends Component {
 
     axios({
         method: 'post',
-        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
+        url: 'http://localhost/ProjectVersion1/api/?/score',
         data: {
           team: this.state.teamname.value
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(function(response) {
-        console.log(response);
+        //(response);
     })
     .catch(function(error) {
-        console.log(error);
+        //(error);
     });
 
     this.setState({
@@ -186,6 +203,14 @@ export default class App extends Component {
     return this.setState({
       showModal: {open: false}
     });
+  }
+
+  _closeRetroModal() {
+    if(this.state.validation.value.length >= 20) {
+      return this.setState({
+        showModal: {open: false}
+      });
+    }
   }
 
   _openModal(type) {
@@ -222,6 +247,7 @@ export default class App extends Component {
     } else {
       return [
         <Navbar key={1} _openModal={this._openModal.bind(this)} navbar={this.state.navbar} teamname={this.state.teamname}/>,
+
         <FrontPage key={2}slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
         _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)} _saveTeamName={this._saveTeamName.bind(this)}
         _gameNav={this._gameNav.bind(this)}
@@ -247,7 +273,7 @@ export default class App extends Component {
     this.state.cards.map(el => {
       axios({
         method: 'post',
-        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
@@ -255,10 +281,10 @@ export default class App extends Component {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(function(response) {
-        console.log(response);
+        //(response);
       })
       .catch(function(error) {
-        console.log(error);
+        //(error);
       });
     })
   }
@@ -272,7 +298,7 @@ export default class App extends Component {
   }
 
   _handleCardClick(card) {
-    console.log(this, card)
+    //(this, card)
     const date = new Date()
     const time = date.getTime()
     const columns = this.state.columns
@@ -499,10 +525,9 @@ export default class App extends Component {
         break
       case 'Fri':
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
-          console.log(columns[4].cash)
           axios({
               method: 'put',
-              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
+              url: 'http://localhost/ProjectVersion1/api/?/score',
               data: {
                 cash: columns[4].cash,
                 sprint: releaseplan.sprint,
@@ -511,10 +536,10 @@ export default class App extends Component {
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
           })
           .then(function(response) {
-              console.log(response);
+              //(response);
           })
           .catch(function(error) {
-              console.log(error);
+              //(error);
           });
 
           return this.setState({
@@ -533,7 +558,7 @@ export default class App extends Component {
     const dicerollbutton = this.state.dicerollbutton
 
     if (releaseplandays[4].done == 3) {
-      return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)} className="RollButtonReady col-sm-1"/>
+      return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)} className="RollButtonReady col-sm-1" />
     } else if (releaseplan.day !== dicerollbutton.value) {
       return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)} className="RollButton col-sm-1"/>
     } else {
@@ -571,7 +596,10 @@ export default class App extends Component {
       <div className="container-fluid">
         <div className="row">
           {this._startGame()}
-          <Modals showModal={this.state.showModal} _closeModal={this._closeModal.bind(this)} />
+          <Modals showModal={this.state.showModal} _validationState={this._validationState.bind(this)}
+          _getValidationState={this._getValidationState.bind(this)}
+          _closeModal={this._closeModal.bind(this)}
+          _closeRetroModal={this._closeRetroModal.bind(this)}  />
         </div>
       </div>
     );

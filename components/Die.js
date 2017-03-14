@@ -26,8 +26,8 @@ export default class Die extends Component {
     return (
       <div className="Die">
         <h5 className="DieValue glyphicon glyphicon-user"></h5>
-        <p>{this.props.value}</p>
         {this._distributeButtons()}
+        <p>{this.props.value}</p>
       </div>
     );
   }

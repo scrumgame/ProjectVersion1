@@ -310,13 +310,13 @@ export default class App extends Component {
     const dice = this.state.dice
 
     dice.filter(el => el.id == die.props.id).map(el => {
-      if (buttontype == 'M') {
+      if (buttontype == 'transfer') {
         el.position = (el.position == 1) ? 3 : 1
         return this.setState({dice})
-      } else if (buttontype == 'L' && el.position == 2 || buttontype == 'L' && el.position == 3) {
+      } else if (buttontype == 'chevron-left' && el.position == 2 || buttontype == 'chevron-left' && el.position == 3) {
         el.position--
         return this.setState({dice})
-      } else if (buttontype == 'R' && el.position == 1 || buttontype == 'R' && el.position == 2) {
+      } else if (buttontype == 'chevron-right' && el.position == 1 || buttontype == 'chevron-right' && el.position == 2) {
         el.position++
         return this.setState({dice})
       }

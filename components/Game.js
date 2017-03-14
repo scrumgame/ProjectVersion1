@@ -7,6 +7,41 @@ export default class Game extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this._generateCards()
+    setTimeout(this.props._createDbCards, 3000)
+  }
+
+  _generateCards() {
+    const cards = [];
+
+    for (var i = 0; i < this.props.slidevalue; i++) {
+      const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
+      const a          = Math.floor((Math.random() * 10) + 1);
+      const d          = Math.floor((Math.random() * 10) + 1);
+      const t          = Math.floor((Math.random() * 10) + 1);
+      const cash       = cashValues[Math.floor(Math.random() * cashValues.length)];
+      const id         = i;
+
+      const card = {
+        type       : 'US',
+        number     : i+1,
+        cash       : cash,
+        a          : a,
+        d          : d,
+        t          : t,
+        id         : i,
+        position   : 0,
+        priority   : 0,
+        timeclicked: 0,
+        movable    : true
+      }
+      cards.push(card);
+    }
+
+    this.props._pushCardsIntoState(cards)
+  }
+
   render() {
     return (
       <div className="container">

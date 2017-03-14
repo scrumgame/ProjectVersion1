@@ -30,8 +30,11 @@ export default class App extends Component {
       customgame:
         {value: false},
 
-      admin:
+      admin: [
         {value: false},
+        {username: undefined},
+        {password: undefined}
+      ],
 
       navbar:
         {value: false},
@@ -87,8 +90,26 @@ export default class App extends Component {
     this._slideState = this._slideState.bind(this)
   }
 
-  componentDidMount() {
-    this._generateCards()
+  componentDidUpdate() {
+    const cards = this.state.cards
+
+    cards.map((el) => {
+      axios({
+        method: 'put',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        data: {
+          team: this.state.teamname.value,
+          card: el
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    })
   }
 
   /**********************************************************************/
@@ -103,6 +124,34 @@ export default class App extends Component {
     return this.setState({
       customgame: {value: true}
     })
+  }
+
+  _login(username, password) {
+    console.log(username, password)
+    var that = this
+    const admin = this.state.admin
+
+    axios({
+      method: 'GET',
+      url: 'http://localhost/ProjectVersion1/api/?/admin',
+      data: {
+        username: username,
+        password: password
+      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .then(function(response) {
+      console.log(response.data.admin[0].password,response)
+      if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
+        that.setState({
+        admin: {value: true}
+        })
+      }
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+
   }
 
   _quickPlay(that) {
@@ -163,8 +212,11 @@ export default class App extends Component {
         _renderDieColumns={this._renderDieColumns.bind(this)}
         _renderSumColumns={this._renderSumColumns.bind(this)}
         _renderColumns={this._renderColumns.bind(this)}
+        _pushCardsIntoState={this._pushCardsIntoState.bind(this)}
+        _createDbCards={this._createDbCards.bind(this)}
         releaseplan={this.state.releaseplan}
         releaseplandays={this.state.releaseplandays}
+        slidevalue={this.state.slidevalue}
         />
       ]
     } else {
@@ -172,7 +224,8 @@ export default class App extends Component {
         <Navbar key={1} _openModal={this._openModal.bind(this)} navbar={this.state.navbar} teamname={this.state.teamname}/>,
         <FrontPage key={2}slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
         _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)} _saveTeamName={this._saveTeamName.bind(this)}
-        _gameNav={this._gameNav.bind(this)} />,
+        _gameNav={this._gameNav.bind(this)}
+        _login={this._login.bind(this)}/>,
       ]
     }
   }
@@ -184,35 +237,29 @@ export default class App extends Component {
   /*                               CARDS                                */
   /**********************************************************************/
 
-  _generateCards() {
-    const cards = [];
-
-    for (var i = 0; i < this.state.slidevalue; i++) {
-      const cashValues = [50, 100, 150, 200, 250, 300, 350, 400, 450];
-      const a          = Math.floor((Math.random() * 10) + 1);
-      const d          = Math.floor((Math.random() * 10) + 1);
-      const t          = Math.floor((Math.random() * 10) + 1);
-      const cash       = cashValues[Math.floor(Math.random() * cashValues.length)];
-      const id         = i;
-
-      const card = {
-        type       : 'US',
-        number     : i+1,
-        cash       : cash,
-        a          : a,
-        d          : d,
-        t          : t,
-        id         : i,
-        position   : 0,
-        priority   : 0,
-        timeclicked: 0,
-        movable    : true
-      }
-      cards.push(card);
-    }
-
+  _pushCardsIntoState(cards) {
     this.setState({
-      cards: this.state.cards.concat(cards, ActionCards, DefectCards, MaintenanceCards, MultipleChoiceCards)
+     cards: this.state.cards.concat(cards, ActionCards, DefectCards, MaintenanceCards, MultipleChoiceCards)
+   })
+  }
+
+  _createDbCards() {
+    this.state.cards.map(el => {
+      axios({
+        method: 'post',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        data: {
+          team: this.state.teamname.value,
+          card: el
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
     })
   }
 
@@ -225,6 +272,7 @@ export default class App extends Component {
   }
 
   _handleCardClick(card) {
+    console.log(this, card)
     const date = new Date()
     const time = date.getTime()
     const columns = this.state.columns
@@ -414,6 +462,7 @@ export default class App extends Component {
     const releaseplan = this.state.releaseplan
     const releaseplandays = this.state.releaseplandays
     const dicerollbutton = this.state.dicerollbutton
+    const columns = this.state.columns
 
     switch (day.props.name) {
       case 'Mon':
@@ -450,6 +499,24 @@ export default class App extends Component {
         break
       case 'Fri':
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
+          console.log(columns[4].cash)
+          axios({
+              method: 'put',
+              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
+              data: {
+                cash: columns[4].cash,
+                sprint: releaseplan.sprint,
+                team: this.state.teamname.value
+              },
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          })
+          .then(function(response) {
+              console.log(response);
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+
           return this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
           })

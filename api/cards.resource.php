@@ -32,7 +32,10 @@ class _cards extends Resource {
 		$card_done = mysqli_real_escape_string($db, $input->card->done);
 
 
-		$query = "INSERT INTO `$team` (type, cardnumber, analysis, development, testing, value, position, priority, description, done) VALUES ('$card_type', '$card_number', '$card_analysis', '$card_development', '$card_testing', '$card_value', '$card_position', '$card_priority', '$card_description', '$card_done')";
+		$query = "INSERT INTO `$team`
+							(type, cardnumber, analysis, development, testing, value, position, priority, description, done)
+						  VALUES
+						  ('$card_type', '$card_number', '$card_analysis', '$card_development', '$card_testing', '$card_value', '$card_position', '$card_priority', '$card_description', '$card_done')";
 
 		mysqli_query($db, $query);
 	}
@@ -54,8 +57,8 @@ class _cards extends Resource {
 		$card_done = mysqli_real_escape_string($db, $input->card->done);
 
 		$query = "UPDATE `$team`
-		SET analysis='$card_analysis', development='$card_development', testing='$card_testing', position='$card_position', priority='$card_priority', done='$card_done'
-		WHERE cardnumber='$card_number'";
+							SET analysis='$card_analysis', development='$card_development', testing='$card_testing', position='$card_position', priority='$card_priority', done='$card_done'
+							WHERE cardnumber='$card_number'";
 
 		mysqli_query($db, $query);
 	}

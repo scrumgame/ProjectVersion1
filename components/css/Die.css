@@ -1,12 +1,17 @@
 .Die {
-  display: block;
+  display: inline-block;
   background: none;
+  height: 50px;
+  width: 40px;
+  padding: 0px;
 }
 .DieValue {
   display: block;
   background: none;
 }
 .glyphicon-user{
-	font-size: 2em;
+	font-size: 1em;
 	color: #0091D2;
+	margin: 0;
+	padding: 0;
 }

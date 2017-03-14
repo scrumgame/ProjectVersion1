@@ -2,7 +2,8 @@
   display: inline;
   background: #fff;
   color: #004969;
-  border: 1px solid #004969;
+  border: 2px solid #004969;
+  border-radius: 10px;	
   padding: 15px 10px;
   width: 80px;
   margin-top: 10px;

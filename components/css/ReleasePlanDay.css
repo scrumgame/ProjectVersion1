@@ -2,7 +2,8 @@
   display: inline;
   background: #c4c4c4;
   color: #606060;
-  border: 1px solid #606060;
+  border: 2px solid #606060;
+  border-radius: 10px;
   cursor: pointer;
   padding: 15px 10px;
   margin: 10px 0 0 1px;
@@ -12,7 +13,8 @@
   display: inline;
   background: #0091D2;
   color: #004969;
-  border: 1px solid #004969;
+  border: 2px solid #004969;
+  border-radius: 10px;
   cursor: pointer;
   padding: 15px 10px;
   margin: 10px 0 0 1px;
@@ -22,7 +24,8 @@
   display: inline;
   background: #004969;
   color: #0091D2;
-  border: 1px solid #0091D2;
+  border: 2px solid #0091D2;
+  border-radius: 10px;
   padding: 15px 10px;
   margin: 10px 0 0 1px;
   overflow: hidden;

@@ -172,7 +172,6 @@ export default class App extends Component {
   }
 
   _quickPlay(that) {
-
     axios({
         method: 'post',
         url: 'http://localhost/ProjectVersion1/api/?/score',
@@ -187,6 +186,21 @@ export default class App extends Component {
     .catch(function(error) {
         //(error);
     });
+
+    axios({
+      method: 'post',
+      url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game',
+      data: {
+        team: this.state.teamname.value
+      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .then(function(response) {
+        console.log(response);
+    })
+    .catch(function(error) {
+        console.log(error);
+    })
 
     this.setState({
       newgame: {value: true}

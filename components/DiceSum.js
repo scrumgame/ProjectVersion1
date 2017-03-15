@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/diceSum.css';
 
 export default class DiceSum extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class DiceSum extends Component {
 
   render() {
     return (
-      <div className={`col-sm-2 DiceSum ${this.props.className}`}>{this.props.value} / {this.props.dice}</div>
+      <div className="col-sm-2 DiceSum"><h4>{this.props.value} / {this.props.dice}</h4></div>
     );
   }
 }

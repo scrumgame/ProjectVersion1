@@ -498,14 +498,13 @@ export default class App extends Component {
   }
 
   _renderSumColumns() {
-    const classes = ['col-sm-offset-3', '', '']
     const dicesum = this.state.dicesum
     const dice = this.state.dice
 
     const diceSumValue = dicesum.map((el, i) => {
       const numberDie = dice.filter(elem => elem.position == el.position)
                             .map(elem => elem)
-      return <DiceSum key={i} className={classes[i]} value={el.value} dice={numberDie.length*6} />
+      return <DiceSum key={i} value={el.value} dice={numberDie.length*6} />
     })
 
     return diceSumValue

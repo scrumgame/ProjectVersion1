@@ -9,11 +9,11 @@ export default class Highscore extends Component {
   // displays the top highscore of the teams
   render() {
     return (
-      <table>
+      <table className="container-fluid">
         <tbody>
           <tr>
-            <th>Team</th>
-            <th>Score</th>
+            <th className='col-sm-1'>Team</th>
+            <th className='col-sm-1'>Score</th>
           </tr>
           <tr>
             <td>Team</td>

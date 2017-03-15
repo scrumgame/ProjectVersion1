@@ -151,7 +151,7 @@ export default class App extends Component {
 
     axios({
       method: 'GET',
-      url: 'http://localhost/ProjectVersion1/api/?/admin',
+      url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/admin',
       data: {
         username: username,
         password: password
@@ -221,6 +221,24 @@ export default class App extends Component {
 
   _closeRetroModal() {
     if(this.state.validation.value.length >= 20) {
+      axios({
+        method: 'put',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game',
+        data: {
+          team: this.state.teamname.value,
+          retrospective: this.state.validation.value,
+          releaseplan: this.state.releaseplan
+
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .then(function(response) {
+          console.log(response);
+      })
+      .catch(function(error) {
+          console.log(error);
+      })
+
       return this.setState({
         showModal: {open: false}
       });

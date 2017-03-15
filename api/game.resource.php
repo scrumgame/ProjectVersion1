@@ -2,7 +2,7 @@
 
 class _game extends Resource {
 
-	public $team, $teamgame, $s, $d;
+	public $team, $teamgame, $s, $d, $sprint, $day;
 
 	function __construct($resource_id, $request){
 
@@ -48,5 +48,20 @@ class _game extends Resource {
 			}
 		}
 
+	}
+
+	function GET($input, $db) {
+		$input = array_keys($input);
+		$input = json_decode($input[0]);
+
+		$team = mysqli_real_escape_string($db, $input->team);
+		$sprint = mysqli_real_escape_string($db, $input->sprint);
+		$day = mysqli_real_escape_string($db, $input->day);
+		$teamgame = $team . "_game";
+
+
+		$query = "SELECT retrospective FROM `$teamgame` WHERE sprint = $sprint AND day = $day";
+
+		mysqli_query($db, $query);
 	}
 }

@@ -99,7 +99,7 @@ export default class App extends Component {
     cards.map((el) => {
       axios({
         method: 'put',
-        url: 'http://localhost/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
@@ -151,7 +151,7 @@ export default class App extends Component {
 
     axios({
       method: 'GET',
-      url: 'http://localhost/ProjectVersion1/api/?/admin',
+      url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/admin',
       data: {
         username: username,
         password: password
@@ -174,7 +174,7 @@ export default class App extends Component {
   _quickPlay(that) {
     axios({
         method: 'post',
-        url: 'http://localhost/ProjectVersion1/api/?/score',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
         data: {
           team: this.state.teamname.value
         },
@@ -287,7 +287,7 @@ export default class App extends Component {
     this.state.cards.map(el => {
       axios({
         method: 'post',
-        url: 'http://localhost/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
@@ -541,7 +541,7 @@ export default class App extends Component {
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
           axios({
               method: 'put',
-              url: 'http://localhost/ProjectVersion1/api/?/score',
+              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
               data: {
                 cash: columns[4].cash,
                 sprint: releaseplan.sprint,

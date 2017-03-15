@@ -12,8 +12,11 @@ export default class Retrospective extends Component {
   render() {
     return (
       <form>
-        <FormGroup controlId="formControlsTextarea">
-          <FormControl componentClass="textarea" placeholder="It's time to reflect over your sprint"/>
+        <FormGroup controlId="formControlsTextarea" validationState={this.props._getValidationState()}>
+          <FormControl
+            componentClass="textarea"
+            placeholder="It's time to reflect over your sprint"
+            onChange={this.props._validationState}/>
         </FormGroup>
       </form>
     );

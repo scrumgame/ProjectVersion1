@@ -28,7 +28,8 @@ export default class Modals extends Component {
         break;
 
       case 'Retrospective':
-        return <Retrospective />
+        return <Retrospective _validationState={this.props._validationState}
+                              _getValidationState={this.props._getValidationState}/>
         break;
 
       default:
@@ -38,7 +39,7 @@ export default class Modals extends Component {
 
   _renderModalButton() {
     if (this.props.showModal.type == "Retrospective") {
-      return <Button onClick={this.props._closeModal} bsStyle="success" block>Submit</Button>
+      return <Button onClick={this.props._closeRetroModal} bsStyle="success" block>Submit</Button>
     } else {
       return <Button onClick={this.props._closeModal} bsStyle="danger" block >Close</Button>
     }

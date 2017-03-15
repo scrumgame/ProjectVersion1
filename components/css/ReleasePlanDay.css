@@ -1,23 +1,24 @@
 .ReleasePlanDay {
   display: inline;
   background: #c4c4c4;
-  color: #606060;
-  border: 2px solid #606060;
-  border-radius: 10px;
-  cursor: pointer;
-  padding: 15px 10px;
+  color: #444;
+  border: 2px solid #444;
+  border-radius: 2px 2px 10px 10px;
+  /*padding: 15px 10px;*/
   margin: 10px 0 0 1px;
+  transition: all 0.5s ease;
 }
 
 .ReleasePlanDayCurrent {
   display: inline;
-  background: #0091D2;
+  background: #00ace7;
   color: #004969;
   border: 2px solid #004969;
-  border-radius: 10px;
+  border-radius: 2px 2px 10px 10px;
   cursor: pointer;
   padding: 15px 10px;
   margin: 10px 0 0 1px;
+  transition: all 0.5s ease;
 }
 
 .ReleasePlanDayDone {
@@ -25,7 +26,7 @@
   background: #004969;
   color: #0091D2;
   border: 2px solid #0091D2;
-  border-radius: 10px;
+  border-radius: 2px 2px 10px 10px;
   padding: 15px 10px;
   margin: 10px 0 0 1px;
   overflow: hidden;
@@ -53,4 +54,10 @@
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     transition: all 1s ease;
+}
+
+@media only screen and (max-width: 767px) {
+  .ReleasePlanDayCurrent {
+    margin: 30px 0 0 1px;
+  }
 }

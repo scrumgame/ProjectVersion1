@@ -26,3 +26,10 @@
 	color:#cc0000;
 	margin-right:4px;
 }
+
+/*prio button*/
+.prio {
+  color: #fff;
+  background: #004969;
+  border: none;
+}

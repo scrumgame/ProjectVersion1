@@ -49,7 +49,7 @@ export default class Navbar extends Component {
                 {this._changeNavbar()}
               </li>
             </ul>
-            <h2>{this.props.teamname.value}</h2>
+            <h2 className="teamfont">{this.props.teamname.value}</h2>
           </div>
         </div>
        </nav>

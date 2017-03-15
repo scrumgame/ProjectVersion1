@@ -7,3 +7,8 @@
 .navbar .navbar-collapse {
   text-align: center;
 }
+
+.teamfont {
+  font-weight: 700;
+  text-transform: uppercase;
+}

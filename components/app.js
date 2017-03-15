@@ -611,11 +611,11 @@ export default class App extends Component {
       }
     })
     this.setState({releaseplandays})
-
+    this._openModal(that, type)
     const newState = this.setState({
             releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
           })
-    this._openModal(that, type)
+
     return newState
   }
 

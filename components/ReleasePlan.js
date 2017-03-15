@@ -7,13 +7,15 @@ export default class ReleasePlan extends Component {
   }
 
   _bajs() {
-    return <p>hej</p>
+    return <p>hej på dig din lilla bajskorv du </p>
   }
 
   render() {
     return (
       <div className="ReleasePlan">
-        {this._bajs()}
+
+          {this._bajs()}
+
       </div>
     );
   }

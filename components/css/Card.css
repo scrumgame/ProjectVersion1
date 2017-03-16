@@ -11,6 +11,22 @@
   border-radius: 4px;
 }
 
+.CardDivValues {
+  display: inline-block;
+  font-weight: bold;
+  color: #004969;
+}
+
+.CardDivDollar {
+  color: #004969;
+  font-weight: bold;
+}
+
+.CardDivValuesSpan {
+  font-weight: normal;
+  color: black;
+}
+
 .CardDiv h4 {
   background: #004969 none repeat scroll 0 0;
   color: #fdfdfd;

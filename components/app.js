@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import FrontPage from './FrontPage'
 import Game from './Game'
 import Navbar from './Navbar'
@@ -14,7 +14,7 @@ import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
 import MultipleChoiceCards from './resources/MultipleChoiceCards'
 import axios from 'axios'
-import update from 'immutability-helper';
+import update from 'immutability-helper'
 
 export default class App extends Component {
   constructor(props) {
@@ -87,32 +87,21 @@ export default class App extends Component {
         {name: "Wed", done: 1},
         {name: "Thu", done: 1},
         {name: "Fri", done: 1}
+      ],
+
+      retrospective: [
+        {text: "ett"},
+        {text: "2"},
+        {text: "3"},
+        {text: "4"},
+        {text: "5"},
+        {text: "6"},
+        {text: "7"},
+        {text: "8"}
       ]
 
     }
     this._slideState = this._slideState.bind(this)
-  }
-
-  componentDidUpdate() {
-    const cards = this.state.cards
-
-    cards.map((el) => {
-      axios({
-        method: 'put',
-        url: 'http://localhost/ProjectVersion1/api/?/cards',
-        data: {
-          team: this.state.teamname.value,
-          card: el
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .then(function(response) {
-        //(response);
-      })
-      .catch(function(error) {
-        //(error);
-      })
-    })
   }
 
   /**********************************************************************/
@@ -159,14 +148,12 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(function(response) {
+      console.log(response)
       if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
         that.setState({
         admin: {value: true}
         })
       }
-    })
-    .catch(function(error) {
-      //(error)
     })
 
   }
@@ -174,18 +161,12 @@ export default class App extends Component {
   _quickPlay(that) {
     axios({
         method: 'post',
-        url: 'http://localhost/ProjectVersion1/api/?/score',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
         data: {
           team: this.state.teamname.value
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
-    .then(function(response) {
-        //(response);
-    })
-    .catch(function(error) {
-        //(error);
-    });
 
     axios({
       method: 'post',
@@ -216,10 +197,13 @@ export default class App extends Component {
   _closeModal() {
     return this.setState({
       showModal: {open: false}
-    });
+    })
   }
 
   _closeRetroModal() {
+    const name = this.state.teamname.value
+    const that = this
+
     if(this.state.validation.value.length >= 20) {
       axios({
         method: 'put',
@@ -233,57 +217,81 @@ export default class App extends Component {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(function(response) {
-          console.log(response);
-      })
-      .catch(function(error) {
-          console.log(error);
+        const retrospective = that.state.retrospective
+        const i = that.state.releaseplan.sprint-1
+
+        axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game/'+name+'_game/'+i)
+        .then(function(response) {
+          that.setState({
+            retrospective: update(retrospective, {[i-1]: {text: {$set: response.data.retro[0].retrospective}}})
+          })
+        })
       })
 
       return this.setState({
         showModal: {open: false}
-      });
+      })
     }
   }
 
   _openModal(type) {
     return this.setState({
       showModal: {open: true, type: type}
-    });
+    })
   }
 
   _saveTeamName(event) {
     return this.setState({
       teamname: {value: event.target.value}
-    });
+    })
   }
 
   _startGame() {
     if (this.state.newgame.value == true) {
       return [
-        <Navbar key={1} _openModal={this._openModal.bind(this)} navbar={this.state.navbar} _gameNav={this._gameNav.bind(this)} teamname={this.state.teamname}/>,
+        <Navbar
+          key={1}
+          _openModal={this._openModal.bind(this)}
+          navbar={this.state.navbar}
+          _gameNav={this._gameNav.bind(this)}
+          teamname={this.state.teamname}
+        />,
         <Game
-        key={2}
-        _openModal={this._openModal.bind(this)}
-        _tickDay={this._tickDay.bind(this)}
-        _renderRollOrRetroButton={this._renderRollOrRetroButton.bind(this)}
-        _renderDieColumns={this._renderDieColumns.bind(this)}
-        _renderSumColumns={this._renderSumColumns.bind(this)}
-        _renderColumns={this._renderColumns.bind(this)}
-        _pushCardsIntoState={this._pushCardsIntoState.bind(this)}
-        _createDbCards={this._createDbCards.bind(this)}
-        releaseplan={this.state.releaseplan}
-        releaseplandays={this.state.releaseplandays}
-        slidevalue={this.state.slidevalue}
+          key={2}
+          _openModal={this._openModal.bind(this)}
+          _tickDay={this._tickDay.bind(this)}
+          _renderRollOrRetroButton={this._renderRollOrRetroButton.bind(this)}
+          _renderDieColumns={this._renderDieColumns.bind(this)}
+          _renderSumColumns={this._renderSumColumns.bind(this)}
+          _renderColumns={this._renderColumns.bind(this)}
+          _pushCardsIntoState={this._pushCardsIntoState.bind(this)}
+          _createDbCards={this._createDbCards.bind(this)}
+          releaseplan={this.state.releaseplan}
+          releaseplandays={this.state.releaseplandays}
+          slidevalue={this.state.slidevalue}
         />
       ]
     } else {
       return [
-        <Navbar key={1} _openModal={this._openModal.bind(this)} navbar={this.state.navbar} teamname={this.state.teamname}/>,
-
-        <FrontPage key={2}slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
-        _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)} _saveTeamName={this._saveTeamName.bind(this)}
-        _gameNav={this._gameNav.bind(this)}
-        _login={this._login.bind(this)}/>,
+        <Navbar
+          key={1}
+          _openModal={this._openModal.bind(this)}
+          navbar={this.state.navbar}
+          teamname={this.state.teamname}
+        />,
+        <FrontPage
+          key={2}
+          slidevalue={this.state.slidevalue}
+          admin={this.state.admin}
+          customgame={this.state.customgame}
+          _customGame={this._customGame.bind(this)}
+          _slideState={this._getState}
+          _slideState={this._slideState}
+          _quickPlay={this._quickPlay.bind(this)}
+          _saveTeamName={this._saveTeamName.bind(this)}
+          _gameNav={this._gameNav.bind(this)}
+          _login={this._login.bind(this)}
+        />
       ]
     }
   }
@@ -305,19 +313,13 @@ export default class App extends Component {
     this.state.cards.map(el => {
       axios({
         method: 'post',
-        url: 'http://localhost/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
-      .then(function(response) {
-        //(response);
-      })
-      .catch(function(error) {
-        //(error);
-      });
     })
   }
 
@@ -343,31 +345,31 @@ export default class App extends Component {
           case 0:
           el.movable = true
           el.timeclicked = time
-          break;
+          break
 
           case 1:
           if (el.a == 0) {
             el.movable = true
             el.timeclicked = time
           }
-          break;
+          break
 
           case 2:
           if (el.d == 0) {
             el.movable = true
             el.timeclicked = time
           }
-          break;
+          break
 
           case 3:
           if (el.t == 0) {
             el.movable = true
             el.timeclicked = time
           }
-          break;
+          break
 
           default:
-          break;
+          break
         }
 
         if(el.movable == true) {
@@ -375,13 +377,22 @@ export default class App extends Component {
           if (el.position !== 4) {
             el.position++
             el.movable = false
+            this.setState({cards})
+
+            axios({
+              method: 'put',
+              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+              data: {
+                team: this.state.teamname.value,
+                card: el
+              },
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
 
             if (el.position == 4 && el.cash) {
               columns[4].cash += el.cash
               return this.setState({columns})
             }
-
-            return this.setState({cards})
           }
         }
       })
@@ -395,8 +406,17 @@ export default class App extends Component {
   _renderColumns() {
     const classes = ['col-sm-offset-1', '', '', '', '']
     return this.state.columns.map((el, i) => (
-      <Column _handleCardClick={this._handleCardClick.bind(this)} _handlePrioClick={this._handlePrioClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash} className={classes[i]}/>
-    ));
+      <Column
+        _handleCardClick={this._handleCardClick.bind(this)}
+        _handlePrioClick={this._handlePrioClick.bind(this)}
+        cards={this.state.cards}
+        key={el.name}
+        name={el.name}
+        id={i}
+        cash={el.cash}
+        className={classes[i]}
+      />
+    ))
   }
 
   /**********************************************************************/
@@ -408,7 +428,7 @@ export default class App extends Component {
     const dieColumns = [1, 2, 3]
     return dieColumns.map((el, i) => (
       <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={el} name={el} id={el} className={classes[i]}/>
-    ));
+    ))
   }
 
   _handleDieClick(die, button) {
@@ -508,8 +528,8 @@ export default class App extends Component {
     })
 
     return diceSumValue
-
   }
+
   /**********************************************************************/
   /*                           RELEASEPLAN                              */
   /**********************************************************************/
@@ -558,7 +578,7 @@ export default class App extends Component {
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
           axios({
               method: 'put',
-              url: 'http://localhost/ProjectVersion1/api/?/score',
+              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
               data: {
                 cash: columns[4].cash,
                 sprint: releaseplan.sprint,
@@ -566,12 +586,6 @@ export default class App extends Component {
               },
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
           })
-          .then(function(response) {
-              //(response);
-          })
-          .catch(function(error) {
-              //(error);
-          });
 
           return this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
@@ -627,12 +641,19 @@ export default class App extends Component {
       <div className="container-fluid">
         <div className="row">
           {this._startGame()}
-          <Modals showModal={this.state.showModal} _validationState={this._validationState.bind(this)}
-          _getValidationState={this._getValidationState.bind(this)}
-          _closeModal={this._closeModal.bind(this)}
-          _closeRetroModal={this._closeRetroModal.bind(this)}  />
+          <Modals
+            showModal={this.state.showModal}
+            releaseplan={this.state.releaseplan}
+            releaseplandays={this.state.releaseplandays}
+            retrospective={this.state.retrospective}
+            teamname={this.state.teamname}
+            _validationState={this._validationState.bind(this)}
+            _getValidationState={this._getValidationState.bind(this)}
+            _closeModal={this._closeModal.bind(this)}
+            _closeRetroModal={this._closeRetroModal.bind(this)}
+          />
         </div>
       </div>
-    );
+    )
   }
 }

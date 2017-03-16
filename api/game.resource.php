@@ -2,12 +2,10 @@
 
 class _game extends Resource {
 
-	public $team, $teamgame, $s, $d, $sprint, $day, $retrospective;
+	public $team, $teamgame, $s, $d, $sprint, $day, $retrospective, $retro;
 
 	function __construct($resource_id, $request){
-
-		if(is_numeric($resource_id))
-			$this->id = $resource_id;
+		$this->id = $resource_id;
 
 		$this->request = $request;
 	}
@@ -50,7 +48,6 @@ class _game extends Resource {
 	}
 
 	function PUT($input, $db) {
-
 		$input = array_keys($input);
 		$input = json_decode($input[0]);
 
@@ -72,17 +69,16 @@ class _game extends Resource {
 	}
 
 	function GET($input, $db) {
-		$input = array_keys($input);
-		$input = json_decode($input[0]);
 
-		$team = mysqli_real_escape_string($db, $input->team);
-		$sprint = mysqli_real_escape_string($db, $input->releaseplan->sprint);
-		$day = mysqli_real_escape_string($db, $input->releaseplan->day);
-		$teamgame = $team . "_game";
+		$currentsprint = $this->request[0];
 
+		$query = "SELECT retrospective FROM `$this->id` WHERE sprint = '$currentsprint' AND day = 5";
 
-		$query = "SELECT retrospective FROM `$teamgame` WHERE sprint = $sprint AND day = $day";
-
-		mysqli_query($db, $query);
+		$result = mysqli_query($db, $query);
+		$data = [];
+		while($row = mysqli_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		$this->retro = $data;
 	}
 }

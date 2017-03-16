@@ -87,6 +87,17 @@ export default class App extends Component {
         {name: "Wed", done: 1},
         {name: "Thu", done: 1},
         {name: "Fri", done: 1}
+      ],
+
+      retrospective: [
+        {text: "ett"},
+        {text: "2"},
+        {text: "3"},
+        {text: "4"},
+        {text: "5"},
+        {text: "6"},
+        {text: "7"},
+        {text: "8"}
       ]
 
     }
@@ -159,14 +170,12 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(function(response) {
+      console.log(response)
       if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
         that.setState({
         admin: {value: true}
         })
       }
-    })
-    .catch(function(error) {
-      //(error)
     })
 
   }
@@ -260,30 +269,49 @@ export default class App extends Component {
   _startGame() {
     if (this.state.newgame.value == true) {
       return [
-        <Navbar key={1} _openModal={this._openModal.bind(this)} navbar={this.state.navbar} _gameNav={this._gameNav.bind(this)} teamname={this.state.teamname}/>,
+        <Navbar
+          key={1}
+          _openModal={this._openModal.bind(this)}
+          navbar={this.state.navbar}
+          _gameNav={this._gameNav.bind(this)}
+          teamname={this.state.teamname}
+        />,
         <Game
-        key={2}
-        _openModal={this._openModal.bind(this)}
-        _tickDay={this._tickDay.bind(this)}
-        _renderRollOrRetroButton={this._renderRollOrRetroButton.bind(this)}
-        _renderDieColumns={this._renderDieColumns.bind(this)}
-        _renderSumColumns={this._renderSumColumns.bind(this)}
-        _renderColumns={this._renderColumns.bind(this)}
-        _pushCardsIntoState={this._pushCardsIntoState.bind(this)}
-        _createDbCards={this._createDbCards.bind(this)}
-        releaseplan={this.state.releaseplan}
-        releaseplandays={this.state.releaseplandays}
-        slidevalue={this.state.slidevalue}
+          key={2}
+          _openModal={this._openModal.bind(this)}
+          _tickDay={this._tickDay.bind(this)}
+          _renderRollOrRetroButton={this._renderRollOrRetroButton.bind(this)}
+          _renderDieColumns={this._renderDieColumns.bind(this)}
+          _renderSumColumns={this._renderSumColumns.bind(this)}
+          _renderColumns={this._renderColumns.bind(this)}
+          _pushCardsIntoState={this._pushCardsIntoState.bind(this)}
+          _createDbCards={this._createDbCards.bind(this)}
+          releaseplan={this.state.releaseplan}
+          releaseplandays={this.state.releaseplandays}
+          slidevalue={this.state.slidevalue}
         />
       ]
     } else {
       return [
-        <Navbar key={1} _openModal={this._openModal.bind(this)} navbar={this.state.navbar} teamname={this.state.teamname}/>,
-
-        <FrontPage key={2}slidevalue={this.state.slidevalue} admin={this.state.admin} customgame={this.state.customgame} _customGame={this._customGame.bind(this)} _slideState={this._getState}
-        _slideState={this._slideState} _quickPlay={this._quickPlay.bind(this)} _saveTeamName={this._saveTeamName.bind(this)}
-        _gameNav={this._gameNav.bind(this)}
-        _login={this._login.bind(this)}/>,
+        <Navbar
+          key={1}
+          _openModal={this._openModal.bind(this)}
+          navbar={this.state.navbar}
+          teamname={this.state.teamname}
+        />,
+        <FrontPage
+          key={2}
+          slidevalue={this.state.slidevalue}
+          admin={this.state.admin}
+          customgame={this.state.customgame}
+          _customGame={this._customGame.bind(this)}
+          _slideState={this._getState}
+          _slideState={this._slideState}
+          _quickPlay={this._quickPlay.bind(this)}
+          _saveTeamName={this._saveTeamName.bind(this)}
+          _gameNav={this._gameNav.bind(this)}
+          _login={this._login.bind(this)}
+        />
       ]
     }
   }
@@ -395,7 +423,16 @@ export default class App extends Component {
   _renderColumns() {
     const classes = ['col-sm-offset-1', '', '', '', '']
     return this.state.columns.map((el, i) => (
-      <Column _handleCardClick={this._handleCardClick.bind(this)} _handlePrioClick={this._handlePrioClick.bind(this)} cards={this.state.cards} key={el.name} name={el.name} id={i} cash={el.cash} className={classes[i]}/>
+      <Column
+        _handleCardClick={this._handleCardClick.bind(this)}
+        _handlePrioClick={this._handlePrioClick.bind(this)}
+        cards={this.state.cards}
+        key={el.name}
+        name={el.name}
+        id={i}
+        cash={el.cash}
+        className={classes[i]}
+      />
     ));
   }
 
@@ -619,6 +656,20 @@ export default class App extends Component {
     return newState
   }
 
+  _getRetrospective(i) {
+    const name = this.state.teamname.value
+    const retrospective = this.state.retrospective
+    const that = this
+
+    // axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game/'+name+'_game/'+i)
+    // .then(function(response) {
+    //   // var lol = response.data.retro[0].retrospective
+    //   that.setState({
+    //     retrospective: update(retrospective, {0: {text: {$set: 2}}})
+    //   })
+    // })
+  }
+
   /**********************************************************************/
   /*                           RENDERFUNCTION                           */
   /**********************************************************************/
@@ -628,10 +679,17 @@ export default class App extends Component {
       <div className="container-fluid">
         <div className="row">
           {this._startGame()}
-          <Modals showModal={this.state.showModal} _validationState={this._validationState.bind(this)}
-          _getValidationState={this._getValidationState.bind(this)}
-          _closeModal={this._closeModal.bind(this)}
-          _closeRetroModal={this._closeRetroModal.bind(this)}  />
+          <Modals
+            showModal={this.state.showModal}
+            releaseplan={this.state.releaseplan}
+            retrospective={this.state.retrospective}
+            teamname={this.state.teamname}
+            _validationState={this._validationState.bind(this)}
+            _getValidationState={this._getValidationState.bind(this)}
+            _closeModal={this._closeModal.bind(this)}
+            _closeRetroModal={this._closeRetroModal.bind(this)}
+            _getRetrospective={this._getRetrospective.bind(this)}
+          />
         </div>
       </div>
     );

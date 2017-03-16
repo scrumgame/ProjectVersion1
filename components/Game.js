@@ -46,7 +46,11 @@ export default class Game extends Component {
     return (
       <div className="container">
         <div className="row">
-          <ReleasePlanWeek releaseplan={this.props.releaseplan} releaseplandays={this.props.releaseplandays} _tickDay={this.props._tickDay}/>
+          <ReleasePlanWeek
+            releaseplan={this.props.releaseplan}
+            releaseplandays={this.props.releaseplandays}
+            _tickDay={this.props._tickDay}
+          />
           {this.props._renderRollOrRetroButton()}
         </div>
         <div className="row">

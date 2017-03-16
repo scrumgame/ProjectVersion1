@@ -13,16 +13,16 @@ export default class Card extends Component {
 
   _ifCash() {
     if (this.props.cash) {
-      return <p>${this.props.cash}</p>
+      return <p className="CardDivDollar">$<span className="CardDivValuesSpan">{this.props.cash}</span></p>
     }
   }
 
   _ifADT() {
     if (this.props.a >= 0 && this.props.d >= 0 && this.props.t >= 0 ) {
       return [
-        <p key={1} >A: {this.props.a}</p>,
-        <p key={2} >D: {this.props.d}</p>,
-        <p key={3} >T: {this.props.t}</p>
+        <p className="CardDivValues" key={1} >A: <span className="CardDivValuesSpan">{this.props.a}</span>&nbsp;</p>,
+        <p className="CardDivValues" key={2} >D: <span className="CardDivValuesSpan">{this.props.d}</span>&nbsp;</p>,
+        <p className="CardDivValues" key={3} >T: <span className="CardDivValuesSpan">{this.props.t}</span></p>
       ]
     }
   }

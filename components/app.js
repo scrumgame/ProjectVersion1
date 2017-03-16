@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import FrontPage from './FrontPage'
 import Game from './Game'
 import Navbar from './Navbar'
@@ -14,7 +14,7 @@ import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
 import MultipleChoiceCards from './resources/MultipleChoiceCards'
 import axios from 'axios'
-import update from 'immutability-helper';
+import update from 'immutability-helper'
 
 export default class App extends Component {
   constructor(props) {
@@ -104,28 +104,6 @@ export default class App extends Component {
     this._slideState = this._slideState.bind(this)
   }
 
-  componentDidUpdate() {
-    const cards = this.state.cards
-
-    cards.map((el) => {
-      axios({
-        method: 'put',
-        url: 'http://localhost/ProjectVersion1/api/?/cards',
-        data: {
-          team: this.state.teamname.value,
-          card: el
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .then(function(response) {
-        //(response);
-      })
-      .catch(function(error) {
-        //(error);
-      })
-    })
-  }
-
   /**********************************************************************/
   /*                           FRONTPAGE                                */
   /**********************************************************************/
@@ -183,18 +161,12 @@ export default class App extends Component {
   _quickPlay(that) {
     axios({
         method: 'post',
-        url: 'http://localhost/ProjectVersion1/api/?/score',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
         data: {
           team: this.state.teamname.value
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
-    .then(function(response) {
-        //(response);
-    })
-    .catch(function(error) {
-        //(error);
-    });
 
     axios({
       method: 'post',
@@ -225,10 +197,13 @@ export default class App extends Component {
   _closeModal() {
     return this.setState({
       showModal: {open: false}
-    });
+    })
   }
 
   _closeRetroModal() {
+    const name = this.state.teamname.value
+    const that = this
+
     if(this.state.validation.value.length >= 20) {
       axios({
         method: 'put',
@@ -242,28 +217,33 @@ export default class App extends Component {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(function(response) {
-          console.log(response);
-      })
-      .catch(function(error) {
-          console.log(error);
+        const retrospective = that.state.retrospective
+        const i = that.state.releaseplan.sprint-1
+
+        axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game/'+name+'_game/'+i)
+        .then(function(response) {
+          that.setState({
+            retrospective: update(retrospective, {[i-1]: {text: {$set: response.data.retro[0].retrospective}}})
+          })
+        })
       })
 
       return this.setState({
         showModal: {open: false}
-      });
+      })
     }
   }
 
   _openModal(type) {
     return this.setState({
       showModal: {open: true, type: type}
-    });
+    })
   }
 
   _saveTeamName(event) {
     return this.setState({
       teamname: {value: event.target.value}
-    });
+    })
   }
 
   _startGame() {
@@ -333,19 +313,13 @@ export default class App extends Component {
     this.state.cards.map(el => {
       axios({
         method: 'post',
-        url: 'http://localhost/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
-      .then(function(response) {
-        //(response);
-      })
-      .catch(function(error) {
-        //(error);
-      });
     })
   }
 
@@ -371,31 +345,31 @@ export default class App extends Component {
           case 0:
           el.movable = true
           el.timeclicked = time
-          break;
+          break
 
           case 1:
           if (el.a == 0) {
             el.movable = true
             el.timeclicked = time
           }
-          break;
+          break
 
           case 2:
           if (el.d == 0) {
             el.movable = true
             el.timeclicked = time
           }
-          break;
+          break
 
           case 3:
           if (el.t == 0) {
             el.movable = true
             el.timeclicked = time
           }
-          break;
+          break
 
           default:
-          break;
+          break
         }
 
         if(el.movable == true) {
@@ -403,13 +377,22 @@ export default class App extends Component {
           if (el.position !== 4) {
             el.position++
             el.movable = false
+            this.setState({cards})
+
+            axios({
+              method: 'put',
+              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+              data: {
+                team: this.state.teamname.value,
+                card: el
+              },
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
 
             if (el.position == 4 && el.cash) {
               columns[4].cash += el.cash
               return this.setState({columns})
             }
-
-            return this.setState({cards})
           }
         }
       })
@@ -433,7 +416,7 @@ export default class App extends Component {
         cash={el.cash}
         className={classes[i]}
       />
-    ));
+    ))
   }
 
   /**********************************************************************/
@@ -445,7 +428,7 @@ export default class App extends Component {
     const dieColumns = [1, 2, 3]
     return dieColumns.map((el, i) => (
       <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={el} name={el} id={el} className={classes[i]}/>
-    ));
+    ))
   }
 
   _handleDieClick(die, button) {
@@ -545,8 +528,8 @@ export default class App extends Component {
     })
 
     return diceSumValue
-
   }
+
   /**********************************************************************/
   /*                           RELEASEPLAN                              */
   /**********************************************************************/
@@ -595,7 +578,7 @@ export default class App extends Component {
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
           axios({
               method: 'put',
-              url: 'http://localhost/ProjectVersion1/api/?/score',
+              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
               data: {
                 cash: columns[4].cash,
                 sprint: releaseplan.sprint,
@@ -603,12 +586,6 @@ export default class App extends Component {
               },
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
           })
-          .then(function(response) {
-              //(response);
-          })
-          .catch(function(error) {
-              //(error);
-          });
 
           return this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
@@ -655,20 +632,6 @@ export default class App extends Component {
     return newState
   }
 
-  _getRetrospective(i) {
-    const name = this.state.teamname.value
-    const retrospective = this.state.retrospective
-    const that = this
-
-    // axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game/'+name+'_game/'+i)
-    // .then(function(response) {
-    //   // var lol = response.data.retro[0].retrospective
-    //   that.setState({
-    //     retrospective: update(retrospective, {0: {text: {$set: 2}}})
-    //   })
-    // })
-  }
-
   /**********************************************************************/
   /*                           RENDERFUNCTION                           */
   /**********************************************************************/
@@ -681,16 +644,16 @@ export default class App extends Component {
           <Modals
             showModal={this.state.showModal}
             releaseplan={this.state.releaseplan}
+            releaseplandays={this.state.releaseplandays}
             retrospective={this.state.retrospective}
             teamname={this.state.teamname}
             _validationState={this._validationState.bind(this)}
             _getValidationState={this._getValidationState.bind(this)}
             _closeModal={this._closeModal.bind(this)}
             _closeRetroModal={this._closeRetroModal.bind(this)}
-            _getRetrospective={this._getRetrospective.bind(this)}
           />
         </div>
       </div>
-    );
+    )
   }
 }

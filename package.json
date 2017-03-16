@@ -47,6 +47,7 @@
     "css-loader": "^0.26.1",
     "eslint": "^3.16.0",
     "eslint-config-google": "^0.7.1",
+    "eslint-plugin-react": "^6.10.0",
     "file-loader": "^0.10.1",
     "image-webpack-loader": "^3.2.0",
     "redux-devtools": "^3.3.2",

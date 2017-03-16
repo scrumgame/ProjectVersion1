@@ -17,7 +17,8 @@ export default class Modals extends Component {
     switch (this.props.showModal.type) {
       case 'Releaseplan':
         return <Releaseplan retrospective={this.props.retrospective}
-                            _getRetrospective={this.props._getRetrospective}/>
+                            releaseplandays={this.props.releaseplandays}
+                            releaseplan={this.props.releaseplan}/>
         break;
 
       case 'Rules':

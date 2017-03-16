@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReleasePlanWeek from './ReleasePlanWeek'
-import axios from 'axios'
+import './css/ReleasePlanDay.css'
 
 export default class ReleasePlan extends Component {
   constructor(props) {
@@ -8,19 +8,25 @@ export default class ReleasePlan extends Component {
   }
 
   _generateReleasePlan() {
-    const lol = this.props.retrospective.map((el, i) => {
-        this.props._getRetrospective(i),
-        <tr key={i}>
-          <td className='col-sm-1' key={1}>Sprint {i+1}</td>
-          <td className='col-sm-1' key={2}>Mon</td>
-          <td className='col-sm-1' key={3}>Tue</td>
-          <td className='col-sm-1' key={4}>Wed</td>
-          <td className='col-sm-1' key={5}>Thu</td>
-          <td className='col-sm-1' key={6}>Fri</td>
-          <td className='col-sm-1' key={7}>{el.text}</td>
-        </tr>
-    })
-    return lol
+    return this.props.retrospective.map((el, i) => (
+      <tr key={i}>
+        <td className='col-sm-1' key={1}>Sprint {i+1}</td>
+      {this.props.releaseplandays.map((elem, index) => {
+
+        if (this.props.releaseplan.sprint > i+1) {
+          return <td className='col-sm-1 ReleasePlanDayDone' key={index}>{elem.name}</td>
+        } else if (this.props.releaseplan.sprint == i+1 && this.props.releaseplan.day > index+1) {
+          return <td className='col-sm-1 ReleasePlanDayDone' key={index}>{elem.name}</td>
+        } else if (this.props.releaseplan.sprint == i+1 && this.props.releaseplan.day == index+1) {
+          return <td className='col-sm-1 ReleasePlanDayCurrent' key={index}>{elem.name}</td>
+        } else {
+          return <td className='col-sm-1 ReleasePlanDay' key={index}>{elem.name}</td>
+        }
+
+      })}
+        <td className='col-sm-1' key={7}>{el.text}</td>
+      </tr>
+    ))
   }
 
   render() {

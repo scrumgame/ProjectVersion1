@@ -1,29 +1,25 @@
 .RollButton {
-  margin: 10px 0 0 4%;
-  padding: 15px;
+  margin: 0 0 0 4.5%;
+  /*padding: 15px;*/
   outline: none;
-
   border: 2px solid #606060;
-  border-radius: 15px;
-  box-shadow: 0 3px 0;
-  top: 3px;
+  border-radius: 5px;
+  box-shadow: 0 1px 0;
+  top: 4px;
   background: #c4c4c4;
   transition: all 0.3s ease;
   color: #606060;
-
   cursor:not-allowed;
 }
 
 .RollButtonReady {
-  margin: 10px 0 0 4%;
-  padding: 15px;
+  margin: 0 0 0 4.5%;
+  /*padding: 15px;*/
   outline: none;
-
   border: 2px solid #425b35;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 0 5px 0;
   top: 0;
-
   background: #91C974;
   transition: all 0.3s ease;
   color: #425b35;

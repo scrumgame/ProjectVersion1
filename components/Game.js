@@ -47,7 +47,6 @@ export default class Game extends Component {
       <div className="container">
         <div className="row">
           <ReleasePlanWeek releaseplan={this.props.releaseplan} releaseplandays={this.props.releaseplandays} _tickDay={this.props._tickDay}/>
-          {this.props._renderRollOrRetroButton()}
         </div>
         <div className="row">
           {this.props._renderDieColumns()}
@@ -57,6 +56,7 @@ export default class Game extends Component {
             <h4>Points</h4>
           </div>
           {this.props._renderSumColumns()}
+          {this.props._renderRollOrRetroButton()}
         </div>
         <div className="row">
           {this.props._renderColumns()}

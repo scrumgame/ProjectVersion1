@@ -8,7 +8,7 @@ export default class CardButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props._handleCardButtonClick(this)}>Prio</button>
+        <button className="prio" onClick={() => this.props._handleCardButtonClick(this)}>Prio</button>
       </div>
     );
   }

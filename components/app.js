@@ -110,7 +110,7 @@ export default class App extends Component {
     cards.map((el) => {
       axios({
         method: 'put',
-        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
@@ -183,7 +183,7 @@ export default class App extends Component {
   _quickPlay(that) {
     axios({
         method: 'post',
-        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
+        url: 'http://localhost/ProjectVersion1/api/?/score',
         data: {
           team: this.state.teamname.value
         },
@@ -333,7 +333,7 @@ export default class App extends Component {
     this.state.cards.map(el => {
       axios({
         method: 'post',
-        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards',
+        url: 'http://localhost/ProjectVersion1/api/?/cards',
         data: {
           team: this.state.teamname.value,
           card: el
@@ -535,14 +535,13 @@ export default class App extends Component {
   }
 
   _renderSumColumns() {
-    const classes = ['col-sm-offset-3', '', '']
     const dicesum = this.state.dicesum
     const dice = this.state.dice
 
     const diceSumValue = dicesum.map((el, i) => {
       const numberDie = dice.filter(elem => elem.position == el.position)
                             .map(elem => elem)
-      return <DiceSum key={i} className={classes[i]} value={el.value} dice={numberDie.length*6} />
+      return <DiceSum key={i} value={el.value} dice={numberDie.length*6} />
     })
 
     return diceSumValue
@@ -596,7 +595,7 @@ export default class App extends Component {
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
           axios({
               method: 'put',
-              url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
+              url: 'http://localhost/ProjectVersion1/api/?/score',
               data: {
                 cash: columns[4].cash,
                 sprint: releaseplan.sprint,

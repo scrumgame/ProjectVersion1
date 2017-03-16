@@ -3,6 +3,7 @@
   height: 70%;
   border: 1px solid #027ebe;
   overflow: hidden;
+  box-shadow: 10px 10px 15px #ededed;
 }
 
 h3 {

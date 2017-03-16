@@ -57,6 +57,9 @@ export default class Game extends Component {
           {this.props._renderDieColumns()}
         </div>
         <div className="row">
+          <div className="col-sm-2 col-sm-offset-1 DiceSum">
+            <h4>Points</h4>
+          </div>
           {this.props._renderSumColumns()}
         </div>
         <div className="row">

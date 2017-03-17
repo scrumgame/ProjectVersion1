@@ -2,12 +2,11 @@
 
 class _score extends Resource {
 
-	public $team, $sprint, $cash, $teamname, $teamcards, $teamgame;
+	public $team, $sprint, $cash, $teamname, $teamcards, $teamgame, $money, $sprintnumber;
 
 	function __construct($resource_id, $request){
 
-		if(is_numeric($resource_id))
-			$this->id = $resource_id;
+		$this->id = $resource_id;
 
 		$this->request = $request;
 	}
@@ -60,6 +59,20 @@ class _score extends Resource {
 							WHERE teamname='$teamname'";
 
 		mysqli_query($db, $query);
+	}
+
+	function GET($input, $db) {
+
+		$sprintnumber = $this->request[0];
+
+		$query = "SELECT sprint_$sprintnumber FROM score WHERE teamname = '$this->id'";
+
+		$result = mysqli_query($db, $query);
+		$data = [];
+		while($row = mysqli_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		$this->money = $data;
 	}
 
 }

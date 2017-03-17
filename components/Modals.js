@@ -6,6 +6,7 @@ import Rules from './Rules'
 import Highscore from './Highscore'
 import Releaseplan from './Releaseplan'
 import Retrospective from './Retrospective'
+import MoneyEarned from './MoneyEarned'
 
 
 export default class Modals extends Component {
@@ -16,9 +17,13 @@ export default class Modals extends Component {
   _renderModalContent() {
     switch (this.props.showModal.type) {
       case 'Releaseplan':
-        return <Releaseplan retrospective={this.props.retrospective}
-                            releaseplandays={this.props.releaseplandays}
-                            releaseplan={this.props.releaseplan}/>
+        return [<Releaseplan
+                  retrospective={this.props.retrospective}
+                  releaseplandays={this.props.releaseplandays}
+                  releaseplan={this.props.releaseplan}/>,
+                  <br/>,
+               <MoneyEarned
+                 moneyearned={this.props.moneyearned}/>]
         break;
 
       case 'Rules':

@@ -55,9 +55,9 @@ class _game extends Resource {
 
 		$teamgame = $team . "_game";
 		$day = mysqli_real_escape_string($db, $input->releaseplan->day);
-		$day = $day+4;
+		$day = $day;
 		$sprint = mysqli_real_escape_string($db, $input->releaseplan->sprint);
-		$sprint = $sprint-1;
+		$sprint = $sprint;
 		$retrospective = mysqli_real_escape_string($db, $input->retrospective);
 
 		$query = "UPDATE `$teamgame`

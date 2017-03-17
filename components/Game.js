@@ -51,7 +51,6 @@ export default class Game extends Component {
             releaseplandays={this.props.releaseplandays}
             _tickDay={this.props._tickDay}
           />
-          {this.props._renderRollOrRetroButton()}
         </div>
         <div className="row">
           {this.props._renderDieColumns()}

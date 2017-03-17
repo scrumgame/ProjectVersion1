@@ -57,6 +57,17 @@ export default class App extends Component {
         {name: 'Done', cash: 0}
       ],
 
+      moneyearned: [
+        {cash: 0},
+        {cash: 0},
+        {cash: 0},
+        {cash: 0},
+        {cash: 0},
+        {cash: 0},
+        {cash: 0},
+        {cash: 0}
+      ],
+
       dice: [
         {position: 1, id: 0, value: 1, type: 'Analysis'},
         {position: 2, id: 1, value: 1, type: 'Development'},
@@ -90,14 +101,14 @@ export default class App extends Component {
       ],
 
       retrospective: [
-        {text: "ett"},
-        {text: "2"},
-        {text: "3"},
-        {text: "4"},
-        {text: "5"},
-        {text: "6"},
-        {text: "7"},
-        {text: "8"}
+        {text: ""},
+        {text: ""},
+        {text: ""},
+        {text: ""},
+        {text: ""},
+        {text: ""},
+        {text: ""},
+        {text: ""}
       ]
 
     }
@@ -121,8 +132,8 @@ export default class App extends Component {
   }
 
   _getValidationState() {
-      const balle = this.state.validation.value
-      const length = balle.length
+      const validation = this.state.validation.value
+      const length = validation.length
       if (length > 20) return 'success'
       else if (length > 10) return 'warning'
       else if (length > 0) return 'error'
@@ -176,12 +187,6 @@ export default class App extends Component {
       },
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
-    .then(function(response) {
-        console.log(response);
-    })
-    .catch(function(error) {
-        console.log(error);
-    })
 
     this.setState({
       newgame: {value: true}
@@ -202,6 +207,7 @@ export default class App extends Component {
 
   _closeRetroModal() {
     const name = this.state.teamname.value
+    const releaseplan = this.state.releaseplan
     const that = this
 
     if(this.state.validation.value.length >= 20) {
@@ -227,11 +233,11 @@ export default class App extends Component {
           })
         })
       })
-
-      return this.setState({
-        showModal: {open: false}
-      })
     }
+    return this.setState({
+            releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}}),
+            showModal: {open: false}
+          })
   }
 
   _openModal(type) {
@@ -576,6 +582,8 @@ export default class App extends Component {
         break
       case 'Fri':
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
+
+          const that = this
           axios({
               method: 'put',
               url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
@@ -585,6 +593,20 @@ export default class App extends Component {
                 team: this.state.teamname.value
               },
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          })
+          .then(function(response) {
+            const moneyearned = that.state.moneyearned
+            const name = that.state.teamname.value
+            const sprint = that.state.releaseplan.sprint
+
+            axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score/'+name+'/'+sprint)
+            .then(function(response) {
+              const sprintnumber = 'sprint_'+sprint
+
+              that.setState({
+                moneyearned: update(moneyearned, {[sprint-1]: {cash: {$set: response.data.money[0][sprintnumber]}}})
+              })
+            })
           })
 
           return this.setState({
@@ -613,7 +635,6 @@ export default class App extends Component {
   }
 
   _handleRetrospective(that, type) {
-    const releaseplan = this.state.releaseplan
     const releaseplandays = this.state.releaseplandays
 
     releaseplandays.map((el, i) => {
@@ -625,11 +646,7 @@ export default class App extends Component {
     })
     this.setState({releaseplandays})
 
-    const newState = this.setState({
-            releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}})
-          })
     this._openModal(that, type)
-    return newState
   }
 
   /**********************************************************************/
@@ -647,6 +664,7 @@ export default class App extends Component {
             releaseplandays={this.state.releaseplandays}
             retrospective={this.state.retrospective}
             teamname={this.state.teamname}
+            moneyearned={this.state.moneyearned}
             _validationState={this._validationState.bind(this)}
             _getValidationState={this._getValidationState.bind(this)}
             _closeModal={this._closeModal.bind(this)}

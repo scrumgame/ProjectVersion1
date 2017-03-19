@@ -9,6 +9,7 @@ import DieColumns from './DieColumns'
 import DiceSum from './DiceSum'
 import Column from './Column'
 import Card from './Card'
+import GameOver from './GameOver'
 import DefectCards from './resources/DefectCards'
 import MaintenanceCards from './resources/MaintenanceCards'
 import ActionCards from './resources/ActionCards'
@@ -88,7 +89,7 @@ export default class App extends Component {
       },
 
       releaseplan: {
-        sprint: 1,
+        sprint: 8,
         day: 1
       },
 
@@ -159,7 +160,6 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(function(response) {
-      console.log(response)
       if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
         that.setState({
         admin: {value: true}
@@ -208,6 +208,8 @@ export default class App extends Component {
   _closeRetroModal() {
     const name = this.state.teamname.value
     const releaseplan = this.state.releaseplan
+    const cards = this.state.cards
+    const columns = this.state.columns
     const that = this
 
     if(this.state.validation.value.length >= 20) {
@@ -233,11 +235,16 @@ export default class App extends Component {
           })
         })
       })
+      cards.filter(el => el.position == 4)
+           .map(elem => elem.done = true)
+      this.setState({cards})
+
+      return this.setState({
+              releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}}),
+              columns: update(columns, {4: {cash: {$set: 0}}}),
+              showModal: {open: false}
+            })
     }
-    return this.setState({
-            releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}}),
-            showModal: {open: false}
-          })
   }
 
   _openModal(type) {
@@ -253,7 +260,7 @@ export default class App extends Component {
   }
 
   _startGame() {
-    if (this.state.newgame.value == true) {
+    if (this.state.newgame.value == true && this.state.releaseplan.sprint !== 9) {
       return [
         <Navbar
           key={1}
@@ -277,6 +284,19 @@ export default class App extends Component {
           slidevalue={this.state.slidevalue}
         />
       ]
+    } else if (this.state.releaseplan.sprint == 9 && this.state.newgame.value == true) {
+      return [
+              <Navbar
+                key={1}
+                _openModal={this._openModal.bind(this)}
+                navbar={this.state.navbar}
+                teamname={this.state.teamname}
+              />,
+              <GameOver
+                key={2}
+                teamname={this.state.teamname.value}
+              />
+            ]
     } else {
       return [
         <Navbar

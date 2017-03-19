@@ -9,6 +9,7 @@ const DefectCards = [
   position   : 0,
   priority   : 0,
   timeclicked: 0,
+  done       : false,
   movable    : true
 },
 {
@@ -21,6 +22,7 @@ const DefectCards = [
   position   : 0,
   priority   : 0,
   timeclicked: 0,
+  done       : false,
   movable    : true
 },
 {
@@ -33,6 +35,7 @@ const DefectCards = [
   position   : 0,
   priority   : 0,
   timeclicked: 0,
+  done       : false,
   movable    : true
 },
 {
@@ -45,6 +48,7 @@ const DefectCards = [
   position   : 0,
   priority   : 0,
   timeclicked: 0,
+  done       : false,
   movable    : true
 },
 {
@@ -57,6 +61,7 @@ const DefectCards = [
   position   : 0,
   priority   : 0,
   timeclicked: 0,
+  done       : false,
   movable    : true
 },
 {
@@ -69,6 +74,7 @@ const DefectCards = [
   position   : 0,
   priority   : 0,
   timeclicked: 0,
+  done       : false,
   movable    : true
 },
 {
@@ -81,6 +87,7 @@ const DefectCards = [
   position   : 0,
   priority   : 0,
   timeclicked: 0,
+  done       : false,
   movable    : true
 }]
 

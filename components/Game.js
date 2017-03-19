@@ -34,6 +34,7 @@ export default class Game extends Component {
         position   : 0,
         priority   : 0,
         timeclicked: 0,
+        done       : false,
         movable    : true
       }
       cards.push(card);

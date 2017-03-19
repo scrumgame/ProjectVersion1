@@ -31,6 +31,7 @@ export default class App extends Component {
       customgame:
         {value: false},
 
+      //TODO: tydligare namn? vad gör den?
       validation:
         {value: ''},
 
@@ -41,6 +42,7 @@ export default class App extends Component {
       ],
 
       navbar:
+      //TODO: tydligare namn?
         {value: false},
 
       slidevalue: 60,
@@ -59,6 +61,7 @@ export default class App extends Component {
       ],
 
       moneyearned: [
+      //TODO: är detta totalen för varje sprint? isf en kommentar som förklarar
         {cash: 0},
         {cash: 0},
         {cash: 0},
@@ -85,6 +88,7 @@ export default class App extends Component {
       ],
 
       dicerollbutton: {
+        //value goes up each day and at end of week(sprint) it changes into Retrospective button
         value: 1
       },
 
@@ -94,6 +98,7 @@ export default class App extends Component {
       },
 
       releaseplandays: [
+      //TODO: comment what "done" numbers mean, also check _handleRetrospective
         {name: "Mon", done: 2},
         {name: "Tue", done: 1},
         {name: "Wed", done: 1},
@@ -102,6 +107,8 @@ export default class App extends Component {
       ],
 
       retrospective: [
+      //After each sprint text is filled with team's retrospective thoughts.
+      //Each object represent a single sprint - so eight in total.
         {text: ""},
         {text: ""},
         {text: ""},
@@ -113,6 +120,9 @@ export default class App extends Component {
       ]
 
     }
+    //the followeing code needs to be set up exactly 
+    //once and the constructor is a suitable place for this.
+    //TODO: behöver den ligga här? vi borde kunna binda den nere när vi skickar den som prop
     this._slideState = this._slideState.bind(this)
   }
 
@@ -131,7 +141,7 @@ export default class App extends Component {
       validation: {value: event.target.value}
     })
   }
-
+  //return appropriate validation css class to bootstrap form in retrospective modal.
   _getValidationState() {
       const validation = this.state.validation.value
       const length = validation.length
@@ -139,15 +149,16 @@ export default class App extends Component {
       else if (length > 10) return 'warning'
       else if (length > 0) return 'error'
   }
-
+  
   _customGame() {
     return this.setState({
       customgame: {value: true}
     })
   }
 
+  //check with API if username & password are correct
   _login(username, password) {
-    var that = this
+    const that = this
     const admin = this.state.admin
 
     axios({
@@ -168,7 +179,8 @@ export default class App extends Component {
     })
 
   }
-
+  //TODO: varför är That med skickat? den används inte?
+  //Starting a new game and sets teamname
   _quickPlay(that) {
     axios({
         method: 'post',
@@ -204,7 +216,8 @@ export default class App extends Component {
       showModal: {open: false}
     })
   }
-
+  //when closing retrospective modal it send all info to API.
+  //it also "resets" the week/starts a new sprint week.
   _closeRetroModal() {
     const name = this.state.teamname.value
     const releaseplan = this.state.releaseplan
@@ -258,7 +271,8 @@ export default class App extends Component {
       teamname: {value: event.target.value}
     })
   }
-
+  //TODO: byt namn till _renderGameState?
+  //Returns the appropriate game component based on current game state.
   _startGame() {
     if (this.state.newgame.value == true && this.state.releaseplan.sprint !== 9) {
       return [
@@ -311,6 +325,7 @@ export default class App extends Component {
           admin={this.state.admin}
           customgame={this.state.customgame}
           _customGame={this._customGame.bind(this)}
+          //TODO: ska det stå _getState istället för _slideState?på raden nedan?
           _slideState={this._getState}
           _slideState={this._slideState}
           _quickPlay={this._quickPlay.bind(this)}
@@ -335,6 +350,7 @@ export default class App extends Component {
    })
   }
 
+  //post all cards to API.
   _createDbCards() {
     this.state.cards.map(el => {
       axios({
@@ -348,7 +364,7 @@ export default class App extends Component {
       })
     })
   }
-
+  //Raise priority on single card when clicked on prio button.
   _handlePrioClick(card) {
     const cards = this.state.cards
     cards.filter(el => el.id == card.props.id).map(el => {
@@ -357,6 +373,7 @@ export default class App extends Component {
     })
   }
 
+  //Check if A, D or T is zero and then card will be moved to the next column.
   _handleCardClick(card) {
     //(this, card)
     const date = new Date()
@@ -429,6 +446,7 @@ export default class App extends Component {
   /*                           CARDCOLUMNS                              */
   /**********************************************************************/
 
+  //render out all columns/render out scrum board
   _renderColumns() {
     const classes = ['col-sm-offset-1', '', '', '', '']
     return this.state.columns.map((el, i) => (
@@ -453,10 +471,17 @@ export default class App extends Component {
     const classes = ['col-sm-offset-3', '', '']
     const dieColumns = [1, 2, 3]
     return dieColumns.map((el, i) => (
-      <DieColumns _handleDieClick={this._handleDieClick.bind(this)} dice={this.state.dice} key={el} name={el} id={el} className={classes[i]}/>
+      <DieColumns 
+        _handleDieClick={this._handleDieClick.bind(this)} 
+        dice={this.state.dice} 
+        key={el} 
+        name={el} 
+        id={el} 
+        className={classes[i]}/>
     ))
   }
-
+  //check position of die and then moves accordingly, 
+  //based on what button was pushed( < , > or <> ) 
   _handleDieClick(die, button) {
     const buttontype = button.props.type
     const dice = this.state.dice
@@ -474,7 +499,7 @@ export default class App extends Component {
       }
     })
   }
-
+  //TODO: change name to _rollDice?
   _handleDieRoll() {
     const dice = this.state.dice
     const dicebutton = this.state.dicerollbutton
@@ -496,7 +521,7 @@ export default class App extends Component {
       this._summarizeDiceRoll()
     }
   }
-
+  //sum of what you did roll for each column
   _summarizeDiceRoll() {
     const dicesum = this.state.dicesum
     const dice = this.state.dice
@@ -511,7 +536,7 @@ export default class App extends Component {
     this.setState({dicesum})
     this._checkValues()
   }
-
+  //card value - dice value for all coulmns and cards(in prio order)
   _checkValues() {
     const dicesum = this.state.dicesum
     const cards = this.state.cards
@@ -542,25 +567,26 @@ export default class App extends Component {
 
     })
   }
-
+  //for all columns render a dice summarizing component 
   _renderSumColumns() {
     const dicesum = this.state.dicesum
     const dice = this.state.dice
 
-    const diceSumValue = dicesum.map((el, i) => {
+    const diceSumComponents = dicesum.map((el, i) => {
       const numberDie = dice.filter(elem => elem.position == el.position)
                             .map(elem => elem)
       return <DiceSum key={i} value={el.value} dice={numberDie.length*6} />
     })
 
-    return diceSumValue
+    return diceSumComponents
   }
 
   /**********************************************************************/
   /*                           RELEASEPLAN                              */
   /**********************************************************************/
 
-  // When card is done, tick off the day to continue the game
+  //if "work"-button has been pressed then you can tick off the current day in sprint. 
+  //also sends info to API at end of sprint.
   _tickDay(day) {
     const releaseplan = this.state.releaseplan
     const releaseplandays = this.state.releaseplandays
@@ -638,7 +664,7 @@ export default class App extends Component {
         break
     }
   }
-
+  //return "work"-button or "retrospective"-button component to render 
   _renderRollOrRetroButton() {
     const releaseplandays = this.state.releaseplandays
     const releaseplan = this.state.releaseplan
@@ -654,14 +680,15 @@ export default class App extends Component {
 
   }
 
+  //reset state on days in current sprint calender and open retrospective modal
   _handleRetrospective(that, type) {
     const releaseplandays = this.state.releaseplandays
 
     releaseplandays.map((el, i) => {
       if (i == 0) {
-        el.done = 2
+        el.done = 2   // SPRINT_DAY_STATUS_CURRENT?
       } else {
-        el.done = 1
+        el.done = 1   // SPRINT_DAY_STATUS_UPCOMING?
       }
     })
     this.setState({releaseplandays})

@@ -33,26 +33,28 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar-kwp-header navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#Navbar">
-              <span key={1} className="sr-only"></span>
-              <span key={2} className="icon-bar"></span>
-              <span key={3} className="icon-bar"></span>
-              <span key={4} className="icon-bar"></span>
-            </button>
+      <div>
+        <h2 className="teamfont">{this.props.teamname.value}</h2>
+        <nav className="navbar-kwp-header navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#Navbar">
+                <span key={1} className="sr-only"></span>
+                <span key={2} className="icon-bar"></span>
+                <span key={3} className="icon-bar"></span>
+                <span key={4} className="icon-bar"></span>
+              </button>
+            </div>
+            <div className="navbar-collapse collapse">
+              <ul className="nav navbar-nav">
+                <li className="dropdown"><a className="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">Info <span className="caret"></span></a>
+                  {this._changeNavbar()}
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <li className="dropdown"><a className="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">Info <span className="caret"></span></a>
-                {this._changeNavbar()}
-              </li>
-            </ul>
-            <h2 className="teamfont">{this.props.teamname.value}</h2>
-          </div>
-        </div>
-       </nav>
+        </nav>
+      </div>
     );
   }
 }

@@ -89,7 +89,7 @@ export default class App extends Component {
       },
 
       releaseplan: {
-        sprint: 8,
+        sprint: 1,
         day: 1
       },
 

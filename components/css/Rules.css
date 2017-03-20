@@ -1,3 +1,58 @@
-.rules{
-  width: 80%;
+.releaseplan-img {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.scrumboard-example-img {
+  margin-bottom: 40px;
+}
+
+.rules-bold {
+  font-weight: bold;
+}
+
+.us-example {
+  border: 2px solid black;
+  width: 45%;
+  height: auto;
+  float: right;
+  text-align: center;
+  margin: 0 0 0 1%;
+}
+
+.us-example-headline {
+  height: 25px;
+  margin-top: 0;
+  font-weight: bold;
+  color: #FFF;
+  background-color: #004969;
+}
+
+.us-adt {
+    color: #004969;
+}
+
+.action-card-example {
+  border: 2px solid black;
+  width: 45%;
+  height: auto;
+  float: right;
+  text-align: center;
+  margin: 0 0 0 1%;
+}
+
+.multiplechoice-card-example {
+  border: 2px solid black;
+  width: 45%;
+  height: auto;
+  float: right;
+  text-align: center;
+  margin: 0 0 0 1%;
+}
+
+.retrospective-rules {
+  margin-top: 200px;
 }

@@ -45,7 +45,7 @@ export default class Game extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container text-center">
         <div className="row">
           <ReleasePlanWeek
             releaseplan={this.props.releaseplan}

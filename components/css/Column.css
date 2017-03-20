@@ -1,10 +1,33 @@
 .column {
   background-color: #edf0f1;
   height: 70%;
-  border: 1px solid #027ebe;
-  overflow-y: auto;
+  border-top: 1px solid #027ebe;
+  border-right: none;
+  border-bottom: 4px solid #027ebe;
+  border-left: 1px solid #027ebe;
+  overflow-y: scroll;
   box-shadow: 10px 10px 15px #ededed;
 }
+.column:first-child{
+  border-left: 3px solid #027ebe;
+}
+.columm::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 5px 5px 6px pink;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.column::-webkit-scrollbar {
+  width: 4px;
+  background-color: #027ebe;
+}
+.column::-webkit-scrollbar-thumb{
+  margin-left: 1px;
+  border-radius: 2px;
+  border-left: 1px solid #027ebe;
+  background-color: white;
+}
+
 
 h3 {
   background: #027ebe none repeat scroll 0 0;

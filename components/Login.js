@@ -18,6 +18,7 @@ export default class Login extends Component {
         <input key={1} placeholder="Username" type="text" ref={(username) => this.username = username}/> &nbsp;
         <input key={2} placeholder="Password" type="password" ref={(password) => this.password = password}/> &nbsp;
         <Input key={3} type="submit" value="Login" className="btn btn-default"/>
+        <h2>{this.props.loginmessage.text}</h2>
       </form>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/CustomGame.css';
 
 export default class CustomGame extends Component {
   constructor(props) {

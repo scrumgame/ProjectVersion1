@@ -38,6 +38,9 @@ export default class App extends Component {
       admin:
         {value: false},
 
+      loginmessage:
+        {text: ''},
+
       navbar:
       //TODO: tydligare namn?
         {value: false},
@@ -133,12 +136,7 @@ export default class App extends Component {
 
       highscorecurrentteam:
         {teamname: "", total: 0}
-
     }
-    //the followeing code needs to be set up exactly
-    //once and the constructor is a suitable place for this.
-    //TODO: behöver den ligga här? vi borde kunna binda den nere när vi skickar den som prop
-    this._slideState = this._slideState.bind(this)
   }
 
   /**********************************************************************/
@@ -189,7 +187,11 @@ export default class App extends Component {
     .then(function(response) {
       if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
         that.setState({
-        admin: {value: true}
+          admin: {value: true}
+        })
+      } else {
+        that.setState({
+          loginmessage: {text: 'Fel användarnamn eller lösenord'}
         })
       }
     })
@@ -342,9 +344,10 @@ export default class App extends Component {
           key={2}
           slidevalue={this.state.slidevalue}
           admin={this.state.admin}
+          loginmessage={this.state.loginmessage}
           customgame={this.state.customgame}
           _customGame={this._customGame.bind(this)}
-          _slideState={this._slideState}
+          _slideState={this._slideState.bind(this)}
           _quickPlay={this._quickPlay.bind(this)}
           _saveTeamName={this._saveTeamName.bind(this)}
           _gameNav={this._gameNav.bind(this)}

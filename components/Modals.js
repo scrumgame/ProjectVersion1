@@ -7,7 +7,7 @@ import Highscore from './Highscore'
 import Releaseplan from './Releaseplan'
 import Retrospective from './Retrospective'
 import MoneyEarned from './MoneyEarned'
-
+import './css/Modals.css'
 
 export default class Modals extends Component {
   constructor() {

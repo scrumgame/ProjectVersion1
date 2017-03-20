@@ -35,9 +35,8 @@ export default class App extends Component {
       validation:
         {value: ''},
 
-      admin: [
-        {value: false}
-      ],
+      admin:
+        {value: false},
 
       navbar:
       //TODO: tydligare namn?
@@ -116,12 +115,7 @@ export default class App extends Component {
         {text: ""}, //sprint 7
         {text: ""}  //sprint 8
       ]
-
     }
-    //the followeing code needs to be set up exactly
-    //once and the constructor is a suitable place for this.
-    //TODO: behöver den ligga här? vi borde kunna binda den nere när vi skickar den som prop
-    this._slideState = this._slideState.bind(this)
   }
 
   /**********************************************************************/
@@ -324,7 +318,7 @@ export default class App extends Component {
           admin={this.state.admin}
           customgame={this.state.customgame}
           _customGame={this._customGame.bind(this)}
-          _slideState={this._slideState}
+          _slideState={this._slideState.bind(this)}
           _quickPlay={this._quickPlay.bind(this)}
           _saveTeamName={this._saveTeamName.bind(this)}
           _gameNav={this._gameNav.bind(this)}

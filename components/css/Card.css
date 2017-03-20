@@ -13,8 +13,12 @@
 
 .CardDivValues {
   display: inline-block;
-  font-weight: bold;
+  font-weight: normal;
   color: #004969;
+}
+
+.Active {
+  font-weight: bold;
 }
 
 .CardDivDollar {

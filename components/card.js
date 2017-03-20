@@ -17,13 +17,34 @@ export default class Card extends Component {
     }
   }
 
+  //TODO: FIX THIS UGLY
   _ifADT() {
     if (this.props.a >= 0 && this.props.d >= 0 && this.props.t >= 0 ) {
-      return [
-        <p className="CardDivValues" key={1} >A: <span className="CardDivValuesSpan">{this.props.a}</span>&nbsp;</p>,
-        <p className="CardDivValues" key={2} >D: <span className="CardDivValuesSpan">{this.props.d}</span>&nbsp;</p>,
-        <p className="CardDivValues" key={3} >T: <span className="CardDivValuesSpan">{this.props.t}</span></p>
-      ]
+      if (this.props.position == 1) {
+        return [
+          <p className="CardDivValues Active" key={1} >A: <span className="CardDivValuesSpan">{this.props.a}</span>&nbsp;</p>,
+          <p className="CardDivValues" key={2} >D: <span className="CardDivValuesSpan">{this.props.d}</span>&nbsp;</p>,
+          <p className="CardDivValues" key={3} >T: <span className="CardDivValuesSpan">{this.props.t}</span></p>
+        ]
+      } else if (this.props.position == 2) {
+        return [
+          <p className="CardDivValues" key={1} >A: <span className="CardDivValuesSpan">{this.props.a}</span>&nbsp;</p>,
+          <p className="CardDivValues Active" key={2} >D: <span className="CardDivValuesSpan">{this.props.d}</span>&nbsp;</p>,
+          <p className="CardDivValues" key={3} >T: <span className="CardDivValuesSpan">{this.props.t}</span></p>
+        ]
+      } else if (this.props.position == 3) {
+        return [
+          <p className="CardDivValues" key={1} >A: <span className="CardDivValuesSpan">{this.props.a}</span>&nbsp;</p>,
+          <p className="CardDivValues" key={2} >D: <span className="CardDivValuesSpan">{this.props.d}</span>&nbsp;</p>,
+          <p className="CardDivValues Active" key={3} >T: <span className="CardDivValuesSpan">{this.props.t}</span></p>
+        ]
+      } else {
+        return [
+          <p className="CardDivValues" key={1} >A: <span className="CardDivValuesSpan">{this.props.a}</span>&nbsp;</p>,
+          <p className="CardDivValues" key={2} >D: <span className="CardDivValuesSpan">{this.props.d}</span>&nbsp;</p>,
+          <p className="CardDivValues" key={3} >T: <span className="CardDivValuesSpan">{this.props.t}</span></p>
+        ]
+      }
     }
   }
 

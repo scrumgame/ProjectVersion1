@@ -38,6 +38,9 @@ export default class App extends Component {
       admin:
         {value: false},
 
+      loginmessage:
+        {text: ''},
+
       navbar:
       //TODO: tydligare namn?
         {value: false},
@@ -165,7 +168,11 @@ export default class App extends Component {
     .then(function(response) {
       if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
         that.setState({
-        admin: {value: true}
+          admin: {value: true}
+        })
+      } else {
+        that.setState({
+          loginmessage: {text: 'Fel användarnamn eller lösenord'}
         })
       }
     })
@@ -316,6 +323,7 @@ export default class App extends Component {
           key={2}
           slidevalue={this.state.slidevalue}
           admin={this.state.admin}
+          loginmessage={this.state.loginmessage}
           customgame={this.state.customgame}
           _customGame={this._customGame.bind(this)}
           _slideState={this._slideState.bind(this)}

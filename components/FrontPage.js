@@ -38,7 +38,7 @@ export default class FrontPage extends Component {
     } else if (this.props.customgame.value == true) {
       return [
           <div key={0} className="col-sm-12">
-            <Login _login={this.props._login}/>
+            <Login _login={this.props._login}               loginmessage={this.props.loginmessage}/>
           </div>
         ]
     } else {

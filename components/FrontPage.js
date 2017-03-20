@@ -56,7 +56,7 @@ export default class FrontPage extends Component {
 
   render() {
     return (
-      <div key={1}>
+      <div key={1} className="col-sm-12 text-center">
         <Logo key={9}/>
         {this._changeUI()}
       </div>

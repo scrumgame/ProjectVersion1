@@ -15,17 +15,17 @@ export default class Navbar extends Component {
     if (this.props.navbar.value == true) {
       return [
         <ul key={0} className="dropdown-menu" role="menu">
-          <li key={1} onClick={this.props._openModal.bind(this, modalTypeReleaseplan)}>Releaseplan</li>
-          <li key={2} onClick={this.props._openModal.bind(this, modalTypeRules)}>Rules</li>
-          <li key={3} onClick={this.props._openModal.bind(this, modalTypeHighscore)}>Highscores</li>
+          <li key={1} onClick={this.props._openModal.bind(this, modalTypeReleaseplan)}><a href="#">Releaseplan</a></li>
+          <li key={2} onClick={this.props._openModal.bind(this, modalTypeRules)}><a href="#">Rules</a></li>
+          <li key={3} onClick={this.props._openModal.bind(this, modalTypeHighscore)}><a href="#">Highscores</a></li>
           <li key={4}><a href="#">Restart </a></li>
         </ul>
       ]
     } else {
       return [
         <ul key={0} className="dropdown-menu" role="menu">
-          <li key={1} onClick={this.props._openModal.bind(this, modalTypeRules)}>Rules</li>
-          <li key={2} onClick={this.props._openModal.bind(this, modalTypeHighscore)}>Highscores</li>
+          <li key={1} onClick={this.props._openModal.bind(this, modalTypeRules)}><a href="#">Rules</a></li>
+          <li key={2} onClick={this.props._openModal.bind(this, modalTypeHighscore)}><a href="#">Highscores</a></li>
         </ul>
       ]
     }
@@ -34,8 +34,8 @@ export default class Navbar extends Component {
   render() {
     return (
       <div>
-        <h2 className="teamfont">{this.props.teamname.value}</h2>
-        <nav className="navbar-kwp-header navbar-default">
+        <h2 className="teamfont text-center">{this.props.teamname.value}</h2>
+        <nav className="navbar-kwp-header navbar-default navbarColor">
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#Navbar">

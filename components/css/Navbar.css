@@ -1,14 +1,26 @@
-.navbar .navbar-nav {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-}
-
-.navbar .navbar-collapse {
-  text-align: center;
-}
-
 .teamfont {
   font-weight: 700;
   text-transform: uppercase;
+  border-bottom: 2px solid #444;
+  background-color: white;
+}
+.navbarColor{
+	background-color: white;
+}
+.dropdown-menu>li>a{
+	transition: all 0.3s ease;
+}
+.dropdown-menu>li>a:hover{
+	background-color: #00ACE7;
+	transition: all 0.3s ease;
+}
+
+.navbar-default .navbar-nav>li>a:{
+	transition: all 0.3s ease;
+
+}
+
+.navbar-default .navbar-nav>li>a:hover{
+	background-color: #00ACE7;
+	transition: all 0.3s ease;
 }

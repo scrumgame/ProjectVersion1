@@ -6,6 +6,8 @@ export default class GameOver extends Component {
     super(props)
   }
 
+
+
   render() {
     return (
       <div>

@@ -35,9 +35,8 @@ export default class App extends Component {
       validation:
         {value: ''},
 
-      admin: [
-        {value: false}
-      ],
+      admin:
+        {value: false},
 
       navbar:
       //TODO: tydligare namn?
@@ -60,15 +59,19 @@ export default class App extends Component {
 
       moneyearned: [
       //This is the total cash earned for each sprint.
-        {cash: 0},
-        {cash: 0},
-        {cash: 0},
-        {cash: 0},
-        {cash: 0},
-        {cash: 0},
-        {cash: 0},
-        {cash: 0}
+        {cash: 0}, //Sprint 1
+        {cash: 0}, //Sprint 2
+        {cash: 0}, //Sprint 3
+        {cash: 0}, //Sprint 4
+        {cash: 0}, //Sprint 5
+        {cash: 0}, //Sprint 6
+        {cash: 0}, //Sprint 7
+        {cash: 0}  //Sprint 8
       ],
+
+      totalscore:
+        // totalscore of the game that was played.
+        {value: 0},
 
       dice: [
         {position: 1, id: 0, value: 1, type: 'Analysis'},
@@ -107,15 +110,29 @@ export default class App extends Component {
       retrospective: [
       //After each sprint text is filled with team's retrospective thoughts.
       //Each object represent a single sprint - so eight in total.
-        {text: ""}, //sprint 1
-        {text: ""}, //sprint 2
-        {text: ""}, //sprint 3
-        {text: ""}, //sprint 4
-        {text: ""}, //sprint 5
-        {text: ""}, //sprint 6
-        {text: ""}, //sprint 7
-        {text: ""}  //sprint 8
-      ]
+        {text: ""}, //Sprint 1
+        {text: ""}, //Sprint 2
+        {text: ""}, //Sprint 3
+        {text: ""}, //Sprint 4
+        {text: ""}, //Sprint 5
+        {text: ""}, //Sprint 6
+        {text: ""}, //Sprint 7
+        {text: ""}  //Sprint 8
+      ],
+
+      highscore: [
+        {teamname: "", total: 0},
+        {teamname: "", total: 0},
+        {teamname: "", total: 0},
+        {teamname: "", total: 0},
+        {teamname: "", total: 0},
+        {teamname: "", total: 0},
+        {teamname: "", total: 0},
+        {teamname: "", total: 0}
+      ],
+
+      highscorecurrentteam:
+        {teamname: "", total: 0}
 
     }
     //the followeing code needs to be set up exactly
@@ -139,6 +156,7 @@ export default class App extends Component {
       validation: {value: event.target.value}
     })
   }
+
   //return appropriate validation css class to bootstrap form in retrospective modal.
   _getValidationState() {
       const validation = this.state.validation.value
@@ -232,7 +250,6 @@ export default class App extends Component {
           team: this.state.teamname.value,
           retrospective: this.state.validation.value,
           releaseplan: this.state.releaseplan
-
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
@@ -247,9 +264,12 @@ export default class App extends Component {
           })
         })
       })
+
       cards.filter(el => el.position == 4)
            .map(elem => elem.done = true)
       this.setState({cards})
+
+      this._sendTotalScore() //insert totalscore into DB
 
       return this.setState({
               releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}}),
@@ -649,10 +669,9 @@ export default class App extends Component {
 
             axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score/'+name+'/'+sprint)
             .then(function(response) {
-              const sprintnumber = 'sprint_'+sprint
 
               that.setState({
-                moneyearned: update(moneyearned, {[sprint-1]: {cash: {$set: response.data.money[0][sprintnumber]}}})
+                moneyearned: update(moneyearned, {[sprint-1]: {cash: {$set: response.data.money[0]}}})
               })
             })
           })
@@ -696,7 +715,50 @@ export default class App extends Component {
     })
     this.setState({releaseplandays})
 
+    this._summarizeScore()
     this._openModal(that, type)
+  }
+
+  _summarizeScore() {
+    let totalScore = 0
+    this.state.moneyearned.map(el => {
+      totalScore += el.cash
+    })
+    this.setState({totalscore: {value: totalScore}})
+  }
+
+  /**********************************************************************/
+  /*                             HIGHSCORE                              */
+  /**********************************************************************/
+  _getTopTenHS() {
+    const name = this.state.teamname.value
+    const highscorecurrentteam = this.state.highscorecurrentteam
+
+    axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score/'+name)
+    .then(response => {
+      const newHighscore = response.data.totalTopTen.map((el, i) => {
+        return {teamname: el.teamname, total: el.total}
+      })
+      this.setState({highscore: newHighscore})
+
+      response.data.totalCurrentTeam.map(el => {
+        this.setState({
+          highscorecurrentteam: update(highscorecurrentteam, {$merge: {teamname: el.teamname, total: el.total}})
+        })
+      })
+    })
+  }
+
+  _sendTotalScore() {
+    axios({
+        method: 'put',
+        url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
+        data: {
+          totalscore: this.state.totalscore.value,
+          team: this.state.teamname.value
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
   }
 
   /**********************************************************************/
@@ -715,7 +777,10 @@ export default class App extends Component {
             retrospective={this.state.retrospective}
             teamname={this.state.teamname}
             moneyearned={this.state.moneyearned}
+            highscore={this.state.highscore}
+            highscorecurrentteam={this.state.highscorecurrentteam}
             _validationState={this._validationState.bind(this)}
+            _getTopTenHS={this._getTopTenHS.bind(this)}
             _getValidationState={this._getValidationState.bind(this)}
             _closeModal={this._closeModal.bind(this)}
             _closeRetroModal={this._closeRetroModal.bind(this)}

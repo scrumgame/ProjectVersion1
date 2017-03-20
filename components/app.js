@@ -36,9 +36,7 @@ export default class App extends Component {
         {value: ''},
 
       admin: [
-        {value: false},
-        {username: undefined},
-        {password: undefined}
+        {value: false}
       ],
 
       navbar:
@@ -61,7 +59,7 @@ export default class App extends Component {
       ],
 
       moneyearned: [
-      //TODO: är detta totalen för varje sprint? isf en kommentar som förklarar
+      //This is the total cash earned for each sprint.
         {cash: 0},
         {cash: 0},
         {cash: 0},
@@ -98,7 +96,7 @@ export default class App extends Component {
       },
 
       releaseplandays: [
-      //TODO: comment what "done" numbers mean, also check _handleRetrospective
+      // done 1 = day still to come, done 2 = current day, done 3 = day is over
         {name: "Mon", done: 2},
         {name: "Tue", done: 1},
         {name: "Wed", done: 1},
@@ -109,18 +107,18 @@ export default class App extends Component {
       retrospective: [
       //After each sprint text is filled with team's retrospective thoughts.
       //Each object represent a single sprint - so eight in total.
-        {text: ""},
-        {text: ""},
-        {text: ""},
-        {text: ""},
-        {text: ""},
-        {text: ""},
-        {text: ""},
-        {text: ""}
+        {text: ""}, //sprint 1
+        {text: ""}, //sprint 2
+        {text: ""}, //sprint 3
+        {text: ""}, //sprint 4
+        {text: ""}, //sprint 5
+        {text: ""}, //sprint 6
+        {text: ""}, //sprint 7
+        {text: ""}  //sprint 8
       ]
 
     }
-    //the followeing code needs to be set up exactly 
+    //the followeing code needs to be set up exactly
     //once and the constructor is a suitable place for this.
     //TODO: behöver den ligga här? vi borde kunna binda den nere när vi skickar den som prop
     this._slideState = this._slideState.bind(this)
@@ -149,7 +147,7 @@ export default class App extends Component {
       else if (length > 10) return 'warning'
       else if (length > 0) return 'error'
   }
-  
+
   _customGame() {
     return this.setState({
       customgame: {value: true}
@@ -179,9 +177,9 @@ export default class App extends Component {
     })
 
   }
-  //TODO: varför är That med skickat? den används inte?
+
   //Starting a new game and sets teamname
-  _quickPlay(that) {
+  _quickPlay() {
     axios({
         method: 'post',
         url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
@@ -216,6 +214,7 @@ export default class App extends Component {
       showModal: {open: false}
     })
   }
+
   //when closing retrospective modal it send all info to API.
   //it also "resets" the week/starts a new sprint week.
   _closeRetroModal() {
@@ -271,9 +270,9 @@ export default class App extends Component {
       teamname: {value: event.target.value}
     })
   }
-  //TODO: byt namn till _renderGameState?
+
   //Returns the appropriate game component based on current game state.
-  _startGame() {
+  _renderGameState() {
     if (this.state.newgame.value == true && this.state.releaseplan.sprint !== 9) {
       return [
         <Navbar
@@ -300,16 +299,16 @@ export default class App extends Component {
       ]
     } else if (this.state.releaseplan.sprint == 9 && this.state.newgame.value == true) {
       return [
-              <Navbar
-                key={1}
-                _openModal={this._openModal.bind(this)}
-                navbar={this.state.navbar}
-                teamname={this.state.teamname}
-              />,
-              <GameOver
-                key={2}
-                teamname={this.state.teamname.value}
-              />
+        <Navbar
+          key={1}
+          _openModal={this._openModal.bind(this)}
+          navbar={this.state.navbar}
+          teamname={this.state.teamname}
+        />,
+        <GameOver
+          key={2}
+          teamname={this.state.teamname.value}
+        />
             ]
     } else {
       return [
@@ -325,8 +324,6 @@ export default class App extends Component {
           admin={this.state.admin}
           customgame={this.state.customgame}
           _customGame={this._customGame.bind(this)}
-          //TODO: ska det stå _getState istället för _slideState?på raden nedan?
-          _slideState={this._getState}
           _slideState={this._slideState}
           _quickPlay={this._quickPlay.bind(this)}
           _saveTeamName={this._saveTeamName.bind(this)}
@@ -364,6 +361,7 @@ export default class App extends Component {
       })
     })
   }
+
   //Raise priority on single card when clicked on prio button.
   _handlePrioClick(card) {
     const cards = this.state.cards
@@ -375,7 +373,6 @@ export default class App extends Component {
 
   //Check if A, D or T is zero and then card will be moved to the next column.
   _handleCardClick(card) {
-    //(this, card)
     const date = new Date()
     const time = date.getTime()
     const columns = this.state.columns
@@ -471,17 +468,18 @@ export default class App extends Component {
     const classes = ['col-sm-offset-3', '', '']
     const dieColumns = [1, 2, 3]
     return dieColumns.map((el, i) => (
-      <DieColumns 
-        _handleDieClick={this._handleDieClick.bind(this)} 
-        dice={this.state.dice} 
-        key={el} 
-        name={el} 
-        id={el} 
+      <DieColumns
+        _handleDieClick={this._handleDieClick.bind(this)}
+        dice={this.state.dice}
+        key={el}
+        name={el}
+        id={el}
         className={classes[i]}/>
     ))
   }
-  //check position of die and then moves accordingly, 
-  //based on what button was pushed( < , > or <> ) 
+
+  //check position of die and then moves accordingly,
+  //based on what button was pushed( < , > or <> )
   _handleDieClick(die, button) {
     const buttontype = button.props.type
     const dice = this.state.dice
@@ -499,8 +497,9 @@ export default class App extends Component {
       }
     })
   }
-  //TODO: change name to _rollDice?
-  _handleDieRoll() {
+
+  // Function to roll the dice.
+  _rollDice() {
     const dice = this.state.dice
     const dicebutton = this.state.dicerollbutton
 
@@ -521,6 +520,7 @@ export default class App extends Component {
       this._summarizeDiceRoll()
     }
   }
+
   //sum of what you did roll for each column
   _summarizeDiceRoll() {
     const dicesum = this.state.dicesum
@@ -536,6 +536,7 @@ export default class App extends Component {
     this.setState({dicesum})
     this._checkValues()
   }
+
   //card value - dice value for all coulmns and cards(in prio order)
   _checkValues() {
     const dicesum = this.state.dicesum
@@ -567,7 +568,8 @@ export default class App extends Component {
 
     })
   }
-  //for all columns render a dice summarizing component 
+
+  //For all columns render a dice summarizing component
   _renderSumColumns() {
     const dicesum = this.state.dicesum
     const dice = this.state.dice
@@ -585,7 +587,7 @@ export default class App extends Component {
   /*                           RELEASEPLAN                              */
   /**********************************************************************/
 
-  //if "work"-button has been pressed then you can tick off the current day in sprint. 
+  //if "work"-button has been pressed then you can tick off the current day in sprint.
   //also sends info to API at end of sprint.
   _tickDay(day) {
     const releaseplan = this.state.releaseplan
@@ -664,7 +666,8 @@ export default class App extends Component {
         break
     }
   }
-  //return "work"-button or "retrospective"-button component to render 
+
+  //return "work"-button or "retrospective"-button component to render
   _renderRollOrRetroButton() {
     const releaseplandays = this.state.releaseplandays
     const releaseplan = this.state.releaseplan
@@ -673,9 +676,9 @@ export default class App extends Component {
     if (releaseplandays[4].done == 3) {
       return <RetroButton _handleRetrospective={this._handleRetrospective.bind(this)} className="RollButtonReady col-sm-1" />
     } else if (releaseplan.day !== dicerollbutton.value) {
-      return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)} className="RollButton col-sm-1"/>
+      return <RollButton _rollDice={this._rollDice.bind(this)} className="RollButton col-sm-1"/>
     } else {
-      return <RollButton _handleDieRoll={this._handleDieRoll.bind(this)} className="RollButtonReady col-sm-1"/>
+      return <RollButton _rollDice={this._rollDice.bind(this)} className="RollButtonReady col-sm-1"/>
     }
 
   }
@@ -686,9 +689,9 @@ export default class App extends Component {
 
     releaseplandays.map((el, i) => {
       if (i == 0) {
-        el.done = 2   // SPRINT_DAY_STATUS_CURRENT?
+        el.done = 2   // Set Monday to current day
       } else {
-        el.done = 1   // SPRINT_DAY_STATUS_UPCOMING?
+        el.done = 1   // Set the rest of the days of the week to upcoming days
       }
     })
     this.setState({releaseplandays})
@@ -704,7 +707,7 @@ export default class App extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          {this._startGame()}
+          {this._renderGameState()}
           <Modals
             showModal={this.state.showModal}
             releaseplan={this.state.releaseplan}

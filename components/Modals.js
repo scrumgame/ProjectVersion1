@@ -18,11 +18,13 @@ export default class Modals extends Component {
     switch (this.props.showModal.type) {
       case 'Releaseplan':
         return [<Releaseplan
+                  key={1}
                   retrospective={this.props.retrospective}
                   releaseplandays={this.props.releaseplandays}
                   releaseplan={this.props.releaseplan}/>,
-                  <br/>,
+                  <br key={2}/>,
                <MoneyEarned
+                 key={3}
                  moneyearned={this.props.moneyearned}/>]
         break;
 

@@ -7,7 +7,6 @@ import CustomGame from './CustomGame'
 import Login from './Login'
 import InputRange from 'react-input-range'
 import './css/FrontPage.css'
-import './css/NewGame.css'
 
 
 export default class FrontPage extends Component {
@@ -46,9 +45,9 @@ export default class FrontPage extends Component {
         <div key={0} className="col-sm-12">
           <form key={6} onSubmit={this.props._quickPlay}>
             <Input key={1} _saveTeamName={this.props._saveTeamName} className="teamnameInput" placeholder="Choose teamname" ref="createTeam"/>
-            <NewGame key={2} className="btn btn-default" name="New Game" type="submit" _gameNav={this.props._gameNav} />
+            <NewGame key={2} className="btn btn-default new-game" name="New Game" type="submit" _gameNav={this.props._gameNav} />
           </form>
-          <CustomGame key={3} className="btn btn-default" name="Custom Game" type="submit" _customGame={this.props._customGame}/>
+          <CustomGame key={3} className="btn btn-default custom-game" name="Custom Game" type="submit" _customGame={this.props._customGame}/>
         </div>
       ]
     }

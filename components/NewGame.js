@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/NewGame.css'
 
 export default class NewGame extends Component {
   constructor(props) {
@@ -7,7 +8,9 @@ export default class NewGame extends Component {
 
   render() {
     return (
-      <input type="submit" className={this.props.className} type={this.props.type} value={this.props.name} onClick={this.props._gameNav}/>
+      <div>
+        <input type="submit" className={this.props.className} type={this.props.type} value={this.props.name} onClick={this.props._gameNav}/>
+      </div>
     );
   }
 }

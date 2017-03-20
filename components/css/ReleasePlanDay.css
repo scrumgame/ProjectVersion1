@@ -3,7 +3,7 @@
   background: #c4c4c4;
   color: #444;
   border: 2px solid #444;
-  border-top: 2px solid #444;
+  border-top: 2px solid #0091D2;
   border-radius: 2px 2px 10px 10px;
   box-shadow: 5px 5px 10px #ededed;
   /*padding: 15px 10px;*/
@@ -17,7 +17,7 @@
   background: #00ace7;
   color: #004969;
   border: 2px solid #004969;
-  border-top: 2px solid #444;
+  border-top: 2px solid #0091D2;
   border-radius: 2px 2px 10px 10px;
   box-shadow: 5px 5px 10px #ededed;
   cursor: pointer;
@@ -30,8 +30,8 @@
   display: inline;
   background: #004969;
   color: #0091D2;
-  border: 2px solid #444;
-  border-top: 2px solid #444;
+  border: 2px solid #0091D2;
+  border-top: 2px solid #0091D2;
   border-radius: 2px 2px 10px 10px;
   box-shadow: 5px 5px 10px #ededed;
   padding: 14px 10px;

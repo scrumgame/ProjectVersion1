@@ -26,7 +26,7 @@ export default class Highscore extends Component {
   render() {
     return (
       <div className="container-fluid highScore">
-        <table>
+        <table className="col-sm-12 topTen">
           <tbody>
             <tr>
               <th className='col-sm-1'>Rank</th>
@@ -37,7 +37,7 @@ export default class Highscore extends Component {
           </tbody>
         </table>
         <br />
-        <table>
+        <table className="col-sm-12">
           <tbody>
             <tr>
               <th className='col-sm-1'>Rank</th>

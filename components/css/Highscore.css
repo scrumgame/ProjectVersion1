@@ -1,4 +1,4 @@
-.highScore td{	
+.highScore td{
 	text-align: center;
   	border-bottom: 2px solid #004969;
   	padding-top: 5px;
@@ -8,4 +8,8 @@
 .highScore th{
 	padding-bottom: 10px;
 	text-align: center;
+}
+
+.topTen {
+	margin-bottom: 25px;
 }

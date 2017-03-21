@@ -9,7 +9,7 @@ export default class Retrospective extends Component {
     return this.props.retrospective.map((el, i) => (
       <tr key={i}>
         <td key={1} className="col-sm-1">Sprint {i+1}</td>
-        <td key={2} className="col-sm-1">{el.text}</td>
+        <td key={2} className="col-sm-7">{el.text}</td>
       </tr>
     ))
   }

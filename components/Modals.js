@@ -42,8 +42,9 @@ export default class Modals extends Component {
         break
 
       case 'Retrospective':
-        return <RetrospectiveInput _retrospectiveInputState={this.props._retrospectiveInputState}
-                              _getRetrospectiveInputState={this.props._getRetrospectiveInputState}/>
+        return <RetrospectiveInput
+                _retrospectiveInputState={this.props._retrospectiveInputState}
+                _getRetrospectiveInputState={this.props._getRetrospectiveInputState}/>
         break
 
       default:

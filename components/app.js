@@ -328,6 +328,9 @@ export default class App extends Component {
         />,
         <GameOver
           key={2}
+          _getTopTenHS={this._getTopTenHS.bind(this)}
+          highscore={this.state.highscore}
+          highscorecurrentteam={this.state.highscorecurrentteam}
           teamname={this.state.teamname.value}
         />
             ]

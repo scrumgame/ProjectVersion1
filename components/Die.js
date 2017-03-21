@@ -7,6 +7,7 @@ export default class Die extends Component {
     super(props)
   }
 
+  // Returns correct move buttons on each die
   _distributeButtons() {
     if (this.props.type == 'Analysis' || this.props.type == 'Testing') {
       return <DieButton _handleDieButtonClick={this._handleDieButtonClick.bind(this)} type='transfer'/>

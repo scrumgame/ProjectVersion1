@@ -7,6 +7,7 @@ export default class Column extends Component {
     super(props);
   }
 
+  // Checks if the column should show cash value
   _cash() {
     if (this.props.cash) {
       return <h3>{this.props.name} ${this.props.cash}</h3>
@@ -15,6 +16,7 @@ export default class Column extends Component {
     }
   }
 
+  //Only shows the top card of the stack
   _sliceCards(type, id) {
     return this.props.cards
       .filter((el) => el.position == id && el.type != 'AC' && el.type != 'MC' && el.type == type)
@@ -24,6 +26,7 @@ export default class Column extends Component {
       .slice(0, 1)
   }
 
+  // Returns the card components depending on their current position
   _renderCards(id) {
     switch (id) {
       case 0:

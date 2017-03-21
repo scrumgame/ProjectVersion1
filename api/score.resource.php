@@ -2,7 +2,7 @@
 
 class _score extends Resource {
 
-	public $team, $sprint, $cash, $teamname, $teamcards, $teamgame, $money, $sprintnumber;
+	public $team, $sprint, $cash, $teamname, $teamcards, $teamgame, $money, $sprintnumber, $totalscore, $totalCurrentTeam, $totalTopTen;
 
 	function __construct($resource_id, $request){
 
@@ -43,7 +43,6 @@ class _score extends Resource {
 							) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
 
 		mysqli_query($db, $query);
-
 	}
 
 	function PUT($input, $db) {
@@ -53,26 +52,60 @@ class _score extends Resource {
 		$cash = mysqli_real_escape_string($db, $input->cash);
 		$sprint = mysqli_real_escape_string($db, $input->sprint);
 		$teamname = mysqli_real_escape_string($db, $input->team);
+		$totalscore = mysqli_real_escape_string($db, $input->totalscore);
 
-		$query = "UPDATE score
-							SET sprint_$sprint=$cash
-							WHERE teamname='$teamname'";
+		if ($sprint != NULL) {
+			$query = "UPDATE score
+								SET sprint_$sprint=$cash
+								WHERE teamname='$teamname'";
 
-		mysqli_query($db, $query);
+			mysqli_query($db, $query);
+
+		} else {
+			$query = "UPDATE score
+								SET total=$totalscore
+								WHERE teamname='$teamname'";
+
+			mysqli_query($db, $query);
+		}
 	}
 
 	function GET($input, $db) {
 
-		$sprintnumber = $this->request[0];
 
-		$query = "SELECT sprint_$sprintnumber FROM score WHERE teamname = '$this->id'";
+		if (isset($this->request[0])) {
+			$sprintnumber = $this->request[0];
+
+			$query = "SELECT sprint_$sprintnumber FROM score WHERE teamname = '$this->id'";
+
+			$result = mysqli_query($db, $query);
+			$data = [];
+			while($row = mysqli_fetch_assoc($result)){
+				$int = intval($row["sprint_$sprintnumber"]);
+				$data[] = $int;
+			}
+			$this->money = $data;
+		}
+
+		$query = "SELECT teamname, total FROM score WHERE teamname = '$this->id'";
 
 		$result = mysqli_query($db, $query);
 		$data = [];
 		while($row = mysqli_fetch_assoc($result)){
 			$data[] = $row;
 		}
-		$this->money = $data;
+		$this->totalCurrentTeam = $data;
+
+		$query = "SELECT teamname, total FROM score ORDER BY total DESC LIMIT 10";
+
+		$result = mysqli_query($db, $query);
+		$data = [];
+		while($row = mysqli_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		$this->totalTopTen = $data;
 	}
+
+
 
 }

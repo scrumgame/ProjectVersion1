@@ -33,7 +33,10 @@ export default class Modals extends Component {
         break;
 
       case 'Highscore':
-        return <Highscore />
+        return <Highscore
+                _getTopTenHS={this.props._getTopTenHS}
+                highscore={this.props.highscore}
+                highscorecurrentteam={this.props.highscorecurrentteam}/>
         break;
 
       case 'Retrospective':

@@ -1,3 +1,10 @@
-td, th, tr {
-  border: 1px solid #000;
+.highScore td{	
+	text-align: center;
+  	border-bottom: 1px solid #004969;
+  	padding-top: 5px;
+  	padding-bottom: 2px;
+}
+.highScore th{
+	padding-bottom: 10px;
+	text-align: center;
 }

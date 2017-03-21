@@ -25,13 +25,13 @@ export default class Highscore extends Component {
   // displays the top highscore of the teams
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid highScore">
         <table>
           <tbody>
             <tr>
               <th className='col-sm-1'>Rank</th>
-              <th className='col-sm-1'>Team</th>
-              <th className='col-sm-1'>Score</th>
+              <th className='col-sm-5'>Team</th>
+              <th className='col-sm-5'>Score</th>
             </tr>
             {this._renderTopTen()}
           </tbody>
@@ -41,8 +41,8 @@ export default class Highscore extends Component {
           <tbody>
             <tr>
               <th className='col-sm-1'>Rank</th>
-              <th className='col-sm-1'>You</th>
-              <th className='col-sm-1'>Score</th>
+              <th className='col-sm-5'>You</th>
+              <th className='col-sm-5'>Score</th>
             </tr>
             {this._renderCurrentTeam()}
           </tbody>

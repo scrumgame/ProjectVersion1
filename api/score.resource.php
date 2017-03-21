@@ -87,7 +87,7 @@ class _score extends Resource {
 			$this->money = $data;
 		}
 
-		$query = "SELECT teamname, total FROM score WHERE teamname = '$this->id'";
+		$query = "SELECT teamname, total FROM score ORDER BY total DESC";
 
 		$result = mysqli_query($db, $query);
 		$data = [];

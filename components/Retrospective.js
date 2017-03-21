@@ -17,7 +17,7 @@ export default class Retrospective extends Component {
   render() {
     return (
       <div>
-        <table className="container-fluid">
+        <table className="container-fluid releaseplanRetrospective">
           <thead>
             <tr>
               <th colSpan="2">Retrospectives</th>

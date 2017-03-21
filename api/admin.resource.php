@@ -24,11 +24,17 @@ class _admin extends Resource {
 		// 	$this->username = mysqli_real_escape_string($admin['username']);
 		// 	$this->password = mysqli_real_escape_string($admin['password']);
 		// }else{ // om vår URL inte innehåller ett ID hämtas alla users
-			$query = "
-				SELECT *
-				FROM admin
+
+		$username = mysqli_real_escape_string($db, $this->request[0]);
+		$password = mysqli_real_escape_string($db, $this->request[1]);
+
+			$query = "SELECT username, password
+								FROM admin
+								WHERE username='$username'
+								AND password='$password'
 			";
 			$result = mysqli_query($db, $query);
+
 			$data = [];
 			while($row = mysqli_fetch_assoc($result)){
 				$data[] = $row;

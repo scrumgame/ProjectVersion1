@@ -174,17 +174,10 @@ export default class App extends Component {
     const that = this
     const admin = this.state.admin
 
-    axios({
-      method: 'GET',
-      url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/admin',
-      data: {
-        username: username,
-        password: password
-      },
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
+    axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/admin/1/'+username+'/'+password)
     .then(function(response) {
-      if (username == response.data.admin[0].username && password == response.data.admin[0].password ) {
+      console.log(response)
+      if (response.data.admin) {
         that.setState({
           admin: {value: true}
         })

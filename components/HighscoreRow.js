@@ -10,7 +10,6 @@ export default class HighscoreRow extends Component {
   render() {
     return (
         <tr>
-          <td>{this.props.rank}</td>
           <td>{this.props.teamname}</td>
           <td>{this.props.total}</td>
         </tr>

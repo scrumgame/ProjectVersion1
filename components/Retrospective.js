@@ -12,11 +12,11 @@ export default class Retrospective extends Component {
   render() {
     return (
       <form>
-        <FormGroup controlId="formControlsTextarea" validationState={this.props._getValidationState()}>
+        <FormGroup controlId="formControlsTextarea" validationState={this.props._getRetrospectiveInputState()}>
           <FormControl
             componentClass="textarea"
             placeholder="It's time to reflect over your sprint"
-            onChange={this.props._validationState}/>
+            onChange={this.props._retrospectiveInputState}/>
         </FormGroup>
       </form>
     );

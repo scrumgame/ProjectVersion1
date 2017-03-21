@@ -1,5 +1,8 @@
 .admin-newgame {
   margin-top: 45px;
+  width: 50%;
+  background-color: #004969;
+  color: #FFF;
 }
 
 .new-game {

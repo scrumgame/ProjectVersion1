@@ -8,7 +8,7 @@ export default class ReleasePlan extends Component {
   }
 
   _generateReleasePlan() {
-    return this.props.retrospective.map((el, i) => (
+    return this.props.moneyearned.map((el, i) => (
       <tr key={i}>
         <td className='col-sm-1' key={1}>Sprint {i+1}</td>
       {this.props.releaseplandays.map((elem, index) => {
@@ -22,9 +22,8 @@ export default class ReleasePlan extends Component {
         } else {
           return <td className='col-sm-1 ReleasePlanDay' key={index}>{elem.name}</td>
         }
-
       })}
-        <td className='col-sm-1' key={7}>{el.text}</td>
+        <td className='col-sm-1' key={7}>${el.cash}</td>
       </tr>
     ))
   }

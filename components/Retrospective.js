@@ -1,24 +1,33 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap'
-import { FormGroup } from 'react-bootstrap'
-import { FormControl } from 'react-bootstrap'
-import './css/Retrospective.css'
+import React, { Component } from 'react'
 
 export default class Retrospective extends Component {
   constructor(props) {
     super(props)
   }
 
+  _renderRetrospectives() {
+    return this.props.retrospective.map((el, i) => (
+      <tr key={i}>
+        <td key={1} className="col-sm-1">Sprint {i+1}</td>
+        <td key={2} className="col-sm-1">{el.text}</td>
+      </tr>
+    ))
+  }
+
   render() {
     return (
-      <form>
-        <FormGroup controlId="formControlsTextarea" validationState={this.props._getRetrospectiveInputState()}>
-          <FormControl
-            componentClass="textarea"
-            placeholder="It's time to reflect over your sprint"
-            onChange={this.props._retrospectiveInputState}/>
-        </FormGroup>
-      </form>
+      <div>
+        <table className="container-fluid">
+          <thead>
+            <tr>
+              <th colSpan="2">Retrospectives</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this._renderRetrospectives()}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

@@ -67,6 +67,6 @@
 
 @media only screen and (max-width: 767px) {
   .ReleasePlanDayCurrent {
-    margin: 30px 0 0 1px;
+    top: 14px;
   }
 }

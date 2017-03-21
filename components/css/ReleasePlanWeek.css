@@ -12,6 +12,6 @@
 
 @media only screen and (max-width: 767px) {
   .ReleasePlanWeek {
-    margin-top: 20px;
+    top: 13px;
   }
 }

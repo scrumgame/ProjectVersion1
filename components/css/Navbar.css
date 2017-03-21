@@ -30,6 +30,7 @@
 }
 
 .navbar-default .navbar-nav>li>a:hover{
-	background-color: #00ACE7;
-	transition: all 0.3s ease;
+  background-color: rgba(0,73,105, 0.1  );
+  transition: all 0.3s ease;
 }
+

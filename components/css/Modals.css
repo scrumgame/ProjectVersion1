@@ -21,12 +21,16 @@ td, th, tr {
 	text-align: center;
   	padding-top: 5px;
   	padding-bottom: 2px;
-  	border-bottom: 1px solid #f2f2f2;
+  	border-bottom: 2px solid #f2f2f2;
 }
 .releaseplanRetrospective th{
 	font-size: 1.2em;
 	text-align: center;
 	padding-bottom: 2px;
+}
+.bajs{
+	padding-left: -1000px;
+	color: pink;
 }
 .releaseplanRetrospective td{
 	padding-top: 5px;
@@ -54,7 +58,7 @@ td, th, tr {
 	border-radius: 0px;
 	cursor: auto;
 	border: none;
-	border-bottom: 1px solid #f2f2f2;
+	border-bottom: 2px solid #f2f2f2;
 	box-shadow: none;
 }
 

@@ -32,7 +32,7 @@ export default class App extends Component {
         {value: false},
 
       //TODO: tydligare namn? vad gör den?
-      validation:
+      retrospectiveinput:
         {value: ''},
 
       admin:
@@ -131,15 +131,15 @@ export default class App extends Component {
     })
   }
 
-  _validationState(event) {
+  _retrospectiveInputState(event) {
     this.setState({
-      validation: {value: event.target.value}
+      retrospectiveinput: {value: event.target.value}
     })
   }
   //return appropriate validation css class to bootstrap form in retrospective modal.
-  _getValidationState() {
-      const validation = this.state.validation.value
-      const length = validation.length
+  _getRetrospectiveInputState() {
+      const retrospectiveinput = this.state.retrospectiveinput.value
+      const length = retrospectiveinput.length
       if (length > 20) return 'success'
       else if (length > 10) return 'warning'
       else if (length > 0) return 'error'
@@ -225,13 +225,13 @@ export default class App extends Component {
     const columns = this.state.columns
     const that = this
 
-    if(this.state.validation.value.length >= 20) {
+    if(this.state.retrospectiveinput.value.length >= 20) {
       axios({
         method: 'put',
         url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game',
         data: {
           team: this.state.teamname.value,
-          retrospective: this.state.validation.value,
+          retrospective: this.state.retrospectiveinput.value,
           releaseplan: this.state.releaseplan
 
         },
@@ -717,8 +717,8 @@ export default class App extends Component {
             retrospective={this.state.retrospective}
             teamname={this.state.teamname}
             moneyearned={this.state.moneyearned}
-            _validationState={this._validationState.bind(this)}
-            _getValidationState={this._getValidationState.bind(this)}
+            _retrospectiveInputState={this._retrospectiveInputState.bind(this)}
+            _getRetrospectiveInputState={this._getRetrospectiveInputState.bind(this)}
             _closeModal={this._closeModal.bind(this)}
             _closeRetroModal={this._closeRetroModal.bind(this)}
           />

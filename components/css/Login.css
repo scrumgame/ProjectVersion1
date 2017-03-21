@@ -1,0 +1,23 @@
+.login-form {
+  width: 60%;
+  float: right;
+}
+
+.login-button {
+  width: 20%;
+  background-color: #004969;
+  color: #FFF;
+  display: block;
+}
+
+.login-input {
+  width: 30%;
+  height: 5%;
+  font-size: 1.5em;
+  display: block;
+  text-align: center;
+}
+
+.login-message {
+  float: left;
+}

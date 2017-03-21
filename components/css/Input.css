@@ -1,13 +1,13 @@
 .teamnameInput {
   width: 40%;
-  height: 70px;
+  padding-bottom: 10px;
   outline: none;
-  margin: 10px;
+  margin-bottom: 10px;
   font-family: 'Roboto', sans-serif;
   color: #004969;
   border: none;
   text-align: center;
-  font-size: 2.5em;
+  font-size: 1.5em;
   border-bottom: 2px solid #004969;
   font-weight: bold;
 }

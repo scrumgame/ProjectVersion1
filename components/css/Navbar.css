@@ -1,10 +1,18 @@
 .teamfont {
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 2px solid #0091D2;
+  border-bottom: 2px solid #c4c4c4;
   background-color: #ededed;
   color: #004969;
+  /*center Team Name*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  line-height: 50px;
 }
+
 .navbarColor{
 	background-color: white;
 }
@@ -22,6 +30,7 @@
 }
 
 .navbar-default .navbar-nav>li>a:hover{
-	background-color: #00ACE7;
-	transition: all 0.3s ease;
+  background-color: rgba(0,73,105, 0.1  );
+  transition: all 0.3s ease;
 }
+

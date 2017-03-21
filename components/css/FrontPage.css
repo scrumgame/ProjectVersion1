@@ -1,13 +1,3 @@
-.teamfont{/*center Team Name*/
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  line-height: 50px;
-  background-color: none;
-}
-
 /*general typography styles*/
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Open Sans Condensed', sans-serif;

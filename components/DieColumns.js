@@ -7,6 +7,7 @@ export default class DieColumns extends Component {
     super(props)
   }
 
+  // Returns the die on their correct position
   _renderDice(id) {
     switch (id) {
       case 1:

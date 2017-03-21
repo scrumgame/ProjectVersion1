@@ -12,6 +12,7 @@ export default class Game extends Component {
     setTimeout(this.props._createDbCards, 3000)
   }
 
+  // We take in the slidevalue (if admin has touched it), otherwise it loops on the default value of 60 and creates that many US cards.
   _generateCards() {
     const cards = [];
 

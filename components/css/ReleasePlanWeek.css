@@ -1,8 +1,8 @@
 .ReleasePlanWeek {
   display: inline;
   background: #ededed;
-  color: #444;
-  border: 2px solid #0091D2;
+  color: grey;
+  border: 2px solid #c4c4c4;
   border-top: none;
   border-radius: 2px 2px 10px 10px;
   box-shadow: 5px 5px 10px #ededed;
@@ -12,6 +12,6 @@
 
 @media only screen and (max-width: 767px) {
   .ReleasePlanWeek {
-    margin-top: 20px;
+    top: 13px;
   }
 }

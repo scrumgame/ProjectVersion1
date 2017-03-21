@@ -5,13 +5,13 @@ import { OverlayTrigger } from 'react-bootstrap'
 import Rules from './Rules'
 import Highscore from './Highscore'
 import Releaseplan from './Releaseplan'
+import RetrospectiveInput from './RetrospectiveInput'
 import Retrospective from './Retrospective'
-import MoneyEarned from './MoneyEarned'
 import './css/Modals.css'
 
 export default class Modals extends Component {
   constructor() {
-    super();
+    super()
   }
 
   _renderModalContent() {
@@ -19,33 +19,36 @@ export default class Modals extends Component {
       case 'Releaseplan':
         return [<Releaseplan
                   key={1}
-                  retrospective={this.props.retrospective}
+                  moneyearned={this.props.moneyearned}
                   releaseplandays={this.props.releaseplandays}
                   releaseplan={this.props.releaseplan}/>,
                   <br key={2}/>,
-               <MoneyEarned
+               <Retrospective
                  key={3}
-                 moneyearned={this.props.moneyearned}/>]
-        break;
+                 retrospective={this.props.retrospective}
+                 />
+               ]
+        break
 
       case 'Rules':
         return <Rules />
-        break;
+        break
 
       case 'Highscore':
         return <Highscore
                 _getTopTenHS={this.props._getTopTenHS}
                 highscore={this.props.highscore}
                 highscorecurrentteam={this.props.highscorecurrentteam}/>
-        break;
+        break
 
       case 'Retrospective':
-        return <Retrospective _retrospectiveInputState={this.props._retrospectiveInputState}
-                              _getRetrospectiveInputState={this.props._getRetrospectiveInputState}/>
-        break;
+        return <RetrospectiveInput
+                _retrospectiveInputState={this.props._retrospectiveInputState}
+                _getRetrospectiveInputState={this.props._getRetrospectiveInputState}/>
+        break
 
       default:
-        break;
+        break
     }
   }
 

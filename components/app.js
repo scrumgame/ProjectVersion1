@@ -134,7 +134,7 @@ export default class App extends Component {
       ],
 
       highscorecurrentteam:
-        {teamname: "", total: 0}
+        {teamname: "", total: 0, rank: 0}
     }
   }
 
@@ -321,6 +321,9 @@ export default class App extends Component {
         />,
         <GameOver
           key={2}
+          _getTopTenHS={this._getTopTenHS.bind(this)}
+          highscore={this.state.highscore}
+          highscorecurrentteam={this.state.highscorecurrentteam}
           teamname={this.state.teamname.value}
         />
             ]
@@ -736,10 +739,12 @@ export default class App extends Component {
       })
       this.setState({highscore: newHighscore})
 
-      response.data.totalCurrentTeam.map(el => {
-        this.setState({
-          highscorecurrentteam: update(highscorecurrentteam, {$merge: {teamname: el.teamname, total: el.total}})
-        })
+      response.data.totalCurrentTeam.map((el, i) => {
+        if (el.teamname == name) {
+          this.setState({
+            highscorecurrentteam: update(highscorecurrentteam, {$merge: {teamname: el.teamname, total: el.total, rank: i+1}})
+          })
+        }
       })
     })
   }

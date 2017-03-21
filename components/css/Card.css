@@ -14,11 +14,11 @@
 .CardDivValues {
   display: inline-block;
   font-weight: normal;
-  color: #004969;
+  color: #C0E2F5;
 }
 
-.Active {
-  font-weight: bold;
+.CardDivValues .CardDivValuesSpan{
+  color: #C0E2F5;
 }
 
 .CardDivDollar {
@@ -27,8 +27,8 @@
 }
 
 .CardDivValuesSpan {
-  font-weight: normal;
-  color: black;
+  font-weight: bold;
+  color: #004969;
 }
 
 .CardDiv h4 {
@@ -40,6 +40,19 @@
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+}
+
+.Active {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.3em;
+  font-weight: 900;
+  text-shadow: 1px 1px 1px #d4d4d4;
+  color: #027ebe;
+}
+
+.Active .CardDivValuesSpan{
+  color: #027ebe;
+  font-weight: 900;
 }
 
 .dollar-sign {

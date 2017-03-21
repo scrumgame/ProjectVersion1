@@ -77,6 +77,7 @@ class _game extends Resource {
 		$result = mysqli_query($db, $query);
 		$data = [];
 		while($row = mysqli_fetch_assoc($result)){
+			$row = str_replace('_', ' ', $row);
 			$data[] = $row;
 		}
 		$this->retro = $data;

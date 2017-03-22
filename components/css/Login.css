@@ -1,5 +1,5 @@
 .login-form {
-  width: 60%;
+  width: 59%;
   float: right;
 }
 
@@ -8,6 +8,7 @@
   background-color: #004969;
   color: #FFF;
   display: block;
+  margin-left: 5%;
 }
 
 .login-input {
@@ -19,5 +20,16 @@
 }
 
 .login-message {
-  float: left;
+ float: left;
+}
+
+@media screen and (max-width: 900px) {
+
+.login-message {
+  margin-left: -20%;
+}
+
+.login-input {
+  font-size: 1em;
+}
 }

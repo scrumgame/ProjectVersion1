@@ -19,8 +19,8 @@ export default class FrontPage extends Component {
     if(this.props.admin.value == true) {
       return [
         <div key={0} className="col-sm-12">
-          <Input key={1} _saveTeamName={this.props._saveTeamName} placeholder="Choose teamname" ref="createTeam" className="teamnameInput"/>
           <form key={2} onSubmit={this.props._quickPlay}>
+          <Input key={1} _saveTeamName={this.props._saveTeamName} placeholder="Choose teamname" ref="createTeam" className="teamnameInput" />
             <div className="col-sm-offset-3 col-sm-6">
               <InputRange
                 maxValue={120}
@@ -28,7 +28,7 @@ export default class FrontPage extends Component {
                 value={this.props.slidevalue}
                 onChange={this.props._slideState.bind(this)}
               />
-              <Input key={2} type="submit" value="Start Game" className="btn btn-default admin-newgame"/>
+              <NewGame key={2} type="submit" value="Start Game" className="btn btn-default admin-newgame" _gameNav={this.props._gameNav}/>
             </div>
           </form>
       </div>

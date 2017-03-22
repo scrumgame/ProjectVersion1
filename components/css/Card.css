@@ -14,7 +14,7 @@
 
 /*styling for the cards title*/
 .CardDiv h4 {
-  background: #14C6E3 none repeat scroll 0 0;
+  background: #004969  none repeat scroll 0 0;
   color: #FDFDFD;
   font-size: 17px;
   margin: -10 -10px 20px;
@@ -27,12 +27,12 @@
 /*STYLING FOR EACH CARD WHEN THAT CARD IS ACTIVE, THAT WILL SAY, IN THE RIGHT COLUMN*/
 /*maintenance*/
 .cardDivM h4{
-  background: #0091D2;
+  background: #14C6E3;
 }
 
 /*defect*/
 .cardDivD h4 {
-  background: #004969;
+  background: #0091D2;
 }
 
 /*the value key font color of the inactive key*/

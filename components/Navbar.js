@@ -20,7 +20,7 @@ export default class Navbar extends Component {
           <li key={2} onClick={this.props._openModal.bind(this, modalTypeRules)}><a href="#">Rules</a></li>
           <li key={3} onClick={this.props._openModal.bind(this, modalTypeHighscore)}><a href="#">Highscores</a></li>
           <li key={4} onClick={this.props._openModal.bind(this, modalTypeAction)}><a href="#">Actioncard</a></li>
-          <li key={5}><a href="#">Restart </a></li>
+          <li key={5} onClick={this.props._restart}><a href="#">Restart </a></li>
         </ul>
       ]
     } else {

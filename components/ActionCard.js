@@ -5,9 +5,9 @@ export default class ActionCard extends Component {
     super(props)
   }
   _renderActionDie()  {
-    if (this.props.actioncard.thrown == false) {
+    if (this.props.actioncard.thrown == false && this.props.actioncard.id != 0) {
       return <button onClick={this.props._actionCardDieRoll}>KASTA MIG</button>
-    } else {
+    } else if (this.props.actioncard.thrown == true && this.props.actioncard.id != 0) {
       return <p>{this.props.actioncard.dievalue}</p>
     }
   }

@@ -36,6 +36,16 @@
 }
 
 /*styling of an active card*/
+.CardDivValues {
+  display: inline-block;
+  font-weight: normal;
+  color: #C0E2F5;
+}
+
+.CardDivValues .CardDivValuesSpan{
+  color: #C0E2F5;
+}
+
 .Active {
   font-family: 'Roboto', sans-serif;
   font-size: 1.3em;
@@ -50,15 +60,7 @@
 }
 
 /*the cards value styling*/
-.CardDivValues {
-  display: inline-block;
-  font-weight: normal;
-  color: #C0E2F5;
-}
 
-.CardDivValues .CardDivValuesSpan{
-  color: #C0E2F5;
-}
 
 .CardDivDollar {
   color: #004969;

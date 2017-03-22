@@ -7,7 +7,7 @@ import Highscore from './Highscore'
 import Releaseplan from './Releaseplan'
 import RetrospectiveInput from './RetrospectiveInput'
 import Retrospective from './Retrospective'
-import ActioncardInfo from './ActioncardInfo'
+import ActionCard from './ActionCard'
 import './css/Modals.css'
 
 export default class Modals extends Component {
@@ -47,8 +47,9 @@ export default class Modals extends Component {
                 _getRetrospectiveInputState={this.props._getRetrospectiveInputState}/>
         break
       case 'Action':
-        return <ActioncardInfo
-                actioncard={this.props.actioncard}/>
+        return <ActionCard
+                actioncard={this.props.actioncard}
+                _actionCardDieRoll={this.props._actionCardDieRoll}/>
 
         break
       default:

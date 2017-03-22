@@ -11,6 +11,7 @@ export default class Navbar extends Component {
     const modalTypeReleaseplan = 'Releaseplan'
     const modalTypeRules       = 'Rules'
     const modalTypeHighscore   = 'Highscore'
+    const modalTypeAction      = 'Action'
 
     if (this.props.navbar.value == true) {
       return [
@@ -18,7 +19,8 @@ export default class Navbar extends Component {
           <li key={1} onClick={this.props._openModal.bind(this, modalTypeReleaseplan)}><a href="#">Releaseplan</a></li>
           <li key={2} onClick={this.props._openModal.bind(this, modalTypeRules)}><a href="#">Rules</a></li>
           <li key={3} onClick={this.props._openModal.bind(this, modalTypeHighscore)}><a href="#">Highscores</a></li>
-          <li key={4}><a href="#">Restart </a></li>
+          <li key={4} onClick={this.props._openModal.bind(this, modalTypeAction)}><a href="#">Actioncard</a></li>
+          <li key={5}><a href="#">Restart </a></li>
         </ul>
       ]
     } else {

@@ -107,7 +107,4 @@ class _score extends Resource {
 		}
 		$this->totalTopTen = $data;
 	}
-
-
-
 }

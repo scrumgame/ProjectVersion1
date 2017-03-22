@@ -52,7 +52,7 @@ export default class App extends Component {
       cards: [],
 
       actioncard:
-        {text: '', time: 0, done: false},
+        {id: 0, text: 'You have no current active actioncard.', dievalue: 0, thrown: false},
 
       columns: [
         {name: 'Backlog'},
@@ -79,12 +79,12 @@ export default class App extends Component {
         {value: 0},
 
       dice: [
-        {position: 1, id: 0, value: 1, type: 'Analysis'},
-        {position: 2, id: 1, value: 1, type: 'Development'},
-        {position: 2, id: 2, value: 1, type: 'Development'},
-        {position: 2, id: 3, value: 1, type: 'Development'},
-        {position: 2, id: 4, value: 1, type: 'Development'},
-        {position: 3, id: 5, value: 1, type: 'Testing'}
+        {position: 1, id: 0, value: 1, type: 'Analysis', timegone: 0},
+        {position: 2, id: 1, value: 1, type: 'Development', timegone: 0},
+        {position: 2, id: 2, value: 1, type: 'Development', timegone: 0},
+        {position: 2, id: 3, value: 1, type: 'Development', timegone: 0},
+        {position: 2, id: 4, value: 1, type: 'Development', timegone: 0},
+        {position: 3, id: 5, value: 1, type: 'Testing', timegone: 0}
       ],
 
       dicesum: [
@@ -268,7 +268,7 @@ export default class App extends Component {
         })
       })
 
-      cards.filter(el => el.position == 4)
+      cards.filter(el => el.position == 4 && el.type == 'US')
            .map(elem => elem.done = true)
       this.setState({cards})
 
@@ -367,32 +367,93 @@ export default class App extends Component {
   /**********************************************************************/
   /*                             ACTIONCARDS                            */
   /**********************************************************************/
-
-  _invokeActionCard() {
-    const releaseplan = this.state.releaseplan
-    const dicerollbutton = this.state.dicerollbutton
+  _actionCardAxios(cardid) {
     const name = this.state.teamname.value
     const that = this
     const modalTypeAction = 'Action'
 
-    if (releaseplan.sprint == 1 && releaseplan.day == 2) {
-      axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards/'+name+'_cards/'+121)
-      .then(function(response) {
-        const actionText = response.data.action[0].description
+    axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards/'+name+'_cards/'+cardid)
+    .then(function(response) {
+      const actionText = response.data.action[0].description
+      const id = Number(response.data.action[0].cardnumber)
 
-        that.setState({
-          actioncard: update(that.state.actioncard, {text: {$set: actionText}})
-        })
-
-        return that._openModal(modalTypeAction)
+      that.setState({
+        actioncard: update(that.state.actioncard, {$merge: {text: actionText, id: id}})
       })
-    }
 
-    this._renderActionCard()
+      return that._openModal(modalTypeAction)
+    })
   }
 
-  _renderActionCard() {
+  _invokeActionCard() {
+    const releaseplan = this.state.releaseplan
 
+    if (releaseplan.sprint == 1 && releaseplan.day == 2) {
+      this._actionCardAxios(121)
+    } else if (releaseplan.sprint == 8 && releaseplan.day == 3) {
+      this._actionCardAxios(126)
+    }
+  }
+
+  _actionCardDieRoll() {
+    const value = Math.floor((Math.random() * 6) + 1)
+
+    this.setState({
+      actioncard: update(this.state.actioncard, {$merge: {dievalue: value, thrown: true}})
+    })
+
+    if (this.state.actioncard.id == 121) {
+      this.setState({
+        dice: update(this.state.dice, {1: {timegone: {$set: value}}})
+      })
+    } else if (this.state.actioncard.id == 126) {
+      this.setState({
+        dice: update(this.state.dice, {5: {timegone: {$set: value}}})
+      })
+    }
+  }
+
+  _actionCardSwitch() {
+    switch (this.state.actioncard.id) {
+      case 121:
+        this._developerRecovery()
+
+        break
+      case 126:
+        this._testerRecovery()
+
+        break
+      default:
+        break
+    }
+  }
+
+  _developerRecovery() {
+    if (this.state.dice[1].timegone > 0) {
+      this.setState({
+        actioncard: update(this.state.actioncard, {dievalue: {$set: this.state.actioncard.dievalue-1}}),
+        dice: update(this.state.dice, {1: {timegone: {$set: this.state.dice[1].timegone-1}}})
+      })
+    }
+    if (this.state.actioncard.dievalue == 1 && this.state.actioncard.thrown == true) {
+      this.setState({
+        actioncard: update(this.state.actioncard, {$merge: {id: 0, text: "You have no current active actioncard.", dievalue: 0, thrown: false}})
+      })
+    }
+  }
+
+  _testerRecovery() {
+    if (this.state.dice[5].timegone > 0) {
+      this.setState({
+        actioncard: update(this.state.actioncard, {dievalue: {$set: this.state.actioncard.dievalue-1}}),
+        dice: update(this.state.dice, {5: {timegone: {$set: this.state.dice[5].timegone-1}}})
+      })
+    }
+    if (this.state.actioncard.dievalue == 1 && this.state.actioncard.thrown == true) {
+      this.setState({
+        actioncard: update(this.state.actioncard, {$merge: {id: 0, text: "You have no current active actioncard.", dievalue: 0, thrown: false}})
+      })
+    }
   }
 
   /**********************************************************************/
@@ -615,19 +676,17 @@ export default class App extends Component {
                while (el.a > 0 && dicevalue > 0 && dice.position == el.position) {
                  el.a--
                  dicevalue--
-                 console.log(el.id, el.a, dicevalue)
+                 console.log(el.id)
                }
              } else if (dice.position == 2) {
                 while (el.d > 0 && dicevalue > 0 && dice.position == el.position) {
                   el.d--
                   dicevalue--
-                  console.log(el.id, el.d, dicevalue)
                 }
               } else if (dice.position == 3) {
                  while (el.t > 0 && dicevalue > 0 && dice.position == el.position) {
                    el.t--
                    dicevalue--
-                   console.log(el.id, el.t, dicevalue)
                  }
                }
            })
@@ -666,10 +725,11 @@ export default class App extends Component {
 
 
           this.setState({
-              releaseplan: update(releaseplan, {day: {$set: 2}}),
-              releaseplandays: update(releaseplandays, {0: {done: {$set: 3}}, 1: {done: {$set: 2}}})
-            })
-            this._invokeActionCard()
+            releaseplan: update(releaseplan, {day: {$set: 2}}),
+            releaseplandays: update(releaseplandays, {0: {done: {$set: 3}}, 1: {done: {$set: 2}}})
+          })
+          this._invokeActionCard()
+          this._actionCardSwitch()
         }
         break
       case 'Tue':
@@ -681,6 +741,7 @@ export default class App extends Component {
             releaseplandays: update(releaseplandays, {1: {done: {$set: 3}}, 2: {done: {$set: 2}}})
           })
           this._invokeActionCard()
+          this._actionCardSwitch()
         }
         break
       case 'Wed':
@@ -692,6 +753,7 @@ export default class App extends Component {
             releaseplandays: update(releaseplandays, {2: {done: {$set: 3}}, 3: {done: {$set: 2}}})
           })
           this._invokeActionCard()
+          this._actionCardSwitch()
         }
         break
       case 'Thu':
@@ -703,6 +765,7 @@ export default class App extends Component {
             releaseplandays: update(releaseplandays, {3: {done: {$set: 3}}, 4: {done: {$set: 2}}})
           })
           this._invokeActionCard()
+          this._actionCardSwitch()
         }
         break
       case 'Fri':
@@ -738,8 +801,9 @@ export default class App extends Component {
           this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
           })
+          this._invokeActionCard()
+          this._actionCardSwitch()
         }
-        this._invokeActionCard()
         break
       default:
         break
@@ -840,6 +904,7 @@ export default class App extends Component {
             teamname={this.state.teamname}
             moneyearned={this.state.moneyearned}
             actioncard={this.state.actioncard}
+            _actionCardDieRoll={this._actionCardDieRoll.bind(this)}
             _retrospectiveInputState={this._retrospectiveInputState.bind(this)}
             _getRetrospectiveInputState={this._getRetrospectiveInputState.bind(this)}
             highscore={this.state.highscore}

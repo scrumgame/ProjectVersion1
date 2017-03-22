@@ -92,6 +92,7 @@ class _score extends Resource {
 		$result = mysqli_query($db, $query);
 		$data = [];
 		while($row = mysqli_fetch_assoc($result)){
+			$row = str_replace('_', ' ', $row);
 			$data[] = $row;
 		}
 		$this->totalCurrentTeam = $data;
@@ -101,6 +102,7 @@ class _score extends Resource {
 		$result = mysqli_query($db, $query);
 		$data = [];
 		while($row = mysqli_fetch_assoc($result)){
+			$row = str_replace('_', ' ', $row);
 			$data[] = $row;
 		}
 		$this->totalTopTen = $data;

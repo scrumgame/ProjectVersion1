@@ -45,9 +45,17 @@ export default class Card extends Component {
     }
   }
 
+  _addClass(){
+    if (this.props.type == 'D') {
+      return "cardDivD"
+    }else if (this.props.type == 'M'){
+      return "cardDivM"
+    }
+  }
+
   render (){
     return(
-      <div onClick={() => this.props._handleCardClick(this)} className="CardDiv">
+      <div onClick={() => this.props._handleCardClick(this)} className={`CardDiv ${this._addClass()}`}>
         <h4>{this.props.type} {this.props.number}</h4>
         {this._ifCash()}
         {this._ifADT()}

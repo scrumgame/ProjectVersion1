@@ -1,3 +1,4 @@
+/*BASIC STYLING FOR THE CARDS*/
 .CardDiv {
   background: #fff none repeat scroll 0 0;
   border: medium none;
@@ -11,6 +12,44 @@
   border-radius: 4px;
 }
 
+/*styling for the cards title*/
+.CardDiv h4 {
+  background: #14C6E3 none repeat scroll 0 0;
+  color: #fdfdfd;
+  font-size: 17px;
+  margin: -10 -10px 20px;
+  padding: 6px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+/*STYLING FOR EACH CARD*/
+/*maintenance*/
+.cardDivM h4{
+  background: #0091D2;
+}
+
+/*defect*/
+.cardDivD h4 {
+  background: #004969;
+}
+
+/*styling of an active card*/
+.Active {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.3em;
+  font-weight: 900;
+  text-shadow: 1px 1px 1px #d4d4d4;
+  color: #027ebe;
+}
+
+.Active .CardDivValuesSpan{
+  color: #027ebe;
+  font-weight: 900;
+}
+
+/*the cards value styling*/
 .CardDivValues {
   display: inline-block;
   font-weight: normal;
@@ -29,30 +68,6 @@
 .CardDivValuesSpan {
   font-weight: bold;
   color: #004969;
-}
-
-.CardDiv h4 {
-  background: #004969 none repeat scroll 0 0;
-  color: #fdfdfd;
-  font-size: 17px;
-  margin: -10 -10px 20px;
-  padding: 6px;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-.Active {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.3em;
-  font-weight: 900;
-  text-shadow: 1px 1px 1px #d4d4d4;
-  color: #027ebe;
-}
-
-.Active .CardDivValuesSpan{
-  color: #027ebe;
-  font-weight: 900;
 }
 
 .dollar-sign {

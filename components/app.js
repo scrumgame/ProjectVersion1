@@ -41,7 +41,7 @@ export default class App extends Component {
         {text: ''},
 
       navbar:
-      //TODO: tydligare namn?
+      //False = frontpage, true = ingame...ingame = releaseplan added.
         {value: false},
 
       slidevalue: 60,
@@ -257,6 +257,12 @@ export default class App extends Component {
       .then(function(response) {
         const retrospective = that.state.retrospective
         const i = that.state.releaseplan.sprint-1
+
+        if(that.state.retrospectiveinput.value !== '') {
+          that.setState({
+            retrospectiveinput: {value: ''}
+          })
+        }
 
         axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game/'+name+'_game/'+i)
         .then(function(response) {

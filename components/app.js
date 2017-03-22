@@ -169,6 +169,10 @@ export default class App extends Component {
     })
   }
 
+  _restart() {
+    return location.reload()
+  }
+
   //check with API if username & password are correct
   _login(username, password) {
     const that = this
@@ -301,6 +305,7 @@ export default class App extends Component {
           navbar={this.state.navbar}
           _gameNav={this._gameNav.bind(this)}
           teamname={this.state.teamname}
+          _restart={this._restart.bind(this)}
         />,
         <Game
           key={2}

@@ -28,7 +28,7 @@ export default class FrontPage extends Component {
                 value={this.props.slidevalue}
                 onChange={this.props._slideState.bind(this)}
               />
-              <Input key={2} type="submit" value="Start Game" className="btn btn-default admin-newgame"/>
+              <NewGame key={2} type="submit" value="Start Game" className="btn btn-default admin-newgame" _gameNav={this.props._gameNav}/>
             </div>
           </form>
       </div>

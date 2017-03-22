@@ -1,34 +1,40 @@
+/*BASIC STYLING FOR EVERY COLUMN*/
 .column {
-  background-color: #edf0f1;
+  background-color: #EDF0F1;
   height: 70%;
-  border-top: 1px solid #027ebe;
+  border-top: 1px solid #027EBE;
   border-right: none;
-  border-bottom: 4px solid #027ebe;
-  border-left: 1px solid #027ebe;
+  border-bottom: 4px solid #027EBE;
+  border-left: 1px solid #027EBE;
   overflow-y: scroll;
-  box-shadow: 10px 10px 15px #ededed;
-}
-.column:first-child{
-  border-left: 3px solid #027ebe;
-}
-.columm::-webkit-scrollbar-track{
-  -webkit-box-shadow: inset 5px 5px 6px pink;
-  border-radius: 10px;
-  background-color: #fff;
+  box-shadow: 10px 10px 15px #EDEDED;
 }
 
+/*left border on the first column*/
+.column:first-child{
+  border-left: 3px solid #027EBE;
+}
+
+.columm::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 5px 5px 6px #FF69B4;
+  border-radius: 10px;
+  background-color: #FFF;
+}
+
+/*background color of the scroll*/
 .column::-webkit-scrollbar {
   width: 4px;
-  background-color: #027ebe;
+  background-color: #027EBE;
 }
+
 .column::-webkit-scrollbar-thumb{
   margin-left: 1px;
   border-radius: 2px;
-  border-left: 1px solid #027ebe;
-  background-color: white;
+  border-left: 1px solid #027EBE;
+  background-color: #FFF;
 }
 
-
+/*styling for the column title*/
 .column h3 {
   background: #027ebe none repeat scroll 0 0;
   color: #fdfdfd;

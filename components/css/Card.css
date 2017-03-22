@@ -1,6 +1,6 @@
 /*BASIC STYLING FOR THE CARDS*/
 .CardDiv {
-  background: #fff none repeat scroll 0 0;
+  background: #FFF none repeat scroll 0 0;
   border: medium none;
   box-shadow: 3px 3px 3px rgba(44, 62, 80, 0.1);
   margin-top: 20px;
@@ -15,7 +15,7 @@
 /*styling for the cards title*/
 .CardDiv h4 {
   background: #14C6E3 none repeat scroll 0 0;
-  color: #fdfdfd;
+  color: #FDFDFD;
   font-size: 17px;
   margin: -10 -10px 20px;
   padding: 6px;
@@ -24,7 +24,7 @@
   border-top-right-radius: 4px;
 }
 
-/*STYLING FOR EACH CARD*/
+/*STYLING FOR EACH CARD WHEN THAT CARD IS ACTIVE, THAT WILL SAY, IN THE RIGHT COLUMN*/
 /*maintenance*/
 .cardDivM h4{
   background: #0091D2;
@@ -35,51 +35,55 @@
   background: #004969;
 }
 
-/*styling of an active card*/
+/*the value key font color of the inactive key*/
 .CardDivValues {
   display: inline-block;
   font-weight: normal;
   color: #C0E2F5;
 }
 
+/*the value property font color of the inactive property*/
 .CardDivValues .CardDivValuesSpan{
   color: #C0E2F5;
 }
 
+/*the value key font color of the active key*/
 .Active {
   font-family: 'Roboto', sans-serif;
   font-size: 1.3em;
   font-weight: 900;
-  text-shadow: 1px 1px 1px #d4d4d4;
-  color: #027ebe;
+  text-shadow: 1px 1px 1px #D4D4D4;
+  color: #027EBE;
 }
 
+/*the value property font color of the active property*/
 .Active .CardDivValuesSpan{
-  color: #027ebe;
+  color: #027EBE;
   font-weight: 900;
 }
 
-/*the cards value styling*/
-
-
+/*DOLLAR SIGN/VALUE STYLING*/
+/*the dollar sign color*/
 .CardDivDollar {
   color: #004969;
   font-weight: bold;
 }
 
+/*the money value font color*/
 .CardDivValuesSpan {
   font-weight: bold;
   color: #004969;
 }
 
 .dollar-sign {
-	color:#cc0000;
+	color: #CC0000;
 	margin-right:4px;
 }
 
-/*prio button*/
+/*PRIO BUTTON*/
 .prio {
-  color: #fff;
+  color: #FFF;
   background: #004969;
   border: none;
+  outline: none;
 }

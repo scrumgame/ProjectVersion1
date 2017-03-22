@@ -3,6 +3,7 @@ td, th, tr {
   border: none;
   color: #004969;
 }
+
 .modal-title {
 	font-size: 2em;
   	font-weight: bold;
@@ -14,7 +15,8 @@ td, th, tr {
 .ReleasePlan th{
 	padding-bottom: 10px;
 	text-align: center;
-	padding-bottom: 2px 
+	padding-bottom: 2px;
+	vertical-align: middle; 
 }
 
 .ReleasePlan td{	
@@ -23,16 +25,23 @@ td, th, tr {
   	padding-bottom: 2px;
   	border-bottom: 2px solid #f2f2f2;
 }
-.releaseplanRetrospective th{
+.ReleasePlan td:first-child{
+	white-space: nowrap;
+}
+.ReleasePlan .table td, .ReleasePlan .table th{
+	vertical-align: middle; 
+}
+.RetrospectiveTable{
+	margin-top: 30px;
+}
+
+.RetrospectiveTable th{
 	font-size: 1.2em;
 	text-align: center;
 	padding-bottom: 2px;
 }
-.bajs{
-	padding-left: -1000px;
-	color: pink;
-}
-.releaseplanRetrospective td{
+
+.RetrospectiveTable td{
 	padding-top: 5px;
 	padding-bottom: 2px;
 	border-bottom: 2px solid #f2f2f2;

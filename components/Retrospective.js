@@ -20,7 +20,7 @@ export default class Retrospective extends Component {
       <table className="table RetrospectiveTable">
         <thead>
           <tr className="row">
-            <th className="col-sm-12 bajs" colSpan="2">Retrospectives</th>
+            <th className="col-sm-12" colSpan="2">Retrospectives</th>
           </tr>
         </thead>
         <tbody>

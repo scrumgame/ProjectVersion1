@@ -22,9 +22,8 @@ export default class Modals extends Component {
                   moneyearned={this.props.moneyearned}
                   releaseplandays={this.props.releaseplandays}
                   releaseplan={this.props.releaseplan}/>,
-                  <br key={2}/>,
                <Retrospective
-                 key={3}
+                 key={2}
                  retrospective={this.props.retrospective}
                  />
                ]

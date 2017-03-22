@@ -51,6 +51,9 @@ export default class App extends Component {
 
       cards: [],
 
+      actioncard:
+        {text: '', time: 0, done: false},
+
       columns: [
         {name: 'Backlog'},
         {name: 'Analysis'},
@@ -141,6 +144,10 @@ export default class App extends Component {
   /**********************************************************************/
   /*                           FRONTPAGE                                */
   /**********************************************************************/
+
+  componentWillUpdate() {
+    this._invokeActionCard()
+  }
 
   _slideState(slidevalue) {
     this.setState({
@@ -355,6 +362,36 @@ export default class App extends Component {
   /**********************************************************************/
   /*                               GAME                                 */
   /**********************************************************************/
+  /**********************************************************************/
+  /*                             ACTIONCARDS                            */
+  /**********************************************************************/
+
+  _invokeActionCard() {
+    const releaseplan = this.state.releaseplan
+    const dicerollbutton = this.state.dicerollbutton
+    const name = this.state.teamname.value
+    const that = this
+    const modalTypeAction = 'Action'
+
+    if (releaseplan.sprint == 1 && releaseplan.day == 1 && dicerollbutton.value == 2) {
+      axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards/'+name+'_cards/'+121)
+      .then(function(response) {
+        const actionText = response.data.action[0].description
+
+        that.setState({
+          actioncard: update(that.state.actioncard, {text: {$set: actionText}})
+        })
+
+        return that._openModal(modalTypeAction)
+      })
+    } else if (releaseplan.sprint == 1 && releaseplan.day == 2 && dicerollbutton.value == 3) {
+      axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards/'+name+'_cards/'+122)
+      .then(function(response) {
+        console.log(response.data.action[0].description)
+      })
+    }
+  }
+
   /**********************************************************************/
   /*                               CARDS                                */
   /**********************************************************************/
@@ -581,9 +618,7 @@ export default class App extends Component {
                    dicevalue--
                  }
                }
-
            })
-
     })
   }
 
@@ -616,6 +651,7 @@ export default class App extends Component {
     switch (day.props.name) {
       case 'Mon':
         if (releaseplan.day == 1 && dicerollbutton.value == 2) {
+
           return this.setState({
               releaseplan: update(releaseplan, {day: {$set: 2}}),
               releaseplandays: update(releaseplandays, {0: {done: {$set: 3}}, 1: {done: {$set: 2}}})
@@ -624,6 +660,7 @@ export default class App extends Component {
         break
       case 'Tue':
         if (releaseplan.day == 2 && dicerollbutton.value == 3) {
+
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 3}}),
             releaseplandays: update(releaseplandays, {1: {done: {$set: 3}}, 2: {done: {$set: 2}}})
@@ -632,6 +669,7 @@ export default class App extends Component {
         break
       case 'Wed':
         if (releaseplan.day == 3 && dicerollbutton.value == 4) {
+
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 4}}),
             releaseplandays: update(releaseplandays, {2: {done: {$set: 3}}, 3: {done: {$set: 2}}})
@@ -640,6 +678,7 @@ export default class App extends Component {
         break
       case 'Thu':
         if (releaseplan.day == 4 && dicerollbutton.value == 5) {
+
           return this.setState({
             releaseplan: update(releaseplan, {day: {$set: 5}}),
             releaseplandays: update(releaseplandays, {3: {done: {$set: 3}}, 4: {done: {$set: 2}}})
@@ -650,6 +689,7 @@ export default class App extends Component {
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
 
           const that = this
+
           axios({
               method: 'put',
               url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/score',
@@ -777,6 +817,7 @@ export default class App extends Component {
             retrospective={this.state.retrospective}
             teamname={this.state.teamname}
             moneyearned={this.state.moneyearned}
+            actioncard={this.state.actioncard}
             _retrospectiveInputState={this._retrospectiveInputState.bind(this)}
             _getRetrospectiveInputState={this._getRetrospectiveInputState.bind(this)}
             highscore={this.state.highscore}

@@ -7,6 +7,7 @@ import Highscore from './Highscore'
 import Releaseplan from './Releaseplan'
 import RetrospectiveInput from './RetrospectiveInput'
 import Retrospective from './Retrospective'
+import Actioncard from './Actioncard'
 import './css/Modals.css'
 
 export default class Modals extends Component {
@@ -45,7 +46,11 @@ export default class Modals extends Component {
                 _retrospectiveInputState={this.props._retrospectiveInputState}
                 _getRetrospectiveInputState={this.props._getRetrospectiveInputState}/>
         break
+      case 'Action':
+        return <Actioncard
+                actioncard={this.props.actioncard}/>
 
+        break
       default:
         break
     }
@@ -59,10 +64,16 @@ export default class Modals extends Component {
     }
   }
 
+  _preventRetroClose() {
+    if (this.props.showModal.type != "Retrospective") {
+      return this.props._closeModal
+    }
+  }
+
   render() {
     return(
       <div>
-        <Modal show={this.props.showModal.open} onHide={this.props._closeModal} bsSize="large">
+        <Modal show={this.props.showModal.open} onHide={this._preventRetroClose()} bsSize="large">
           <Modal.Header>
             <Modal.Title>
               {this.props.showModal.type}

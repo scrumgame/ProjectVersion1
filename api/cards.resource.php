@@ -2,13 +2,10 @@
 
 class _cards extends Resource {
 
-	public $card_type, $card_number, $card_analysis, $card_priority, $card_development, $card_testing, $card_value, $card_position, $card_description, $card_done;
+	public $card_type, $card_number, $card_analysis, $card_priority, $card_development, $card_testing, $card_value, $card_position, $card_description, $card_done, $currentcard, $action;
 
 	function __construct($resource_id, $request){
-
-		if(is_numeric($resource_id))
-			$this->id = $resource_id;
-
+		$this->id = $resource_id;
 		$this->request = $request;
 	}
 
@@ -61,5 +58,22 @@ class _cards extends Resource {
 							WHERE cardnumber='$card_number'";
 
 		mysqli_query($db, $query);
+	}
+
+	function GET($input, $db) {
+		$currentcard = $this->request[0];
+		$currentcard = intval($currentcard);
+
+		$query = "SELECT *
+							FROM `$this->id`
+							WHERE cardnumber = '$currentcard'";
+
+		$result = mysqli_query($db, $query);
+		$data = [];
+		while($row = mysqli_fetch_assoc($result)){
+			$row = str_replace('_', ' ', $row);
+			$data[] = $row;
+		}
+		$this->action = $data;
 	}
 }

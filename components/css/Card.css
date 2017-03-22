@@ -11,6 +11,28 @@
   border-radius: 4px;
 }
 
+.CardDiv h4 {
+  background: #53D8FF none repeat scroll 0 0;
+  color: #fdfdfd;
+  font-size: 17px;
+  margin: -10 -10px 20px;
+  padding: 6px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+/*STYLING FOR EACH CARD*/
+/*maintenance*/
+.cardDivM h4{
+  background: #0091D2;
+}
+
+/*defect*/
+.cardDivD h4 {
+  background: #004969;
+}
+
 .CardDivValues {
   display: inline-block;
   font-weight: normal;
@@ -29,17 +51,6 @@
 .CardDivValuesSpan {
   font-weight: bold;
   color: #004969;
-}
-
-.CardDiv h4 {
-  background: #004969 none repeat scroll 0 0;
-  color: #fdfdfd;
-  font-size: 17px;
-  margin: -10 -10px 20px;
-  padding: 6px;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
 }
 
 .Active {

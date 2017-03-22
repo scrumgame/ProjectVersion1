@@ -145,10 +145,6 @@ export default class App extends Component {
   /*                           FRONTPAGE                                */
   /**********************************************************************/
 
-  componentWillUpdate() {
-    this._invokeActionCard()
-  }
-
   _slideState(slidevalue) {
     this.setState({
       slidevalue: slidevalue
@@ -379,7 +375,7 @@ export default class App extends Component {
     const that = this
     const modalTypeAction = 'Action'
 
-    if (releaseplan.sprint == 1 && releaseplan.day == 1 && dicerollbutton.value == 2) {
+    if (releaseplan.sprint == 1 && releaseplan.day == 2) {
       axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards/'+name+'_cards/'+121)
       .then(function(response) {
         const actionText = response.data.action[0].description
@@ -390,12 +386,13 @@ export default class App extends Component {
 
         return that._openModal(modalTypeAction)
       })
-    } else if (releaseplan.sprint == 1 && releaseplan.day == 2 && dicerollbutton.value == 3) {
-      axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/cards/'+name+'_cards/'+122)
-      .then(function(response) {
-        console.log(response.data.action[0].description)
-      })
     }
+
+    this._renderActionCard()
+  }
+
+  _renderActionCard() {
+
   }
 
   /**********************************************************************/
@@ -606,22 +603,31 @@ export default class App extends Component {
     dicesum.map(dice => {
       let dicevalue = dice.value
       cards.filter(el => el.position == dice.position)
-           .sort((a, b) => b.priority - a.priority)
+           .sort((a,b) => {
+             if (a.priority > 0 || b.priority > 0) {
+               return b.priority - a.priority
+             } else {
+               return a.timeclicked - b.timeclicked
+             }
+           })
            .map(el => {
              if (dice.position == 1) {
                while (el.a > 0 && dicevalue > 0 && dice.position == el.position) {
                  el.a--
                  dicevalue--
+                 console.log(el.id, el.a, dicevalue)
                }
              } else if (dice.position == 2) {
                 while (el.d > 0 && dicevalue > 0 && dice.position == el.position) {
                   el.d--
                   dicevalue--
+                  console.log(el.id, el.d, dicevalue)
                 }
               } else if (dice.position == 3) {
                  while (el.t > 0 && dicevalue > 0 && dice.position == el.position) {
                    el.t--
                    dicevalue--
+                   console.log(el.id, el.t, dicevalue)
                  }
                }
            })
@@ -658,41 +664,50 @@ export default class App extends Component {
       case 'Mon':
         if (releaseplan.day == 1 && dicerollbutton.value == 2) {
 
-          return this.setState({
+
+          this.setState({
               releaseplan: update(releaseplan, {day: {$set: 2}}),
               releaseplandays: update(releaseplandays, {0: {done: {$set: 3}}, 1: {done: {$set: 2}}})
             })
+            this._invokeActionCard()
         }
         break
       case 'Tue':
         if (releaseplan.day == 2 && dicerollbutton.value == 3) {
 
-          return this.setState({
+
+          this.setState({
             releaseplan: update(releaseplan, {day: {$set: 3}}),
             releaseplandays: update(releaseplandays, {1: {done: {$set: 3}}, 2: {done: {$set: 2}}})
           })
+          this._invokeActionCard()
         }
         break
       case 'Wed':
         if (releaseplan.day == 3 && dicerollbutton.value == 4) {
 
-          return this.setState({
+
+          this.setState({
             releaseplan: update(releaseplan, {day: {$set: 4}}),
             releaseplandays: update(releaseplandays, {2: {done: {$set: 3}}, 3: {done: {$set: 2}}})
           })
+          this._invokeActionCard()
         }
         break
       case 'Thu':
         if (releaseplan.day == 4 && dicerollbutton.value == 5) {
 
-          return this.setState({
+
+          this.setState({
             releaseplan: update(releaseplan, {day: {$set: 5}}),
             releaseplandays: update(releaseplandays, {3: {done: {$set: 3}}, 4: {done: {$set: 2}}})
           })
+          this._invokeActionCard()
         }
         break
       case 'Fri':
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
+
 
           const that = this
 
@@ -720,10 +735,11 @@ export default class App extends Component {
             })
           })
 
-          return this.setState({
+          this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
           })
         }
+        this._invokeActionCard()
         break
       default:
         break

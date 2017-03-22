@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Actioncard extends Component {
+export default class ActioncardInfo extends Component {
   constructor(props) {
     super(props)
   }

@@ -1,20 +1,20 @@
 /*BASIC STYLING FOR THE CARDS*/
 .CardDiv {
   background: #FFF none repeat scroll 0 0;
-  border: medium none;
+  border: none;
   box-shadow: 3px 3px 3px rgba(44, 62, 80, 0.1);
   margin-top: 20px;
   padding: 10px;
   text-align: center;
   cursor:pointer;
   -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
 }
 
 /*styling for the cards title*/
 .CardDiv h4 {
-  background: #004969  none repeat scroll 0 0;
+  background: #004969 none repeat scroll 0 0;
   color: #FDFDFD;
   font-size: 17px;
   margin: -10 -10px 20px;
@@ -63,16 +63,11 @@
 }
 
 /*DOLLAR SIGN/VALUE STYLING*/
-/*the dollar sign color*/
-.CardDivDollar {
-  color: #004969;
-  font-weight: bold;
-}
-
-/*the money value font color*/
+/*the dollar sign color and the money value font color*/
+.CardDivDollar,
 .CardDivValuesSpan {
-  font-weight: bold;
   color: #004969;
+  font-weight: bold;
 }
 
 .dollar-sign {

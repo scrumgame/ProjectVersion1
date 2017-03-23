@@ -1,6 +1,5 @@
 /*basic styling for table, thead and trow*/
 td, th, tr {
-  border: 1px solid black;
   border: none;
   color: #004969;
 }
@@ -15,19 +14,11 @@ td, th, tr {
 	color: #004969;
 }
 
-.ReleasePlan th {
-	padding-bottom: 10px;
-	text-align: center;
-	padding-bottom: 2px;
-	vertical-align: middle;
-}
-
 /*the border under the sprints and money earned*/
 .ReleasePlan td {
 	text-align: center;
-  	padding-top: 5px;
-  	padding-bottom: 2px;
-  	border-bottom: 2px solid #f2f2f2;
+  padding: 5px 0 2px 0;
+  border-bottom: 2px solid #F2F2F2;
 }
 
 /*individual styling for the tables*/
@@ -54,9 +45,8 @@ td, th, tr {
 
 /*border bottom under every sprint*/
 .RetrospectiveTable td {
-	padding-top: 5px;
-	padding-bottom: 2px;
-	border-bottom: 2px solid #f2f2f2;
+  padding: 5px 0 2px 0;
+	border-bottom: 2px solid #F2F2F2;
 }
 
 /*current day in releaseplan background*/
@@ -64,23 +54,23 @@ td, th, tr {
 	text-align: center;
 	padding: 0;
 	margin: 0;
-	background-color: #00ACE7;
+	background: #00ACE7;
+  border: none;
 	border-radius: 0px;
 	cursor: auto;
-	border: none;
 	box-shadow: none;
 }
 
 .modal-body .ReleasePlan .ReleasePlanDay {
 	text-align: center;
-	color: #ccc;
+	color: #CCC;
 	padding: 0;
 	margin: 0;
-	background-color: white;
-	border-radius: 0px;
+	background: #FFF;
 	cursor: auto;
 	border: none;
-	border-bottom: 2px solid #f2f2f2;
+	border-bottom: 2px solid #F2F2F2;
+  border-radius: 0px;
 	box-shadow: none;
 }
 
@@ -88,10 +78,10 @@ td, th, tr {
 	text-align: center;
 	padding: 0;
 	margin: 0;
-	background-color: #004969;
+	background: #004969;
+  border: none;
 	border-radius: 0px;
 	cursor: auto;
-	border: none;
 	box-shadow: none;
 }
 

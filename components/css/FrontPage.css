@@ -36,8 +36,8 @@ p {
   }
 
   .input-range--disabled .input-range__slider {
-    background: #cccccc;
-    border: 1px solid #cccccc;
+    background: #CCC;
+    border: 1px solid #CCC;
     box-shadow: none;
     transform: none;
   }
@@ -47,7 +47,7 @@ p {
 }
 
 .input-range__label {
-  color: #aaaaaa;
+  color: #AAA;
   font-family: "Roboto", san-serif;
   font-size: 2rem;
   transform: translateZ(0);
@@ -82,7 +82,7 @@ p {
 }
 
 .input-range__track {
-  background: #eeeeee;
+  background: #EEE;
   border-radius: 5px;
   cursor: pointer;
   display: block;
@@ -92,7 +92,7 @@ p {
 }
 
   .input-range--disabled .input-range__track {
-    background: #eeeeee;
+    background: #EEE;
 }
 
 .input-range__track--background {

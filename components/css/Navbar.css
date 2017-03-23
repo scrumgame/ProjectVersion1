@@ -2,8 +2,8 @@
 .teamfont {
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 2px solid #c4c4c4;
-  background-color: #ededed;
+  border-bottom: 2px solid #C4C4C4;
+  background: #EDEDED;
   color: #004969;
   position: absolute;
   top: 0;
@@ -14,7 +14,7 @@
 }
 
 .navbarColor {
-	background-color: white;
+	background: #FFF;
 }
 
 /*the animation transition on background color*/
@@ -24,7 +24,7 @@
 
 /*the navbar background color*/
 .dropdown-menu>li>a:hover {
-	background-color: #00ACE7;
+	background: #00ACE7;
 	transition: all 0.3s ease;
 }
 

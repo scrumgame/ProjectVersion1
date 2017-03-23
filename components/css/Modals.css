@@ -39,6 +39,7 @@ td, th, tr {
 	vertical-align: middle;
 }
 
+
 /*RETROSPECTIVE TABLE*/
 .RetrospectiveTable {
 	margin-top: 30px;
@@ -94,11 +95,10 @@ td, th, tr {
 	box-shadow: none;
 }
 
-.modal-body .ReleasePlan .ReleasePlanDayDone:before{
+.modal-body .ReleasePlan .ReleasePlanDayDone:before {
 	background: none;
-
 }
 
-.modal-body .ReleasePlan .ReleasePlanDayDone:after{
+.modal-body .ReleasePlan .ReleasePlanDayDone:after {
 	background: none;
 }

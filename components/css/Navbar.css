@@ -13,27 +13,26 @@
   line-height: 50px;
 }
 
-/*the navbar background color*/
-.navbarColor{
-	background: #fff;
+.navbarColor {
+	background-color: white;
 }
 
 /*the animation transition on background color*/
-.dropdown-menu>li>a{
+.dropdown-menu>li>a {
 	transition: all 0.3s ease;
 }
 
-/*hover color on links in dropdown menu*/
-.dropdown-menu>li>a:hover{
+/*the navbar background color*/
+.dropdown-menu>li>a:hover {
 	background-color: #00ACE7;
 	transition: all 0.3s ease;
 }
 
-.navbar-default .navbar-nav>li>a:{
+.navbar-default .navbar-nav>li>a: {
 	transition: all 0.3s ease;
 }
 
-.navbar-default .navbar-nav>li>a:hover{
+.navbar-default .navbar-nav>li>a:hover {
   background-color: rgba(0,73,105, 0.1  );
   transition: all 0.3s ease;
 }

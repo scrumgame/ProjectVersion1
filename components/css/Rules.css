@@ -11,7 +11,15 @@
   margin-left: 30px;
 }
 
+<<<<<<< HEAD
 /*font weight on the list items under 'Note:'*/
+=======
+.img-responsive {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+>>>>>>> c3e3f6f490d5a0b72c84b7426bda4c029df0afdf
 .rules-bold {
   font-weight: bold;
 }

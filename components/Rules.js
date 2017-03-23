@@ -65,14 +65,14 @@ export default class Rules extends Component {
               </p>
 
               <p>
-                The team can choose wheter or not to spend time on Defects or Maintenance tasks in the beginning of each sprint. When the die is cast cross over one point for each number on the die on each of the stories.
+                The team can choose wheter or not to spend time on Defects or Maintenance tasks in the beginning of each sprint. When the dice is rolled then the game will automaticly remove the same amount of points on dice on the correct card. 
               </p>
             </div>
 
             <div>
               <h4 className="rules-bold"> Cards: </h4>
               <p>
-                There are two types of cards, action cards and Multiple choice cards. When to draw a card is determined in the releaseplan (see below). The card is drawn in the beginning of the day and read out loud by Scrum Master.
+                There are two types of cards, action cards and Multiple choice cards. The cards will appear at random during the game. The card is drawn in the beginning of the day and read out loud by Scrum Master.
               </p>
 
               <div className="action-card-example">
@@ -85,7 +85,7 @@ export default class Rules extends Component {
 
               <h4 className="rules-bold"> Action cards: </h4>
               <p>
-                Each action card is tied to a specific time in sprint. The action cards all have an impact on the current sprint for a limited duration of time. Each card that has an impact on sprint is placed over the scrum board during the impact period.
+                Each action card is tied to a specific time in sprint. The action cards all have an impact on the current sprint for a limited duration of time. Action cards that are active will be shown under the menu "Info" > "Action card".
               </p>
 
               <h4 className="rules-bold"> Multiple choice cards: </h4>
@@ -109,11 +109,7 @@ export default class Rules extends Component {
 
               <h4 className="rules-bold"> Release plan: </h4>
               <p>
-                The release plan keeps track of where the team is in the sprints. it's a checklist where the scrum master puts crosses for each day the team has completed, and also to keep track of money earned for each sprint. The scrum master of the team is responsible for keeping the release plan updated at all times.
-              </p>
-
-              <p>
-                In the example release plan below the game is in the third sprint with second day finished, money earned so far is 1250$. Note also the action cards (AC1-6) and multiple choice cards (MC1-5) are written in the release plan, to keep track of when each card should be put into play.
+                The release plan keeps track of where the team is in the sprints. After you rolled the dice check of todays day in the current sprint on the scumboard. This will also update the releaseplan under the menu.
               </p>
 
             <img className="img-responsive" src={require("../images/releaseplan.png")} />
@@ -126,9 +122,9 @@ export default class Rules extends Component {
                 <li>
                   Team can choose wheather or not to do work on defects or maintenance tasks by putting them in the product backlog mixed with user stories.
                 </li>
-                <li> Start brolling the dice!</li>
+                <li> Start rolling the dice!</li>
               </ol>
-              <p> Good luck! </p>
+              <p> Good luck and have fun! </p>
             </div>
 
           </div>

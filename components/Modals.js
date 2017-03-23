@@ -60,13 +60,19 @@ export default class Modals extends Component {
   _renderModalButton() {
     if (this.props.showModal.type == "Retrospective") {
       return <Button onClick={this.props._closeRetroModal} bsStyle="success" block>Submit</Button>
+    } else if (this.props.showModal.type == "Action" && this.props.actioncard.thrown == false && this.props.actioncard.id != 0) {
+      return <Button onClick={this.props._closeModal} bsStyle="danger" block disabled>Close</Button>
     } else {
-      return <Button onClick={this.props._closeModal} bsStyle="danger" block >Close</Button>
+      return <Button onClick={this.props._closeModal} bsStyle="danger" block>Close</Button>
     }
   }
 
-  _preventRetroClose() {
-    if (this.props.showModal.type != "Retrospective") {
+  _preventModalClose() {
+    if (this.props.showModal.type == "Retrospective") {
+      return
+    } else if (this.props.showModal.type == "Action" && this.props.actioncard.thrown == false && this.props.actioncard.id != 0) {
+      return
+    } else {
       return this.props._closeModal
     }
   }
@@ -74,7 +80,7 @@ export default class Modals extends Component {
   render() {
     return(
       <div>
-        <Modal show={this.props.showModal.open} onHide={this._preventRetroClose()} bsSize="large">
+        <Modal show={this.props.showModal.open} onHide={this._preventModalClose()} bsSize="large">
           <Modal.Header>
             <Modal.Title>
               {this.props.showModal.type}

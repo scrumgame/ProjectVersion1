@@ -1,0 +1,18 @@
+.actionCardInfo {
+  text-align: center;
+  padding: 10px;
+  font-size: 1.3em;
+}
+
+.actionButton {
+  outline: none;
+  border: 2px solid #425b35;
+  border-radius: 5px;
+  box-shadow: 0 5px 0;
+  top: 0;
+  height: 35px;
+  font-size: 1.3em;
+  background: #91C974;
+  transition: all 0.3s ease;
+  color: #425b35;
+}

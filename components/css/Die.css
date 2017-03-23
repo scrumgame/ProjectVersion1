@@ -1,3 +1,18 @@
+/*BASIC STYLING FOR THE DICES (FIGURES)*/
+/*The dice columns*/
+.dieColumn {
+	background: transparent;
+	border: none;
+	margin-top: 40px;
+	text-align: center;
+	max-height:200px;
+	overflow: hidden;
+	margin-bottom:30px;
+	padding: 0;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
 .Die {
   display: inline-block;
   background: none;
@@ -6,13 +21,54 @@
   padding: 0px;
 }
 
+/*the value of the dice*/
 .DieValue {
   display: block;
   background: none;
 }
+
+/*ICONS*/
+/*the icon*/
 .glyphicon-user{
 	font-size: 1em;
 	color: #0091D2;
 	margin: 0;
 	padding: 0;
+}
+
+/*icon arrow to the right*/
+.glyphicon-chevron-right{
+  background: none;
+  border: none;
+  padding: 1px;
+  height: 14px;
+  width: 16px;
+  color: #004969;
+}
+
+/*icon arrow to the left*/
+.glyphicon-chevron-left{
+  background: none;
+  border: none;
+  padding: 1px;
+  height: 14px;
+  width: 16px;
+  color: #004969;
+}
+
+/*icon transfer icon*/
+.glyphicon-transfer{
+  background: none;
+  border: none;
+  padding: 1px;
+  height: 14px;
+  width: 16px;
+  color: #004969;
+}
+
+/*STYLING FOR THE POINTS*/
+.DiceSum{
+	background-color: #00ACE7;
+	color: #FFF;
+	box-shadow: 10px 10px 15px #EDEDED;
 }

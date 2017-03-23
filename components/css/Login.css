@@ -1,8 +1,10 @@
+/*the login form*/
 .login-form {
   width: 59%;
   float: right;
 }
 
+/*login button*/
 .login-button {
   width: 20%;
   background-color: #004969;
@@ -11,6 +13,7 @@
   margin-left: 5%;
 }
 
+/*the login inputs*/
 .login-input {
   width: 30%;
   height: 5%;
@@ -19,6 +22,7 @@
   text-align: center;
 }
 
+/*the login message*/
 .login-message {
  float: left;
 }

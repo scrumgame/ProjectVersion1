@@ -1,3 +1,4 @@
+/*the highscore table*/
 .highScore td{
 	text-align: center;
   	border-bottom: 2px solid #004969;
@@ -5,11 +6,14 @@
   	padding-bottom: 2px;
   	font-size: 1.2em
 }
+
+/*highscore thead*/
 .highScore th{
 	padding-bottom: 10px;
 	text-align: center;
 }
 
+/*highscore top ten*/
 .topTen {
 	margin-bottom: 25px;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/diceSum.css';
+import './css/Die.css';
 
 export default class DiceSum extends Component {
   constructor(props) {

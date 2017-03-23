@@ -1,12 +1,15 @@
+/*basic styling for table, thead and trow*/
 td, th, tr {
   border: 1px solid black;
   border: none;
   color: #004969;
 }
 
+/*RELEASEPLAN TABLE*/
+/*the releaseplan heading*/
 .modal-title {
 	font-size: 2em;
-  	font-weight: bold;
+  font-weight: bold;
 	text-align: center;
 	text-transform: uppercase;
 	color: #004969;
@@ -19,6 +22,7 @@ td, th, tr {
 	vertical-align: middle;
 }
 
+/*the border under the sprints and money earned*/
 .ReleasePlan td {
 	text-align: center;
   	padding-top: 5px;
@@ -26,6 +30,7 @@ td, th, tr {
   	border-bottom: 2px solid #f2f2f2;
 }
 
+/*individual styling for the tables*/
 .ReleasePlan td:first-child {
 	white-space: nowrap;
 }
@@ -34,22 +39,27 @@ td, th, tr {
 	vertical-align: middle;
 }
 
+
+/*RETROSPECTIVE TABLE*/
 .RetrospectiveTable {
 	margin-top: 30px;
 }
 
+/*retrospective heading*/
 .RetrospectiveTable th {
 	font-size: 1.2em;
 	text-align: center;
 	padding-bottom: 2px;
 }
 
+/*border bottom under every sprint*/
 .RetrospectiveTable td {
 	padding-top: 5px;
 	padding-bottom: 2px;
 	border-bottom: 2px solid #f2f2f2;
 }
 
+/*current day in releaseplan background*/
 .modal-body .ReleasePlan .ReleasePlanDayCurrent {
 	text-align: center;
 	padding: 0;

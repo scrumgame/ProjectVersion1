@@ -7,6 +7,7 @@ export default class ReleasePlan extends Component {
     super(props)
   }
 
+  //Loops through 2 different states to create the releaseplan
   _generateReleasePlan() {
     return this.props.moneyearned.map((el, i) => (
       <tr className="row" key={i}>

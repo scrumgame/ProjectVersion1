@@ -7,6 +7,7 @@ export default class Navbar extends Component {
     super(props)
   }
 
+  // Changes the content of the navbar depending on state
   _changeNavbar() {
     const modalTypeReleaseplan = 'Releaseplan'
     const modalTypeRules       = 'Rules'

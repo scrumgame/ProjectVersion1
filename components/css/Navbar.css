@@ -1,10 +1,10 @@
+/*Team font styling*/
 .teamfont {
   font-weight: 700;
   text-transform: uppercase;
   border-bottom: 2px solid #c4c4c4;
   background-color: #ededed;
   color: #004969;
-  /*center Team Name*/
   position: absolute;
   top: 0;
   left: 0;
@@ -17,10 +17,12 @@
 	background-color: white;
 }
 
+/*the animation transition on background color*/
 .dropdown-menu>li>a {
 	transition: all 0.3s ease;
 }
 
+/*the navbar background color*/
 .dropdown-menu>li>a:hover {
 	background-color: #00ACE7;
 	transition: all 0.3s ease;

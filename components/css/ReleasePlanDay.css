@@ -1,3 +1,5 @@
+/*STYLING FOR THE SPRINTS AND EVERY DAY*/
+/*The inactive days of the sprint*/
 .ReleasePlanDay {
   display: inline;
   background: #c4c4c4;
@@ -6,7 +8,6 @@
   border-top: 2px solid #c4c4c4;
   border-radius: 2px 2px 10px 10px;
   box-shadow: 5px 5px 10px #ededed;
-  /*padding: 15px 10px;*/
   margin: 0 0 0 1px;
   transition: all 0.5s ease;
   cursor: not-allowed;
@@ -15,6 +16,7 @@
   box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
 }
 
+/*current day*/
 .ReleasePlanDayCurrent {
   display: inline;
   background: #00ace7;
@@ -28,10 +30,11 @@
   margin: 0 0 0 1px;
   transition: all 0.5s ease;
   -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
-  -moz-box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
-  box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
+     -moz-box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
+          box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
 }
 
+/*the previous day*/
 .ReleasePlanDayDone {
   display: inline;
   background: #004969;
@@ -46,10 +49,11 @@
   cursor: not-allowed;
   transition: all 1s ease;
   -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
-  -moz-box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
-  box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
+     -moz-box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
+          box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
 }
 
+/*the 'X' over the previous day*/
 .ReleasePlanDayDone:before, .ReleasePlanDayDone:after {
     position: absolute;
     content: '';
@@ -58,7 +62,7 @@
     width: 100%;
     height: 4px;
     -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
+            transform: rotate(-45deg);
     transition: all 1s ease;
     left: 0;
     right: 0;
@@ -70,12 +74,30 @@
 
 .ReleasePlanDayDone:after {
     -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
+            transform: rotate(45deg);
     transition: all 1s ease;
 }
 
+/*THE CURRENT WEEK (SPRINT)*/
+.ReleasePlanWeek {
+  display: inline;
+  background: #ededed;
+  color: grey;
+  border: 2px solid #c4c4c4;
+  border-top: none;
+  border-radius: 2px 2px 10px 10px;
+  box-shadow: 5px 5px 10px #ededed;
+  padding: 15px 10px;
+  width: 80px;
+}
+
+/*MEDIA QUERIES*/
 @media only screen and (max-width: 767px) {
   .ReleasePlanDayCurrent {
     top: 14px;
+  }
+
+  .ReleasePlanWeek {
+    top: 13px;
   }
 }

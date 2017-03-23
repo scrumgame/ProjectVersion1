@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Die from './Die'
-import './css/DieColumns.css';
+import './css/Die.css';
 
 export default class DieColumns extends Component {
   constructor(props) {

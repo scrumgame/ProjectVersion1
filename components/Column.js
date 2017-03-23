@@ -45,9 +45,9 @@ export default class Column extends Component {
         .filter((el) => el.position == id && el.done == false)
         .sort((a,b) => {
           if (a.priority > 0 || b.priority > 0) {
-            return b.priority - a.priority
+            return b.priority - a.priority //sort by priority
           } else {
-            return a.timeclicked - b.timeclicked
+            return a.timeclicked - b.timeclicked //else sort by the time the card was clicked
           }
         })
         .map((el, i) => (

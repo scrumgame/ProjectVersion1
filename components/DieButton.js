@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/DieButton.css'
+import './css/Die.css'
 
 export default class DieButton extends Component {
   constructor(props) {

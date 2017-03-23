@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReleasePlanDay from './ReleasePlanDay'
-import './css/ReleasePlanWeek.css'
+import './css/ReleasePlanDay.css'
 
 export default class ReleasePlanWeek extends Component {
   constructor(props) {

@@ -1,55 +1,67 @@
+/*basic styling for table, thead and trow*/
 td, th, tr {
   border: 1px solid black;
   border: none;
   color: #004969;
 }
 
+/*RELEASEPLAN TABLE*/
+/*the releaseplan heading*/
 .modal-title {
 	font-size: 2em;
-  	font-weight: bold;
+  font-weight: bold;
 	text-align: center;
 	text-transform: uppercase;
 	color: #004969;
 }
 
-.ReleasePlan th{
+.ReleasePlan th {
 	padding-bottom: 10px;
 	text-align: center;
 	padding-bottom: 2px;
-	vertical-align: middle; 
+	vertical-align: middle;
 }
 
-.ReleasePlan td{	
+/*the border under the sprints and money earned*/
+.ReleasePlan td {
 	text-align: center;
   	padding-top: 5px;
   	padding-bottom: 2px;
   	border-bottom: 2px solid #f2f2f2;
 }
-.ReleasePlan td:first-child{
+
+/*individual styling for the tables*/
+.ReleasePlan td:first-child {
 	white-space: nowrap;
 }
-.ReleasePlan .table td, .ReleasePlan .table th{
-	vertical-align: middle; 
+
+.ReleasePlan .table td, .ReleasePlan .table th {
+	vertical-align: middle;
 }
-.RetrospectiveTable{
+
+/*RETROSPECTIVE TABLE*/
+.RetrospectiveTable {
 	margin-top: 30px;
 }
 
-.RetrospectiveTable th{
+/*retrospective heading*/
+.RetrospectiveTable th {
 	font-size: 1.2em;
 	text-align: center;
 	padding-bottom: 2px;
 }
 
-.RetrospectiveTable td{
+/*border bottom under every sprint*/
+.RetrospectiveTable td {
 	padding-top: 5px;
 	padding-bottom: 2px;
 	border-bottom: 2px solid #f2f2f2;
 }
 
-.modal-body .ReleasePlan .ReleasePlanDayCurrent{
+/*current day in releaseplan background*/
+.modal-body .ReleasePlan .ReleasePlanDayCurrent {
 	text-align: center;
-	padding: 0;	
+	padding: 0;
 	margin: 0;
 	background-color: #00ACE7;
 	border-radius: 0px;
@@ -58,10 +70,10 @@ td, th, tr {
 	box-shadow: none;
 }
 
-.modal-body .ReleasePlan .ReleasePlanDay{
+.modal-body .ReleasePlan .ReleasePlanDay {
 	text-align: center;
 	color: #ccc;
-	padding: 0;	
+	padding: 0;
 	margin: 0;
 	background-color: white;
 	border-radius: 0px;
@@ -71,9 +83,9 @@ td, th, tr {
 	box-shadow: none;
 }
 
-.modal-body .ReleasePlan .ReleasePlanDayDone{
+.modal-body .ReleasePlan .ReleasePlanDayDone {
 	text-align: center;
-	padding: 0;	
+	padding: 0;
 	margin: 0;
 	background-color: #004969;
 	border-radius: 0px;

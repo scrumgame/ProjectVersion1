@@ -1,8 +1,10 @@
+/*gameover text*/
 .gameoverHeadline {
   text-align: center;
   padding: 50px;
 }
 
+/*highscore text*/
 .highScoreFinal {
   box-shadow: 0 0 5px black;
   padding: 20px;

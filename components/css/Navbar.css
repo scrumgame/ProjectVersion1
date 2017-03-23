@@ -13,24 +13,24 @@
   line-height: 50px;
 }
 
-.navbarColor{
+.navbarColor {
 	background-color: white;
 }
-.dropdown-menu>li>a{
+
+.dropdown-menu>li>a {
 	transition: all 0.3s ease;
 }
-.dropdown-menu>li>a:hover{
+
+.dropdown-menu>li>a:hover {
 	background-color: #00ACE7;
 	transition: all 0.3s ease;
 }
 
-.navbar-default .navbar-nav>li>a:{
+.navbar-default .navbar-nav>li>a: {
 	transition: all 0.3s ease;
-
 }
 
-.navbar-default .navbar-nav>li>a:hover{
+.navbar-default .navbar-nav>li>a:hover {
   background-color: rgba(0,73,105, 0.1  );
   transition: all 0.3s ease;
 }
-

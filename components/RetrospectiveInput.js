@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
 import { FormGroup } from 'react-bootstrap'
 import { FormControl } from 'react-bootstrap'
-import './css/RetrospectiveInput.css'
 
 export default class RetrospectiveInput extends Component {
   constructor(props) {

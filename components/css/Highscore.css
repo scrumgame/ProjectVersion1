@@ -1,11 +1,12 @@
-.highScore td{
+.highScore td {
 	text-align: center;
   	border-bottom: 2px solid #004969;
   	padding-top: 5px;
   	padding-bottom: 2px;
   	font-size: 1.2em
 }
-.highScore th{
+
+.highScore th {
 	padding-bottom: 10px;
 	text-align: center;
 }

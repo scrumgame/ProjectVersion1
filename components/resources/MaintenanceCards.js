@@ -2,6 +2,7 @@ const MaintenanceCards = [
 {
   type       : 'M',
   number     : 1,
+  cash       : 0,
   a          : 4,
   d          : 7,
   t          : 4,
@@ -15,6 +16,7 @@ const MaintenanceCards = [
 {
   type       : 'M',
   number     : 2,
+  cash       : 0,
   a          : 2,
   d          : 5,
   t          : 3,
@@ -28,6 +30,7 @@ const MaintenanceCards = [
 {
   type       : 'M',
   number     : 3,
+  cash       : 0,
   a          : 3,
   d          : 8,
   t          : 6,
@@ -41,6 +44,7 @@ const MaintenanceCards = [
 {
   type       : 'M',
   number     : 4,
+  cash       : 0,
   a          : 2,
   d          : 5,
   t          : 4,
@@ -54,6 +58,7 @@ const MaintenanceCards = [
 {
   type       : 'M',
   number     : 5,
+  cash       : 0,
   a          : 5,
   d          : 7,
   t          : 3,

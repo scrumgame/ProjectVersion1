@@ -52,7 +52,13 @@ export default class App extends Component {
       cards: [],
 
       actioncard:
-        {id: 0, text: 'You have no current active actioncard.', dievalue: 0, thrown: false},
+        {
+          id: 0,
+          text: 'You have no current active actioncard.',
+          number: 0,
+          card: 0,
+          clicked: false
+        },
 
       columns: [
         {name: 'Backlog'},
@@ -277,11 +283,11 @@ export default class App extends Component {
 
       this._sendTotalScore() //insert totalscore into DB
 
-      return this.setState({
-              releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}}),
-              columns: update(columns, {4: {cash: {$set: 0}}}),
-              showModal: {open: false}
-            })
+      this.setState({
+        releaseplan: update(releaseplan, {$merge: {day: 1, sprint: releaseplan.sprint+1}}),
+        columns: update(columns, {4: {cash: {$set: 0}}}),
+        showModal: {open: false}
+      })
     }
   }
 
@@ -392,10 +398,12 @@ export default class App extends Component {
   _invokeActionCard() {
     const releaseplan = this.state.releaseplan
 
-    if (releaseplan.sprint == 1 && releaseplan.day == 2) {
+    if (releaseplan.sprint == 2 && releaseplan.day == 1) {
       this._actionCardAxios(121)
     } else if (releaseplan.sprint == 8 && releaseplan.day == 3) {
       this._actionCardAxios(126)
+    } else if (releaseplan.sprint == 4 && releaseplan.day == 1) {
+      this._actionCardAxios(125)
     }
   }
 
@@ -403,7 +411,7 @@ export default class App extends Component {
     const value = Math.floor((Math.random() * 6) + 1)
 
     this.setState({
-      actioncard: update(this.state.actioncard, {$merge: {dievalue: value, thrown: true}})
+      actioncard: update(this.state.actioncard, {$merge: {number: value, clicked: true}})
     })
 
     if (this.state.actioncard.id == 121) {
@@ -417,10 +425,34 @@ export default class App extends Component {
     }
   }
 
+  _actionCardSaveSprint() {
+    const sprint = this.state.releaseplan.sprint
+    let indexArray = []
+
+    const test = this.state.cards.filter((elem, i) => {
+      if (elem.type == 'D' && elem.position == 0) {
+        indexArray.push(i)
+        return elem
+      }
+    }).slice(0, 1)
+
+    const indexOfArray = indexArray.slice(0, 1)
+    const indexOfCard = indexOfArray[0]
+
+    this.setState({
+      actioncard: update(this.state.actioncard, {$merge: {number: sprint, card: indexOfCard, clicked: true}}),
+      cards: update(this.state.cards, {[indexOfCard]: {cash: {$set: 400}}})
+    })
+  }
+
   _actionCardSwitch() {
     switch (this.state.actioncard.id) {
       case 121:
         this._developerRecovery()
+
+        break
+      case 125:
+        this._criticalDefect()
 
         break
       case 126:
@@ -435,13 +467,13 @@ export default class App extends Component {
   _developerRecovery() {
     if (this.state.dice[1].timegone > 0) {
       this.setState({
-        actioncard: update(this.state.actioncard, {dievalue: {$set: this.state.actioncard.dievalue-1}}),
+        actioncard: update(this.state.actioncard, {number: {$set: this.state.actioncard.number-1}}),
         dice: update(this.state.dice, {1: {timegone: {$set: this.state.dice[1].timegone-1}}})
       })
     }
-    if (this.state.actioncard.dievalue == 1 && this.state.actioncard.thrown == true) {
+    if (this.state.actioncard.number == 1 && this.state.actioncard.clicked == true) {
       this.setState({
-        actioncard: update(this.state.actioncard, {$merge: {id: 0, text: "You have no current active actioncard.", dievalue: 0, thrown: false}})
+        actioncard: update(this.state.actioncard, {$merge: {id: 0, text: "You have no current active actioncard.", number: 0, card: 0, clicked: false}})
       })
     }
   }
@@ -449,17 +481,27 @@ export default class App extends Component {
   _testerRecovery() {
     if (this.state.dice[5].timegone > 0) {
       this.setState({
-        actioncard: update(this.state.actioncard, {dievalue: {$set: this.state.actioncard.dievalue-1}}),
+        actioncard: update(this.state.actioncard, {number: {$set: this.state.actioncard.number-1}}),
         dice: update(this.state.dice, {5: {timegone: {$set: this.state.dice[5].timegone-1}}})
       })
     }
-    if (this.state.actioncard.dievalue == 1 && this.state.actioncard.thrown == true) {
+    if (this.state.actioncard.number == 1 && this.state.actioncard.clicked == true) {
       this.setState({
-        actioncard: update(this.state.actioncard, {$merge: {id: 0, text: "You have no current active actioncard.", dievalue: 0, thrown: false}})
+        actioncard: update(this.state.actioncard, {$merge: {id: 0, text: "You have no current active actioncard.", number: 0, card: 0, clicked: false}})
       })
     }
   }
 
+  _criticalDefect() {
+    const sprint = this.state.releaseplan.sprint
+
+    if (this.state.actioncard.number < sprint) {
+      this.setState({
+        cards: update(this.state.cards, {[this.state.actioncard.card]: {cash: {$set: 0}}}),
+        actioncard: update(this.state.actioncard, {$merge: {id: 0, text: "You have no current active actioncard.", number: 0, card: 0, clicked: false}})
+      })
+    }
+  }
   /**********************************************************************/
   /*                               CARDS                                */
   /**********************************************************************/
@@ -773,6 +815,8 @@ export default class App extends Component {
         break
       case 'Fri':
         if (releaseplan.day == 5 && dicerollbutton.value == 1) {
+          this._invokeActionCard()
+          this._actionCardSwitch()
 
 
           const that = this
@@ -804,8 +848,6 @@ export default class App extends Component {
           this.setState({
             releaseplandays: update(releaseplandays, {4: {done: {$set: 3}}})
           })
-          this._invokeActionCard()
-          this._actionCardSwitch()
         }
         break
       default:
@@ -908,6 +950,7 @@ export default class App extends Component {
             moneyearned={this.state.moneyearned}
             actioncard={this.state.actioncard}
             _actionCardDieRoll={this._actionCardDieRoll.bind(this)}
+            _actionCardSaveSprint={this._actionCardSaveSprint.bind(this)}
             _retrospectiveInputState={this._retrospectiveInputState.bind(this)}
             _getRetrospectiveInputState={this._getRetrospectiveInputState.bind(this)}
             highscore={this.state.highscore}

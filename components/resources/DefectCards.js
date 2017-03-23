@@ -2,6 +2,7 @@ const DefectCards = [
 {
   type       : 'D',
   number     : 1,
+  cash       : 0,
   a          : 1,
   d          : 6,
   t          : 4,
@@ -15,6 +16,7 @@ const DefectCards = [
 {
   type       : 'D',
   number     : 2,
+  cash       : 0,
   a          : 3,
   d          : 4,
   t          : 7,
@@ -28,6 +30,7 @@ const DefectCards = [
 {
   type       : 'D',
   number     : 3,
+  cash       : 0,
   a          : 2,
   d          : 7,
   t          : 5,
@@ -41,6 +44,7 @@ const DefectCards = [
 {
   type       : 'D',
   number     : 4,
+  cash       : 0,
   a          : 5,
   d          : 8,
   t          : 6,
@@ -54,6 +58,7 @@ const DefectCards = [
 {
   type       : 'D',
   number     : 5,
+  cash       : 0,
   a          : 7,
   d          : 5,
   t          : 3,
@@ -67,6 +72,7 @@ const DefectCards = [
 {
   type       : 'D',
   number     : 6,
+  cash       : 0,
   a          : 5,
   d          : 7,
   t          : 3,
@@ -80,6 +86,7 @@ const DefectCards = [
 {
   type       : 'D',
   number     : 7,
+  cash       : 0,
   a          : 1,
   d          : 6,
   t          : 3,

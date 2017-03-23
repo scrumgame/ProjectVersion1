@@ -50,7 +50,8 @@ export default class Modals extends Component {
       case 'Action':
         return <ActionCard
                 actioncard={this.props.actioncard}
-                _actionCardDieRoll={this.props._actionCardDieRoll}/>
+                _actionCardDieRoll={this.props._actionCardDieRoll}
+                _actionCardSaveSprint={this.props._actionCardSaveSprint}/>
 
         break
       default:
@@ -62,7 +63,7 @@ export default class Modals extends Component {
   _renderModalButton() {
     if (this.props.showModal.type == "Retrospective") {
       return <Button onClick={this.props._closeRetroModal} bsStyle="success" block>Submit</Button>
-    } else if (this.props.showModal.type == "Action" && this.props.actioncard.thrown == false && this.props.actioncard.id != 0) {
+    } else if (this.props.showModal.type == "Action" && this.props.actioncard.clicked == false && this.props.actioncard.id != 0) {
       return <Button onClick={this.props._closeModal} bsStyle="danger" block disabled>Close</Button>
     } else {
       return <Button onClick={this.props._closeModal} bsStyle="danger" block>Close</Button>
@@ -73,7 +74,7 @@ export default class Modals extends Component {
   _preventModalClose() {
     if (this.props.showModal.type == "Retrospective") {
       return
-    } else if (this.props.showModal.type == "Action" && this.props.actioncard.thrown == false && this.props.actioncard.id != 0) {
+    } else if (this.props.showModal.type == "Action" && this.props.actioncard.clicked == false && this.props.actioncard.id != 0) {
       return
     } else {
       return this.props._closeModal

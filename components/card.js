@@ -13,7 +13,7 @@ export default class Card extends Component {
 
   // Checks if the card holds any cash value
   _ifCash() {
-    if (this.props.cash) {
+    if (this.props.cash > 0) {
       return <p className="CardDivDollar">$<span className="CardDivValuesSpan">{this.props.cash}</span></p>
     }
   }

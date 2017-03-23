@@ -12,7 +12,6 @@ export default class Login extends Component {
     this.props._login(this.username.value, this.password.value);
     }
 
-
   render() {
     return (
       <div>

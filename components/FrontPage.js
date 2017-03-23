@@ -8,7 +8,6 @@ import Login from './Login'
 import InputRange from 'react-input-range'
 import './css/FrontPage.css'
 
-
 export default class FrontPage extends Component {
   constructor(props) {
     super(props)
@@ -37,7 +36,7 @@ export default class FrontPage extends Component {
     } else if (this.props.customgame.value == true) {
       return [
           <div key={0} className="col-sm-12">
-            <Login _login={this.props._login}               loginmessage={this.props.loginmessage}/>
+            <Login _login={this.props._login} loginmessage={this.props.loginmessage}/>
           </div>
         ]
     } else {

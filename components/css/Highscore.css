@@ -1,5 +1,5 @@
 /*the highscore table*/
-.highScore td{
+.highScore td {
 	text-align: center;
   	border-bottom: 2px solid #004969;
   	padding-top: 5px;
@@ -8,7 +8,7 @@
 }
 
 /*highscore thead*/
-.highScore th{
+.highScore th {
 	padding-bottom: 10px;
 	text-align: center;
 }

@@ -6,6 +6,7 @@ export default class Retrospective extends Component {
     super(props)
   }
 
+  // map on the retrostate to build up and show the thing the teams have put in
   _renderRetrospectives() {
     return this.props.retrospective.map((el, i) => (
       <tr key={i} className="row">

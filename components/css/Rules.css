@@ -11,6 +11,11 @@
   margin-left: 30px;
 }
 
+.img-responsive {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
 .rules-bold {
   font-weight: bold;
 }

@@ -15,6 +15,7 @@ export default class Modals extends Component {
     super()
   }
 
+  //Depending on type we render out different content inside the modal
   _renderModalContent() {
     switch (this.props.showModal.type) {
       case 'Releaseplan':
@@ -57,6 +58,7 @@ export default class Modals extends Component {
     }
   }
 
+  // Depending on the type again we show different buttons inside the modal
   _renderModalButton() {
     if (this.props.showModal.type == "Retrospective") {
       return <Button onClick={this.props._closeRetroModal} bsStyle="success" block>Submit</Button>
@@ -67,6 +69,7 @@ export default class Modals extends Component {
     }
   }
 
+  // This functions checks on what type of modal it is, and prevents close on outside click if needed.
   _preventModalClose() {
     if (this.props.showModal.type == "Retrospective") {
       return

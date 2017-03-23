@@ -45,6 +45,7 @@ export default class Card extends Component {
     }
   }
 
+  // Adds different classes to show different colors on the cards
   _addClass(){
     if (this.props.type == 'D') {
       return "cardDivD"

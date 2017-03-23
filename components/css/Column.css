@@ -11,7 +11,7 @@
 }
 
 /*left border on the first column*/
-.column:first-child{
+.column:first-child {
   border-left: 3px solid #027EBE;
 }
 
@@ -27,7 +27,7 @@
   background-color: #027EBE;
 }
 
-.column::-webkit-scrollbar-thumb{
+.column::-webkit-scrollbar-thumb {
   margin-left: 1px;
   border-radius: 2px;
   border-left: 1px solid #027EBE;

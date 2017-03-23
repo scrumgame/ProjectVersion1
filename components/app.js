@@ -183,7 +183,6 @@ export default class App extends Component {
 
     axios.get('http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/admin/1/'+username+'/'+password)
     .then(function(response) {
-      console.log(response)
       if (response.data.admin) {
         that.setState({
           admin: {value: true}
@@ -681,7 +680,6 @@ export default class App extends Component {
                while (el.a > 0 && dicevalue > 0 && dice.position == el.position) {
                  el.a--
                  dicevalue--
-                 console.log(el.id)
                }
              } else if (dice.position == 2) {
                 while (el.d > 0 && dicevalue > 0 && dice.position == el.position) {

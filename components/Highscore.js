@@ -12,12 +12,14 @@ export default class Highscore extends Component {
     this.props._getTopTenHS()
   }
 
+  // Highscore top 10
   _renderTopTen() {
     return this.props.highscore.map((el, i) =>
       <HighscoreRow key={i} teamname={el.teamname} rank={i+1} total={el.total} />
     )
   }
 
+  // The team playing currents score and rank
   _renderCurrentTeam() {
     return <HighscoreRow key={1} teamname={this.props.highscorecurrentteam.teamname} rank={this.props.highscorecurrentteam.rank} total={this.props.highscorecurrentteam.total} />
   }

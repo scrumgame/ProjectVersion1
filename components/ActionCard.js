@@ -6,6 +6,7 @@ export default class ActionCard extends Component {
     super(props)
   }
 
+  // This function shows a rollbutton and then a text with the rolled number
   _renderActionDie()  {
     if (this.props.actioncard.thrown == false && this.props.actioncard.id != 0) {
       return <button onClick={this.props._actionCardDieRoll} className="actionButton col-sm-2 col-sm-offset-5">Roll</button>

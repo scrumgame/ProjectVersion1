@@ -7,6 +7,7 @@ export default class ReleasePlanWeek extends Component {
     super(props)
   }
 
+  // displays different types of css depending on the state of each day
   _renderReleasePlanDays() {
     return this.props.releaseplandays
       .map((el, i) => {

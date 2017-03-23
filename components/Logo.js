@@ -6,6 +6,7 @@ export default class Logo extends Component {
     super(props)
   }
 
+  // Our logo on the startpage
   render() {
     return (
       <div>

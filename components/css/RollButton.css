@@ -1,28 +1,33 @@
-.RollButton {
+/*BASIC STYLING FOR THE ROLL BUTTON*/
+/*same styling for disable and enable button*/
+.RollButton,
+.RollButtonReady {
   margin: 0 0 0 4.5%;
   outline: none;
-  border: 2px solid #606060;
   border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/*unique styling for disable button*/
+.RollButton {
+  border: 2px solid #606060;
   box-shadow: 0 1px 0;
   top: 4px;
-  background: #c4c4c4;
-  transition: all 0.3s ease;
+  background: #C4C4C4;
   color: #606060;
   cursor:not-allowed;
 }
 
+/*unique styling for enable button*/
 .RollButtonReady {
-  margin: 0 0 0 4.5%;
-  outline: none;
-  border: 2px solid #425b35;
-  border-radius: 5px;
+  border: 2px solid #425B35;
   box-shadow: 0 5px 0;
   top: 0;
   background: #91C974;
-  transition: all 0.3s ease;
-  color: #425b35;
+  color: #425B35;
 }
 
+/*MEDIA QUERIES*/
 @media only screen and (max-width: 767px) {
   .RollButtonReady,
   .RollButton {

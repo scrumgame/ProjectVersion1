@@ -3,11 +3,9 @@
 .dieColumn {
 	background: transparent;
 	border: none;
-	margin-top: 40px;
 	text-align: center;
 	max-height:200px;
 	overflow: hidden;
-	margin-bottom:30px;
 	padding: 0;
 	margin-bottom: 10px;
 	margin-top: 10px;
@@ -29,7 +27,8 @@
 
 /*ICONS*/
 /*the icon*/
-.glyphicon-user{
+
+.glyphicon-user {
 	font-size: 1em;
 	color: #0091D2;
 	margin: 0;
@@ -37,7 +36,7 @@
 }
 
 /*icon arrow to the right*/
-.glyphicon-chevron-right{
+.glyphicon-chevron-right {
   background: none;
   border: none;
   padding: 1px;
@@ -47,7 +46,7 @@
 }
 
 /*icon arrow to the left*/
-.glyphicon-chevron-left{
+.glyphicon-chevron-left {
   background: none;
   border: none;
   padding: 1px;
@@ -57,7 +56,7 @@
 }
 
 /*icon transfer icon*/
-.glyphicon-transfer{
+.glyphicon-transfer {
   background: none;
   border: none;
   padding: 1px;
@@ -67,8 +66,8 @@
 }
 
 /*STYLING FOR THE POINTS*/
-.DiceSum{
-	background-color: #00ACE7;
+.DiceSum {
+	background: #00ACE7;
 	color: #FFF;
 	box-shadow: 10px 10px 15px #EDEDED;
 }

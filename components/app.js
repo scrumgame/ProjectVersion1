@@ -195,7 +195,7 @@ export default class App extends Component {
         })
       } else {
         that.setState({
-          loginmessage: {text: 'Fel användarnamn eller lösenord'}
+          loginmessage: {text: 'Wrong username or password'}
         })
       }
     })
@@ -400,9 +400,9 @@ export default class App extends Component {
 
     if (releaseplan.sprint == 2 && releaseplan.day == 1) {
       this._actionCardAxios(121)
-    } else if (releaseplan.sprint == 8 && releaseplan.day == 3) {
+    } else if (releaseplan.sprint == 4 && releaseplan.day == 3) {
       this._actionCardAxios(126)
-    } else if (releaseplan.sprint == 4 && releaseplan.day == 1) {
+    } else if (releaseplan.sprint == 8 && releaseplan.day == 2) {
       this._actionCardAxios(125)
     }
   }

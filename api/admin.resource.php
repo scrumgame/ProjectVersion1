@@ -15,20 +15,20 @@ class _admin extends Resource {
 	function GET($input, $db) {
 
 		$username = mysqli_real_escape_string($db, $this->request[0]);
-		$password = sha1(mysqli_real_escape_string($db, $this->request[1]));
+		$password = mysqli_real_escape_string($db, $this->request[1]);
 
 			$query = "SELECT username, password
 								FROM admin
 								WHERE username='$username'
 								AND password='$password'
 								";
-								
+
 			$result = mysqli_query($db, $query);
 
 			$data = [];
 			while($row = mysqli_fetch_assoc($result)){
 				$data[] = $row;
+				$this->admin = $data;
 			}
-			$this->admin = $data;
 	}
 }

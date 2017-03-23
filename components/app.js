@@ -161,8 +161,8 @@ export default class App extends Component {
   _getRetrospectiveInputState() {
       const retrospectiveinput = this.state.retrospectiveinput.value
       const length = retrospectiveinput.length
-      if (length > 20) return 'success'
-      else if (length > 10) return 'warning'
+      if (length > 7) return 'success'
+      else if (length > 3) return 'warning'
       else if (length > 0) return 'error'
   }
 
@@ -243,7 +243,7 @@ export default class App extends Component {
     const columns = this.state.columns
     const that = this
 
-    if(this.state.retrospectiveinput.value.length >= 20) {
+    if(this.state.retrospectiveinput.value.length >= 7) {
       axios({
         method: 'put',
         url: 'http://localhost/Grupp_2_projekt/ProjectVersion1/api/?/game',

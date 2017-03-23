@@ -116,7 +116,7 @@ export default class Rules extends Component {
                 In the example release plan below the game is in the third sprint with second day finished, money earned so far is 1250$. Note also the action cards (AC1-6) and multiple choice cards (MC1-5) are written in the release plan, to keep track of when each card should be put into play.
               </p>
 
-              {/* <div className="releaseplan-img">Space for relesplan img or somethink </div> */}
+            <img className="img-responsive" src={require("../images/releaseplan.png")} />
             </div>
 
             <div>
@@ -126,7 +126,7 @@ export default class Rules extends Component {
                 <li>
                   Team can choose wheather or not to do work on defects or maintenance tasks by putting them in the product backlog mixed with user stories.
                 </li>
-                <li> Start burning points!</li>
+                <li> Start brolling the dice!</li>
               </ol>
               <p> Good luck! </p>
             </div>

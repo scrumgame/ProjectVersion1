@@ -9,7 +9,7 @@ export default class RollButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props._rollDice()} className={this.props.className}>Burn</button>
+        <button onClick={() => this.props._rollDice()} className={this.props.className}>Roll</button>
       </div>
     );
   }

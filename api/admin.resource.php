@@ -15,7 +15,7 @@ class _admin extends Resource {
 	function GET($input, $db) {
 
 		$username = mysqli_real_escape_string($db, $this->request[0]);
-		$password = mysqli_real_escape_string($db, $this->request[1]);
+		$password = sha1(mysqli_real_escape_string($db, $this->request[1]));
 
 			$query = "SELECT username, password
 								FROM admin
@@ -28,5 +28,5 @@ class _admin extends Resource {
 				$data[] = $row;
 			}
 			$this->admin = $data;
-		}
 	}
+}

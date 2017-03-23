@@ -44,11 +44,14 @@ export default class Rules extends Component {
             <div>
               <div className="us-example">
                 <h4 className="us-example-headline">US 1</h4>
-                <p> <b className="us-adt">$</b>100 </p>
-                <p> <b className="us-adt">A</b>: 7 &nbsp;
-                    <b className="us-adt">D</b>: 5 &nbsp;
-                    <b className="us-adt">T</b>: 4
-                  </p>
+                <p>
+                  <b className="us-adt">$</b>100
+                </p>
+                <p>
+                  <b className="us-adt">A</b>: 7 &nbsp;
+                  <b className="us-adt">D</b>: 5 &nbsp;
+                  <b className="us-adt">T</b>: 4
+                </p>
               </div>
 
               <ul>
@@ -65,7 +68,7 @@ export default class Rules extends Component {
               </p>
 
               <p>
-                The team can choose wheter or not to spend time on Defects or Maintenance tasks in the beginning of each sprint. When the dice is rolled then the game will automaticly remove the same amount of points on dice on the correct card. 
+                The team can choose wheter or not to spend time on Defects or Maintenance tasks in the beginning of each sprint. When the dice is rolled then the game will automaticly remove the same amount of points on dice on the correct card.
               </p>
             </div>
 

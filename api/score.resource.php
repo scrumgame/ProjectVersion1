@@ -72,7 +72,6 @@ class _score extends Resource {
 
 	function GET($input, $db) {
 
-
 		if (isset($this->request[0])) {
 			$sprintnumber = $this->request[0];
 

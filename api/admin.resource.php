@@ -19,8 +19,10 @@ class _admin extends Resource {
 
 			$query = "SELECT username, password
 								FROM admin
-								WHERE username=$username
-								AND password=$password";
+								WHERE username='$username'
+								AND password='$password'
+								";
+								
 			$result = mysqli_query($db, $query);
 
 			$data = [];

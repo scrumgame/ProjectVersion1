@@ -398,7 +398,7 @@ export default class App extends Component {
   _invokeActionCard() {
     const releaseplan = this.state.releaseplan
 
-    if (releaseplan.sprint == 2 && releaseplan.day == 1) {
+    if (releaseplan.sprint == 1 && releaseplan.day == 2) {
       this._actionCardAxios(121)
     } else if (releaseplan.sprint == 4 && releaseplan.day == 3) {
       this._actionCardAxios(126)

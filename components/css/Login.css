@@ -25,6 +25,7 @@
 /*the login message*/
 .login-message {
  float: left;
+ margin-left: 2%;
 }
 
 @media screen and (max-width: 900px) {

@@ -16,9 +16,7 @@ class _score extends Resource {
 		$input = array_keys($input);
 		$input = json_decode($input[0]);
 		$teamname = mysqli_real_escape_string($db, $input->team);
-		$team = mysqli_real_escape_string($db, $input->team);
-		$teamcards = $team . "_cards";
-		$teamgame = $team . "_game";
+		$teamcards = $teamname . "_cards";
 
 		$query = "INSERT INTO score
 							(teamname)
@@ -73,7 +71,7 @@ class _score extends Resource {
 	function GET($input, $db) {
 
 		if (isset($this->request[0])) {
-			$sprintnumber = $this->request[0];
+			$sprintnumber = mysqli_real_escape_string($db, $this->request[0]);
 
 			$query = "SELECT sprint_$sprintnumber FROM score WHERE teamname = '$this->id'";
 

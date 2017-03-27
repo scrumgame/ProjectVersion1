@@ -61,7 +61,7 @@ class _cards extends Resource {
 	}
 
 	function GET($input, $db) {
-		$currentcard = $this->request[0];
+		$currentcard = mysqli_real_escape_string($db, $this->request[0]);
 		$currentcard = intval($currentcard);
 
 		$query = "SELECT *

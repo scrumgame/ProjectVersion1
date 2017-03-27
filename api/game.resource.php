@@ -52,7 +52,6 @@ class _game extends Resource {
 		$input = json_decode($input[0]);
 
 		$team = mysqli_real_escape_string($db, $input->team);
-
 		$teamgame = $team . "_game";
 		$day = mysqli_real_escape_string($db, $input->releaseplan->day);
 		$day = $day;
@@ -61,18 +60,20 @@ class _game extends Resource {
 		$retrospective = mysqli_real_escape_string($db, $input->retrospective);
 
 		$query = "UPDATE `$teamgame`
-		SET retrospective = '$retrospective'
-		WHERE sprint = '$sprint' AND day = '$day'
-		";
+							SET retrospective = '$retrospective'
+							WHERE sprint = '$sprint' AND day = '$day'";
 
 		mysqli_query($db, $query);
 	}
 
 	function GET($input, $db) {
 
-		$currentsprint = $this->request[0];
+		$currentsprint = mysqli_real_escape_string($db, $this->request[0]);
 
-		$query = "SELECT retrospective FROM `$this->id` WHERE sprint = '$currentsprint' AND day = 5";
+		$query = "SELECT retrospective
+							FROM `$this->id`
+							WHERE sprint = '$currentsprint'
+							AND day = 5";
 
 		$result = mysqli_query($db, $query);
 		$data = [];
